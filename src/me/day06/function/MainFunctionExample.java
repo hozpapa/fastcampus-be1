@@ -1,10 +1,5 @@
 package me.day06.function;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
-
 public class MainFunctionExample { // 클래스 로더
     /*
      * 함수: 공통적인 기능을 분리/모듈화해서 작성하기 위함
@@ -80,7 +75,7 @@ public class MainFunctionExample { // 클래스 로더
 
 
     // 자바 함수의 한계: 반환값이 두 개 이상이 불가능함 => 해결방법: 배열이나 객체 전달
-    public static Aggregation sumAndAverage(int n) { // int n = 1, int n = 10 개발자 개발할 때 개발 단위
+    public static Aggregation sumAndAverage(int n) { // int n = 1, int n = 10
         int sum = 0;
         double average = 0.0;
         for (int i = 1; i <= n; i++) {

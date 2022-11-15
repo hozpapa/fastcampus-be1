@@ -11,7 +11,14 @@ public class Arrays2dExample {
         // 행: 학생 번호
         // 열: 과목 번호
         int[][] scores1 = new int[ROW][COL]; // 배열의 크기만 알고 있는 경우 (나중에 데이터를 초기화)
-        
+        for (int i = 0; i < ROW; i++) {
+            for (int j = 0; j < COL; j++) {
+                System.out.print(scores1[i][j] + " ");
+            }
+            System.out.println();
+        }
+
+
         int[][] scores2 = {{10, 20, 30}, {40, 50, 60}, {70, 80, 90}, {10, 20, 30}, {40, 50, 60}};
         // 배열 선언시 데이터를 알고 있는 경우 (한줄 초기화)
         
