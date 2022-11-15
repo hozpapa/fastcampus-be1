@@ -22,14 +22,21 @@ public class ArraysExample {
 
         int[] scores2;
         scores2 = new int[] {100, 50, 40, 50, 80};
+        // 함수의 인자로 전달되거나 반환값으로 전달될 때 배열에 이름없이 배열에 값을 초기화해서 전달할 수 있음
+        // => new int[] {100, 50, 40, 50, 80}
 
-        for (int i = 0; i < scores2.length; i++) { // for-i
-
+        int sum = 0;
+        for (int i = 0; i < scores2.length; i++) { // for-i (읽기 / 수정 모두 가능)
+            sum += scores2[i]; // 1)
+            scores2[i] = 100; // scores2의 원소 수정이 가능
         }
 
-        for (int score: scores2) { // for-each
+        sum = 0;
+        for (int score: scores2) { // for-each (읽기만 가능)
             // i가 필요 없을 때
-            // 인덱스 정보가 필요 없을 때
+            // 인덱스 정보가 필요 없을 경우 즉, 원소값만 하나씩 가지고 와야할 경우
+            sum += score; // 2) 위의 1번보다 훨씬 코드가 깔끔함
+            score = 100; // scores2의 원소 수정이 불가능
         }
 
         int[] scores3 = {100, 50, 40, 50, 80}; // 배열의 크기는 5, 인덱스 0 ~ 4

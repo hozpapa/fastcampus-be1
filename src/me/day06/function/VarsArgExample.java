@@ -8,7 +8,7 @@ public class VarsArgExample {
         sum(1, 2, 3);
         sum(1, 2, 3, 4, 5, 6);
     }
-    public static int sum(int... vars) { // int[] vars
+    public static int sum(int... vars) { // 가변 인자, int[] vars
         int sum = 0;
         for (int v: vars) {
             sum += v;
