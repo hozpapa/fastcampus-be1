@@ -3,7 +3,11 @@ package me.day07.string;
 public class StringIndexOfExample {
     public static void main(String[] args) {
         String s = "helloh";
+
         int idx = s.indexOf('h'); // 처음으로 등장하는 'h' 인덱스 반환
+        System.out.println(idx); // 0
+
+        idx = s.lastIndexOf('h'); // 뒤에서부터 처음으로 등장하는 'h' 인덱스 반환
         System.out.println(idx);
 
         idx = s.indexOf('h', 2); // 인덱스 2부터 'h' 찾아 인덱스 반환

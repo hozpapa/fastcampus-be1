@@ -18,11 +18,14 @@ public class EnumsExample {
             System.out.println(authorization.ordinal() + " => " + authorization);
         }
 
+
+        // "ADMIN" (String) == mapper ==> Authorization.ADMIN (Authorization)
+        // Authorization.valueOf("ADMIN") => ADMIN
         System.out.println();
         System.out.println("\n=================");
         String[] authorizationStrings = new String[authorizations.length];
         for (int i = 0; i < authorizationStrings.length; i++) {
-            authorizationStrings[i] = authorizations[i].toString();
+            authorizationStrings[i] = authorizations[i].toString(); // "ADMIN", "DEV", "TEST", "USER"
         }
         System.out.println(Arrays.toString(authorizationStrings));
 
@@ -30,6 +33,17 @@ public class EnumsExample {
             Authorization authorization = Authorization.valueOf(authorizationStrings[i]);
             System.out.println(authorization);
         }
+        System.out.println();
+
+        Authorization a = Authorization.ADMIN;
+        String st = a.toString();
+        System.out.println(st);
+
+        Authorization re = Authorization.valueOf(st);
+        System.out.println(re);
+
+        System.out.println(Authorization.valueOf("ADMIN"));
+        System.out.println(Authorization.valueOf("admin")); // IllegalArgumentException
 
     }
 }

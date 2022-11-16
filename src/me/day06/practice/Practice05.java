@@ -33,7 +33,9 @@ class Solution2 {
 //            System.out.println(binaryString.getBytes().length); // 16 바이트
 
 //            System.out.println(binaryString);
-            // 최대 비트값: 1111111111111111
+            // 문자 하나: '1' (1 byte), '가' (2 byte)
+
+            // 최대 비트값: 1111111111111111 (16 bit) => "1111111111111111" (16 byte)
             // toBinaryString()를 통해 문자열로 변경: "1111111111111111"
             // 문자 하나당 1바이트 * 16개 => 총 16 바이트
             // int:  4 바이트

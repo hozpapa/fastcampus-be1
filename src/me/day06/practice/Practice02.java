@@ -35,15 +35,15 @@ public class Practice02 {
 
         sort(subjectsAverage, subjects, "descending");
         System.out.println("[ subject's average by descending order ]");
-        System.out.println("\n-----------------------------------------");
+        System.out.println("\n-----------------------------------------------");
         for (int i = 0; i < subjects.length; i++) {
-            System.out.printf("%10s | ", subjectsName[subjects[i]]);
+            System.out.printf("%12s | ", subjectsName[subjects[i]]);
         }
-        System.out.println("\n-----------------------------------------");
+        System.out.println("\n-----------------------------------------------");
         for (int i = 0; i < subjectsAverage.length; i++) {
-            System.out.printf("%10s  | ", subjectsAverage[i]);
+            System.out.printf("%12f  | ", subjectsAverage[i]);
         }
-        System.out.println("\n-----------------------------------------");
+        System.out.println("\n-----------------------------------------------");
 
         System.out.println();
         sort(studentsAverage, students, "ascending");
