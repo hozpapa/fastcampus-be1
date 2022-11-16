@@ -5,8 +5,8 @@ import java.util.Arrays;
 public class Practice02 {
     public static void main(String[] args) {
 
-        final int STUDENT_NUM = 5;
-        final int SUBJECT_NUM = 3;
+        final int STUDENT_NUM = 5; // row
+        final int SUBJECT_NUM = 3; // col
 
         int[][] scores2d = {
                 { 50,  60,  70},
@@ -16,15 +16,16 @@ public class Practice02 {
                 {100,  85,  77}
         };
 
+        // 정렬하기 위해 저장
         String[] subjectsName = { "국어", "수학", "영어" };
-        int[] subjects = new int[SUBJECT_NUM];
+        int[] subjects = new int[SUBJECT_NUM]; // subject index
         for (int i = 0; i < subjects.length; i++) {
-            subjects[i] = i;
+            subjects[i] = i; // 0 ~ 2
         }
 
-        int[] students = new int[STUDENT_NUM];
+        int[] students = new int[STUDENT_NUM]; // student index
         for (int i = 0; i < students.length; i++) {
-            students[i] = i;
+            students[i] = i; // 0 ~ 4
         }
         double[] subjectsAverage = calculateSubjectsAverage(scores2d);
         double[] studentsAverage = calculateStudentsAverage(scores2d);
@@ -76,7 +77,7 @@ public class Practice02 {
 
         for (int i = 0; i < scores2d.length; i++) { // ROW
             int sum = 0;
-            for (int j = 0; j < scores2d[i].length; j++) { // COLUMN
+            for (int j = 0; j < scores2d[0].length; j++) { // COLUMN
                 sum += scores2d[i][j];
             }
             studentsAverage[i] = (double) sum / scores2d[0].length;
@@ -90,26 +91,52 @@ public class Practice02 {
 
     public static void sort(double[] array, int[] index, String order) {
         int comp = compare(order);
-        // ascending : 1, descending: -1
-        // ascending : array[j] > array[j + 1] -> swap
-        //             array[j] - array[j + 1] > 0
 
-        // descending: array[j] < array[j + 1] -> swap
-        //             array[j] - array[j + 1] < 0
+        // bubble sort
+        // (10, 20, 5, 1, 2)
+        // ( 0,  1, 2, 3, 4)
 
-        // (array[j] - array[j + 1]) * comp > 0
-        // -(array[j] - array[j + 1]) > 0
-        // -array[j] + array[j + 1] > 0
-        // 0 > array[j] - array[j + 1]
+        // 1번째 반복문 i == 1
+        // (10, 20, 5, 1, 2)
+        // (10, 5, 20, 1, 2)
+        // (10, 5, 1, 20, 2)
+        // (10, 5, 1, 2, // 20) // 가장 큰 놈이 뒤에 있음
 
+        // 2번째 반복문 i == 2
+        // (5, 10, 1, 2, // 20)
+        // (5, 1, 10, 2 // 20)
+        // (5, 1, 2, // 10 // 20) // 두번째 큰 놈이 뒤에 있음
+
+        // 3번째 반복문 i == 3
+        // (1, 5, 2, // 10, 20)
+        // (1, 2, // 5, // 10, 20)
+
+        // 4번째 반복문 i == 4
+        // (1, // 2, 5, 10, 20)
 
         for (int i = array.length - 1; i > 0; i--) { // n 숫자 정렬시 반복해야하는 횟수 -> n - 1
             for (int j = 0; j < i; j++) {
+                // 오름차순 (array[j] > array[j + 1]) [2, 1] => [1, 2]
+                //        (array[j] - array[j + 1] > 0)
+                // 내림차순 (array[j] < array[j + 1]) [1, 2] => [2, 1]
+                //        (array[j] - array[j + 1] < 0)
+
+
+                /*
+                * (array[j] - array[j + 1] > 0)
+                * (array[j] - array[j + 1] (*-1) > 0)
+                * -array[j] + array[j + 1] > 0
+                * 0 > array[j] - array[j + 1]
+                * array[j] - array[j + 1] < 0
+                * */
+
                 if ((array[j] - array[j + 1]) * comp > 0) {
+                    // swap
                     double value = array[j];
                     array[j] = array[j + 1];
                     array[j + 1] = value;
 
+                    // swap
                     int idx = index[j];
                     index[j] = index[j + 1];
                     index[j + 1] = idx;

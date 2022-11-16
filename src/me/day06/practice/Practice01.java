@@ -59,6 +59,6 @@ public class Practice01 {
         return dev;
     }
     public static double standard(int[] scores) {
-        return Math.sqrt(derivation(scores));
+        return Math.sqrt(derivation(scores)); // square root
     }
 }

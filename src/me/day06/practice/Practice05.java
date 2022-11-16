@@ -8,6 +8,8 @@ class Solution1 {
         String[] answer = new String[n];
 
         for (int i = 0; i < n; i++) {
+            // 5 => 00101
+
             String binaryString = Long.toBinaryString(arr1[i] | arr2[i]); // 비트 연산
 //            System.out.println(binaryString.getBytes().length); // 16 바이트
 

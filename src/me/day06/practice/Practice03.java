@@ -8,12 +8,16 @@ public class Practice03 {
         BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(System.out));
 
         String word = bufferedReader.readLine().toLowerCase();
-        int[] counts = new int['z' - 'a' + 1];
-        char[] alpha = new char['z' - 'a' + 1];
+        int[] counts = new int['z' - 'a' + 1]; // 'a' <=    <= 'z'
+        char[] alpha = new char['z' - 'a' + 1]; // 'a' <=    <= 'z'
 
         for (int i = 0; i < alpha.length; i++) {
             alpha[i] = (char)('a' + i);
         }
+
+        // a b c d e f g h .... z
+        // 0 1 2 3 ............ 25
+        // 4 1 0 0 ............ 0
 
         for (int i = 0; i < word.length(); i++) {
             counts[word.charAt(i) - 'a']++;
