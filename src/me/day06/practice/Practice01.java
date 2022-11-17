@@ -19,6 +19,8 @@ public class Practice01 {
         System.out.println("average = " + average(scores));
         System.out.println("derivation = " + derivation(scores));
         System.out.println("standard = " + standard(scores));
+
+        scanner.close();
     }
     public static int max(int[] scores) {
         int max = Integer.MIN_VALUE;

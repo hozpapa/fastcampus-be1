@@ -3,6 +3,7 @@ package me.day07.regex;
 import java.util.regex.Pattern;
 
 public class PatternClassExample {
+    // ABC, ABC1234
     static final String EMAIL_REGEX = "^\\w+@\\w+\\.\\w+(\\.\\w+)?$";
     static final String PHONE_REGEX = "^\\d{2,3}-\\d{3,4}-\\d{4}$";
     public static void main(String[] args) {
@@ -15,7 +16,7 @@ public class PatternClassExample {
         email = "qwe@naver.";
         System.out.println("Pattern.matches(EMAIL_REGEX, email) = " + Pattern.matches(EMAIL_REGEX, email));
         System.out.println();
-
+        
 
         String phone = "010-1234-5678";
         System.out.println("Pattern.matches(PHONE_REGEX, phone) = " + Pattern.matches(PHONE_REGEX, phone));

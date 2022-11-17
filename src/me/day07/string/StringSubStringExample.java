@@ -3,7 +3,7 @@ package me.day07.string;
 public class StringSubStringExample {
     public static void main(String[] args) {
         String str = "Java is Fun.";
-        String substring1 = str.substring(0, 4);
+        String substring1 = str.substring(0, 4); // beginIndex <=     < endIndex
         String substring2 = str.substring(5);
         String substring3 = str.substring(5); // str.length() 생략가능
 

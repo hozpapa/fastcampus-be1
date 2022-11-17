@@ -1,4 +1,4 @@
-package me.day07.stringbuilder;
+package me.day08.stringbuilder;
 
 import java.util.Arrays;
 
@@ -49,7 +49,7 @@ public class StringBuilderExample {
         System.out.println("SubString = " + charSequence);
         System.out.println();
 
-        char[] chars = new char[100];
+        char[] chars = new char[100]; // '\0' 로 초기화
         stringBuilder2.getChars(1, 5, chars, 2);
         System.out.println(Arrays.toString(chars));
         for (int i = 0; i < chars.length; i++) {

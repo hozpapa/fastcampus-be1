@@ -54,5 +54,7 @@ public class Practice03 {
         }
 
         System.out.printf("%d %c %d = %.2f\n", xi, op, yi, res);
+
+        scanner.close();
     }
 }

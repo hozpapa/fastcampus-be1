@@ -36,5 +36,6 @@ public class BreakContinueExample {
             System.out.println("str = " + str);
         }
 
+        scanner.close();
     }
 }

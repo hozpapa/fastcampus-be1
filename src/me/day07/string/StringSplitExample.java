@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class StringSplitExample {
     public static void main(String[] args) {
         String str1 = "010-1234--5678";
-        String[] strSplit1 = str1.split("-");
+        String[] strSplit1 = str1.split("[-]+"); // ["010", "1234", "5678"]
         System.out.println("strSplit2 = " + Arrays.toString(strSplit1));
         
         String str2 = "010.1234...5678";
@@ -18,6 +18,11 @@ public class StringSplitExample {
         String strJoin = String.join("", strSplit3); // 하나의 문자열로 합치기
         System.out.println("strJoin = " + strJoin);
 
+        // split <-> join
+        // "22/09/23" => ["22", "09", "23"]
+        // String.join("/", ["22", "09", "23"]) => "22/09/23"
+
+        // split vs StringTokenizer
         String str4 = "adkasd100200asd1";
         String[] strSplit4 = str4.split("[a-zA-Z]+");
         System.out.println("strSplit4 = " + Arrays.toString(strSplit4));

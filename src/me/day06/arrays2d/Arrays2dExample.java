@@ -64,5 +64,7 @@ public class Arrays2dExample {
         for (int i = 0; i < averages.length; i++) {
             System.out.printf("%d번 학생의 평균: %f\n", i+1, averages[i]);
         }
+
+        scanner.close();
     }
 }

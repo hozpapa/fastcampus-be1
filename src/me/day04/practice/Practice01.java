@@ -32,5 +32,7 @@ public class Practice01 {
         if (avg >= 70) {
             System.out.println("=> 합격 !");
         }
+
+        scanner.close();
     }
 }

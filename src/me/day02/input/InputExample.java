@@ -32,5 +32,7 @@ public class InputExample {
         System.out.println("gender = " + gender);
         System.out.println("height = " + height);
         System.out.println("alphabet = " + alphabet);
+
+        scanner.close();
     }
 }

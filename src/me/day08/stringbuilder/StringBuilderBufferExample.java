@@ -1,4 +1,4 @@
-package me.day07.stringbuilder;
+package me.day08.stringbuilder;
 
 public class StringBuilderBufferExample {
     public static void main(String[] args) {

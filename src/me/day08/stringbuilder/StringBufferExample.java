@@ -1,4 +1,4 @@
-package me.day07.stringbuilder;
+package me.day08.stringbuilder;
 
 import java.util.Arrays;
 

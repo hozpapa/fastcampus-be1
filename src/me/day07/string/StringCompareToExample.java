@@ -7,7 +7,7 @@ public class StringCompareToExample {
 
         System.out.println("a".compareTo("aa")); // -1 (길이가 더 긴 게 뒤에 존재. 아스키코드 뺄셈으로 표현할 수 없음)
         System.out.println("c".compareTo("ca")); // -1 (길이가 더 긴 게 뒤에 존재. 아스키코드 뺄셈으로 표현할 수 없음)
-        System.out.println("c".compareTo("a"));  // 'c' - 'a' == 2
+        System.out.println("a".compareTo("c"));  // 'a' - 'c' == -2
         System.out.println("a".compareTo("A"));  // 'a' - 'A' == 32
         System.out.println("a".compareToIgnoreCase("A")); // 0
     }

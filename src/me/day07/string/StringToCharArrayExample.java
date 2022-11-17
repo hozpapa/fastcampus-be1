@@ -8,7 +8,7 @@ public class StringToCharArrayExample {
         String str = "this is constant string. Immutable";
         // str.charAt(0) = 'T'; // 불가능
 
-        char[] charArr = str.toCharArray();
+        char[] charArr = str.toCharArray(); // StringBuilder, StringBuffer
         System.out.println(Arrays.toString(charArr));
 
         // char[]은 수정 가능 (힙에 저장)

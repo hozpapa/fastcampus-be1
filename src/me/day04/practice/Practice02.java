@@ -22,5 +22,7 @@ public class Practice02 {
             ch -= ('a' - 'A');
         }
         System.out.println("결과 문자는 " + ch + " 입니다.");
+
+        scanner.close();
     }
 }

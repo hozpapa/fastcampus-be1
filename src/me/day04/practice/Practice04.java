@@ -31,5 +31,7 @@ public class Practice04 {
         } else {
             System.out.println("at 4 quadrant");
         }
+
+        scanner.close();
     }
 }

@@ -1,4 +1,4 @@
-package me.day07.stringtokenzier;
+package me.day08.stringtokenzier;
 
 import java.util.Iterator;
 import java.util.StringTokenizer;
@@ -18,15 +18,15 @@ public class StringTokenizerExample {
         System.out.println();
 
         for (int i = 0; i < count; i++) {
-            String token = stringTokenizer1.nextToken();
+            String token = stringTokenizer1.nextToken(); // "홍홍, 박박, 김김"
             System.out.println("token = " + token);
         }
         System.out.println();
 
         StringTokenizer stringTokenizer2 = new StringTokenizer(str, ", ");
-        while (stringTokenizer2.hasMoreElements()) {
-            //String token = stringTokenizer2.nextToken();
-            Object token = stringTokenizer2.nextElement();
+        while (stringTokenizer2.hasMoreTokens()) {
+            String token = stringTokenizer2.nextToken();
+//            Object token = stringTokenizer2.nextElement();
             System.out.println("token = " + token);
         }
         System.out.println();
@@ -55,10 +55,11 @@ public class StringTokenizerExample {
         System.out.println();
 
         StringTokenizer stringTokenizer = new StringTokenizer(data, ",");
+        System.out.println("stringTokenizer.countTokens() = " + stringTokenizer.countTokens()); // 자르기 전에는 토큰 수 정확히 나옴
         while (stringTokenizer.hasMoreTokens()) {
             System.out.println("stringTokenizer.nextToken() = " + stringTokenizer.nextToken());
         }
-        System.out.println("stringTokenizer.countTokens() = " + stringTokenizer.countTokens());
+        System.out.println("stringTokenizer.countTokens() = " + stringTokenizer.countTokens()); // 자른 후에는 0 개
 
     }
 }

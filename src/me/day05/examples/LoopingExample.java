@@ -36,5 +36,7 @@ public class LoopingExample {
         }
         System.out.println("min = " + min);
         System.out.println("max = " + max);
+
+        scanner.close();
     }
 }
