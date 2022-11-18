@@ -17,7 +17,10 @@ public class Practice04 {
         Thread thread1 = new Thread(new Runnable() {
             @Override
             public void run() {
+                long start = System.currentTimeMillis();
                 String[] splitString = STR.split(", ");
+                long end = System.currentTimeMillis();
+                System.out.printf("%5d ms\n", end - start);
             }
         });
 
@@ -25,11 +28,14 @@ public class Practice04 {
         Thread thread2 = new Thread(new Runnable() {
             @Override
             public void run() {
+                long start = System.currentTimeMillis();
                 StringTokenizer stringTokenizer = new StringTokenizer(STR, ", ");
 
                 while (stringTokenizer.hasMoreTokens()) {
                     String token = stringTokenizer.nextToken();
                 }
+                long end = System.currentTimeMillis();
+                System.out.printf("%5d ms\n", end - start);
             }
         });
 

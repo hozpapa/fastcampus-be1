@@ -14,11 +14,14 @@ public class Practice03 {
         Thread thread1 = new Thread(new Runnable() {
             @Override
             public void run() {
+                long start = System.currentTimeMillis();
+
                 String answer = "";
                 for (String string: strings) {
                     answer += string;
                 }
-
+                long end = System.currentTimeMillis();
+                System.out.printf("%5d ms\n", end - start);
             }
         });
 //        StringConcatFactory.makeConcatWithConstants();
@@ -27,11 +30,14 @@ public class Practice03 {
         Thread thread2 = new Thread(new Runnable() {
             @Override
             public void run() {
+                long start = System.currentTimeMillis();
+
                 String answer = "";
                 for (String string: strings) {
                     answer.concat(string);
                 }
-
+                long end = System.currentTimeMillis();
+                System.out.printf("%5d ms\n", end - start);
             }
         });
 
