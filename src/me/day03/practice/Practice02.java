@@ -16,5 +16,7 @@ public class Practice02 {
         int max = Math.max(x, y);
         System.out.println("\n>> 최솟값 : " + min);
         System.out.println(">> 최댓값 : " + max);
+
+        scanner.close();
     }
 }

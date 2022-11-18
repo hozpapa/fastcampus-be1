@@ -17,7 +17,6 @@ public class Practice08 {
             }
             System.out.println();
             k++;
-
         }
 
     }

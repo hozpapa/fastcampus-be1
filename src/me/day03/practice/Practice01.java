@@ -24,5 +24,7 @@ public class Practice01 {
         double change = money - total;
         String changeString = numberFormat.format(change);
         System.out.println("\n=> 잔돈은 " + changeString + " 입니다.");
+
+        scanner.close();
     }
 }
