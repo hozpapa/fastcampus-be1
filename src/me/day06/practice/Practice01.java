@@ -17,7 +17,7 @@ public class Practice01 {
         System.out.println("max = " + max(scores));
         System.out.println("min = " + min(scores));
         System.out.println("average = " + average(scores));
-        System.out.println("derivation = " + derivation(scores));
+        System.out.println("variance = " + variance(scores));
         System.out.println("standard = " + standard(scores));
 
         scanner.close();
@@ -50,7 +50,7 @@ public class Practice01 {
         }
         return (double)sum / scores.length;
     }
-    public static double derivation(int[] scores) {
+    public static double variance(int[] scores) {
         double avg = average(scores);
         double dev = 0.0;
 
@@ -61,6 +61,6 @@ public class Practice01 {
         return dev;
     }
     public static double standard(int[] scores) {
-        return Math.sqrt(derivation(scores)); // square root
+        return Math.sqrt(variance(scores)); // square root
     }
 }
