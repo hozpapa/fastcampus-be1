@@ -1,4 +1,4 @@
-package me.day10.object;
+package me.day10.object.equals;
 
 public class StudentExample {
     public static void main(String[] args) {

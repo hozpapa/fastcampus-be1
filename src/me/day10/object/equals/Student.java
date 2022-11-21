@@ -1,4 +1,4 @@
-package me.day10.object;
+package me.day10.object.equals;
 
 import java.util.Objects;
 
