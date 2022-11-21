@@ -1,7 +1,8 @@
 package me.day10.object.copy;
 
-import me.day07.object.compare.Gender;
-import me.day07.object.compare.Person;
+
+import me.day10.object.compare.Gender;
+import me.day10.object.compare.Person;
 
 public class ObjectCopyMain {
     public static void main(String[] args) {
