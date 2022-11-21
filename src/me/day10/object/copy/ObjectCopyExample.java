@@ -8,7 +8,7 @@ import java.util.Objects;
 public class ObjectCopyExample implements Cloneable {
     private int intVariable;
     private String strVariable;
-    private Person[] personArray;
+    private Person[] personArray; // deep copy
 
     public ObjectCopyExample() {}
 
@@ -86,16 +86,17 @@ public class ObjectCopyExample implements Cloneable {
     @Override
     public ObjectCopyExample clone() throws CloneNotSupportedException {
         ObjectCopyExample objectCopyExample = (ObjectCopyExample) super.clone(); // shallow copy
-        objectCopyExample.personArray = new Person[personArray.length];
-        for (int i = 0; i < objectCopyExample.personArray.length; i++) {
-//            objectCopyExample.personArray[i] = new Person();
-//            objectCopyExample.personArray[i].setName(personArray[i].getName());
-//            objectCopyExample.personArray[i].setGender(personArray[i].getGender());
-//            objectCopyExample.personArray[i].setBirthdate(personArray[i].getBirthdate());
-//            objectCopyExample.personArray[i].setRegistrationNumber(personArray[i].getRegistrationNumber());
 
-            objectCopyExample.personArray[i] = personArray[i];
-            // 배열 이름은 주소 저정이 되어있으므로 주소 복사가 됨 (잘못된 복사)
+        objectCopyExample.personArray = new Person[personArray.length]; // 배열 객체인 경우 deep copy
+        for (int i = 0; i < objectCopyExample.personArray.length; i++) {
+            objectCopyExample.personArray[i] = new Person();
+            objectCopyExample.personArray[i].setName(personArray[i].getName());
+            objectCopyExample.personArray[i].setGender(personArray[i].getGender());
+            objectCopyExample.personArray[i].setBirthdate(personArray[i].getBirthdate());
+            objectCopyExample.personArray[i].setRegistrationNumber(personArray[i].getRegistrationNumber());
+
+//            objectCopyExample.personArray[i] = personArray[i];
+            // 객체 주소 저정이 되어있으므로 주소 복사가 됨 (잘못된 복사)
         }
         return objectCopyExample;
     }

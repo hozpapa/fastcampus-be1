@@ -19,20 +19,20 @@ public class Main {
         people[3] = new Person("aa", Gender.FEMALE, "970722", "970722-2387883");
         people[4] = new Person("zz", Gender.MALE, "980420", "980420-1101225");
 
-        System.out.println("<이름 오름차순 정렬>");
-        Arrays.sort(people);
+        System.out.println("<이름 오름차순 (이름이 같으면 생년월일 오름차순) 정렬>");
+        Arrays.sort(people); // people[0], people[1], .... people[4]
         for (Person p: people) {
             System.out.println(p);
         }
 
-        System.out.println("<성별로 정렬>");
-        Arrays.sort(people, new ComparatorByGender());
+        System.out.println("<성별로 오름차순 정렬>");
+        Arrays.sort(people, new ComparatorByGender()); // 구현 클래스 이름이 있는 경우
         for (Person p: people) {
             System.out.println(p);
         }
 
         System.out.println("<생년월일 내림차순 정렬>");
-        Arrays.sort(people, new Comparator<Person>() {
+        Arrays.sort(people, new Comparator<Person>() { // 구현 클래스 이름이 없는 경우 (익명 객체, 일회성 객체, 잘 사용하지 않는 정렬방식)
             @Override
             public int compare(Person o1, Person o2) {
 
@@ -42,5 +42,6 @@ public class Main {
         for (Person p: people) {
             System.out.println(p);
         }
+
     }
 }

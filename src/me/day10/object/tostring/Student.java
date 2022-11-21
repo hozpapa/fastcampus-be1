@@ -4,10 +4,11 @@ import java.util.Arrays;
 
 public class Student {
     /* auto-generated */
-    private String ID;
+    private String ID; // 객체에 대한 고유한 값 (PK) (**)
     private String name;
     private Semester currentSemester;
     private String[] takenCourses;
+
 
     public Student() {}
 

@@ -52,8 +52,8 @@ public class Car { // 테슬라 자동차만 만드는 공장
     }
 
 
-    public static String getBrandName() {  // 정적 메소드
-        return Car.BRAND;
+    public static String getBrandName() {  // static 메소드
+        return Car.BRAND; // static 메모리에 존재
     }
 
     @Override

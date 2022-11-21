@@ -6,7 +6,7 @@ package me.day11.singleton.dcl;
 //
 
 public class Singleton {
-	private volatile static Singleton uniqueInstance;
+	private static Singleton uniqueInstance;
 
 	private Singleton() {}
 
