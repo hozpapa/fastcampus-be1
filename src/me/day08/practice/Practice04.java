@@ -6,7 +6,7 @@ public class Practice04 {
     public static void main(String[] args) {
         String str = "";
 
-        for (int i = 0; i < 1000000; i++) {
+        for (int i = 0; i < 100000; i++) {
             str += i + ", ";
         }
 
@@ -19,11 +19,11 @@ public class Practice04 {
             @Override
             public void run() {
                 long start = System.currentTimeMillis();
-                String[] splitString = STR.split(", ");
+                String[] splits = STR.split(", ");
                 long end = System.currentTimeMillis();
-                System.out.printf("%5d ms\n", end - start);
+                System.out.printf("%s: %5d ms\n", Thread.currentThread().getName(), end - start);
             }
-        });
+        }, "thread1");
 
         Thread thread2 = new Thread(new Runnable() {
             @Override
@@ -35,9 +35,9 @@ public class Practice04 {
                     String token = stringTokenizer.nextToken();
                 }
                 long end = System.currentTimeMillis();
-                System.out.printf("%5d ms\n", end - start);
+                System.out.printf("%s: %5d ms\n", Thread.currentThread().getName(), end - start);
             }
-        });
+        }, "thread2");
 
         thread1.start();
         thread2.start();

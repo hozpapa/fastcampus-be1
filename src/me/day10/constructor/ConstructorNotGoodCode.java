@@ -8,13 +8,13 @@ public class ConstructorNotGoodCode {
     private B b;
 
     // 안좋음
-    public ConstructorNotGoodCode() {
+    public ConstructorNotGoodCode() { // - 1 맥북
         a = new A();
         b = new B();
     }
 
     // 이 코드가 더 좋음
-    public ConstructorNotGoodCode(A a, B b) {
+    public ConstructorNotGoodCode(A a, B b) { // - 2 리모콘 (리모콘 / 건전지 회사)
         this.a = a;
         this.b = b;
     }
