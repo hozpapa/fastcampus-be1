@@ -9,8 +9,9 @@ public class Practice04 {
 
         StringBuilder leftBuilder = new StringBuilder(strings[0]).reverse();
         StringBuilder rightBuilder = new StringBuilder(strings[1]).reverse();
-        String max = leftBuilder.compareTo(rightBuilder) < 0 ?
-                rightBuilder.toString() : leftBuilder.toString();
+        StringBuilder max = leftBuilder.compareTo(rightBuilder) < 0 ? rightBuilder : leftBuilder;
         System.out.println(max);
+
+        scanner.close();
     }
 }

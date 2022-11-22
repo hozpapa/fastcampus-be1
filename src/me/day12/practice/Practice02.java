@@ -7,7 +7,7 @@ public class Practice02 {
         Scanner scanner = new Scanner(System.in);
 
         int T = scanner.nextInt();
-        for (int t = 0; t < T; t++) {
+        for (int t = 0; t < T; t++) { // test case
             int R = scanner.nextInt(); // repeat
             String S = scanner.next(); // string
             StringBuilder P = new StringBuilder();
