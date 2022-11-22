@@ -2,6 +2,7 @@ package me.day10.object.compare;
 
 import java.util.Objects;
 
+
 public class Person implements Comparable<Person> { // Comparable: Person 클래스의 객체를 정렬할 때 사용하는 인터페이스
     private String name;
     private Gender gender;

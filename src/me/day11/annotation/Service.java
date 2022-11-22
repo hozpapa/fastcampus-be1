@@ -1,7 +1,7 @@
 package me.day11.annotation;
 
 public class Service {
-    @PrintAnnotation
+    //@PrintAnnotation
     public void method1() {
         System.out.println("method1");
     }

@@ -1,6 +1,11 @@
 package me.day11.annotation;
 
+@AnnotationName(elementName1 = "abc")
 public class AnnotationNameClass {
+
+    @AnnotationName(elementName1 = "abc", elementName2 = 100)
+    int foo;
+
     // 생성자는 지정 불가
     // {ElementType.TYPE, ElementType.FIELD, ElementType.METHOD
     // 클래스 / 필드 / 메소드만 붙일 수 있음

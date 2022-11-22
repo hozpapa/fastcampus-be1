@@ -5,7 +5,9 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Target({ElementType.TYPE, ElementType.FIELD, ElementType.METHOD})
+@Target({ElementType.TYPE,
+        ElementType.FIELD,
+        ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface AnnotationName {
     // ElementType.TYPE - 클래스 / 인터페이스 / 열거타입
