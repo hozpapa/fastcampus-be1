@@ -1,4 +1,6 @@
-package me.day13.inheritance;
+package me.day13.inheritance.use;
+
+import java.util.Objects;
 
 public class SportCar extends Car {
     // 부모한테서 상속받은 필드
@@ -37,8 +39,22 @@ public class SportCar extends Car {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        SportCar sportCar = (SportCar) o;
+        return turbo == sportCar.turbo;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), turbo);
+    }
+
+    @Override
     public String toString() { // Object 클래스의 toString() 재정의
-        return "SportCar{" + ", " + // 부모 객체 호출
+        return "SportCar{" + super.toString() + ", " + // 부모 객체 호출
                 "turbo=" + turbo +
                 '}';
     }

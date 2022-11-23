@@ -1,4 +1,6 @@
-package me.day13.inheritance;
+package me.day13.inheritance.use;
+
+import java.util.Objects;
 
 public class Car { // 테스라만 만드는 공장
     protected String ID; // auto-generated
@@ -49,6 +51,19 @@ public class Car { // 테스라만 만드는 공장
 
     public static void setNumOfCar(int numOfCar) {
         Car.numOfCar = numOfCar;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Car car = (Car) o;
+        return speed == car.speed && ID.equals(car.ID) && modelName.equals(car.modelName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ID, modelName, speed);
     }
 
     @Override
