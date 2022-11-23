@@ -2,12 +2,13 @@ package me.day13.inheritance.use;
 
 import java.util.Objects;
 
+
 public class Car { // 테스라만 만드는 공장
     protected String ID; // auto-generated
     protected String modelName;
     protected int speed;
     protected static final String COMPANY = "TESLA";
-    protected static int numOfCar = 0;
+    private static int numOfCar = 0;
 
     public Car() {
         numOfCar++;
@@ -53,7 +54,7 @@ public class Car { // 테스라만 만드는 공장
         Car.numOfCar = numOfCar;
     }
 
-    @Override
+    @Override // Object equals()
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

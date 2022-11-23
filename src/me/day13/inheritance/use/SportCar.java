@@ -15,19 +15,34 @@ public class SportCar extends Car {
     // 눈으로는 안보이지만 내부적으로 super 존재함
     // Car super = new Car();가 살고 있음
     private int turbo;
+    private static int numOfSportCar = 0;
 
     public SportCar() {
         //super(); // 내부적으로 자동 호출
+        numOfSportCar++;
+        ID = String.format("%04d", numOfSportCar);
     }
 
     public SportCar(int turbo) {
         //super(); // 내부적으로 자동 호출
+        numOfSportCar++;
+        ID = String.format("%04d", numOfSportCar);
         this.turbo = turbo;
     }
 
     public SportCar(String modelName, int speed, int turbo) {
         super(modelName, speed);
+        numOfSportCar++;
+        ID = String.format("%04d", numOfSportCar);
         this.turbo = turbo;
+    }
+
+    public static int getNumOfSportCar() {
+        return numOfSportCar;
+    }
+
+    public static void setNumOfSportCar(int numOfSportCar) {
+        SportCar.numOfSportCar = numOfSportCar;
     }
 
     public int getTurbo() {
@@ -53,9 +68,12 @@ public class SportCar extends Car {
     }
 
     @Override
-    public String toString() { // Object 클래스의 toString() 재정의
-        return "SportCar{" + super.toString() + ", " + // 부모 객체 호출
+    public String toString() {
+        return "SportCar{" +
                 "turbo=" + turbo +
+                ", ID='" + ID + '\'' +
+                ", modelName='" + modelName + '\'' +
+                ", speed=" + speed +
                 '}';
     }
 }

@@ -1,4 +1,4 @@
-package me.day13.polymorphism.instancesof;
+package me.day14.abstracts;
 
 import java.util.Objects;
 
@@ -7,11 +7,6 @@ public class Triangle extends Shape {
     private int height;
 
     public Triangle() {
-    }
-
-    public Triangle(int base, int height) {
-        this.base = base;
-        this.height = height;
     }
 
     public Triangle(Point centerPoint, int base, int height) {

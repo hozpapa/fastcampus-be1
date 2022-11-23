@@ -12,5 +12,6 @@ public class Main {
 
 //        B b2 = new E(); // 불가
 //        C c2 = new D(); // 불가
+
     }
 }

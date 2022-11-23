@@ -1,9 +1,9 @@
-package me.day13.polymorphism.definition;
+package me.day14.abstracts;
 
 import java.util.Objects;
 
 public class Circle extends Shape {
-    int radius;
+    private int radius;
 
     public Circle() {
     }
@@ -20,6 +20,17 @@ public class Circle extends Shape {
     public void setRadius(int radius) {
         this.radius = radius;
     }
+
+    @Override
+    public void draw() {
+        System.out.println(Circle.class.getName() + " draw()");
+    }
+
+    @Override
+    public double calculateArea() {
+        return Math.PI * radius * radius;
+    }
+
 
     @Override
     public boolean equals(Object o) {

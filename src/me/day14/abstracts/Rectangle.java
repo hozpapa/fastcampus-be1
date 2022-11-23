@@ -1,4 +1,4 @@
-package me.day13.polymorphism.instancesof;
+package me.day14.abstracts;
 
 import java.util.Objects;
 
@@ -7,11 +7,6 @@ public class Rectangle extends Shape {
     private int height;
 
     public Rectangle() {
-    }
-
-    public Rectangle(int width, int height) {
-        this.width = width;
-        this.height = height;
     }
 
     public Rectangle(Point centerPoint, int width, int height) {

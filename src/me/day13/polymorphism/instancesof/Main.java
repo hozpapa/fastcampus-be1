@@ -10,17 +10,18 @@ public class Main {
         }
 
         for (int i = 0; i < shapes.length; i++) {
-            System.out.println(shapes[i].getClass().getName() + " = " + calculateArea(shapes[i]));
+            System.out.println(shapes[i].getClass().getName() + " = " + shapes[i].calculateArea());
         }
 
         // 일반 도형 클래스는 면적을 구할 수 없음
         // calculateArea(Shape shape) 호출은 가능하지만 else 구문에 만족하여 0.0 반환
         Point point = new Point(15, 20);
         Shape shape = new Shape(point);
-        System.out.println(shape.getClass().getName() + " = " + calculateArea(shape));
+        System.out.println(shape.getClass().getName() + " = " + shape.calculateArea());
     }
     // 객체지향적이지 않은 코드 🤔
-    public static double calculateArea(Shape shape) {
+    // => shape.calculateArea();
+    public static double calculateArea(Shape shape) { // Shape shape = new Circle() / new Rectangle() / new Triangle()
         final double PI = 3.14;
         if (shape instanceof Circle) {
             return ((Circle) shape).getRadius() * ((Circle) shape).getRadius() * PI;

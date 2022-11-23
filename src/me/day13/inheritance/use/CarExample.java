@@ -20,5 +20,7 @@ public class CarExample {
             System.out.println(sportCars[i]);
         }
 
+        System.out.println(Car.getNumOfCar()); // 10
+        System.out.println(SportCar.getNumOfSportCar()); // 10
     }
 }
