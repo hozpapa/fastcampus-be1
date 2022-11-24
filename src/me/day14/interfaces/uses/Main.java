@@ -43,9 +43,24 @@ public class Main {
     public static void b(AmusementParkSaleAble saleAble) {
         System.out.println("b method()");
     }
-    public static double price(Person person) {
+    public static double price(Person person) { // Baby, HighStudent, UnivStudent, Worker => Person
+        ///////////////////////////////////
+        // BabySaleAble extends AmusementParkSaleAble
+        // - Baby
+        // - Baby => BabySaleAble => AmusementParkSaleAble
+        // StudentSaleAble extends AmusementParkSaleAble
+        // - HighStudent, UnivStudent
+        // - HighStudent, UnivStudent => StudentSaleAble => AmusementParkSaleAble
+        // Other
+        // - Worker
+        //////////////////////////////////
+
+
         double price = 30000;
-        if (person instanceof AmusementParkSaleAble) { // SaleAble => StudentSaleAble, BabySaleAble
+        // Baby implement BabySaleAble => AmusementParkSaleAble amusementParkSaleAble = new Baby();
+        // HighStudent implement StudentSaleAble => AmusementParkSaleAble amusementParkSaleAble = new HighStudent();
+        // UnivStudent implement StudentSaleAble => AmusementParkSaleAble amusementParkSaleAble = new UnivStudent();
+        if (person instanceof AmusementParkSaleAble) { // AmusementParkSaleAble => StudentSaleAble, BabySaleAble
             return price * (1 - ((AmusementParkSaleAble) person).saleRate());
         } else {
             return price;
