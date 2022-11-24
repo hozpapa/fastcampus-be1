@@ -1,7 +1,8 @@
 package me.day14.interfaces.uses;
 
 public interface DriveLicenseAble { // 분류 기준만 제공
-    int a = 0;
+    int a = 0; // 분류된 객체들에게 공통된 상수값을 제공
+    double PI = Math.PI; // 함수 구현 중에 함수 내에서 특정 값이 필요한 경우
     // static final 생략 가능
     // 함수를 구현하는 중에 함수 내에서 특정 값이 필요할 수 있음
     // 해당 분류 기준에 의해 분류된 객체들에 공통된 상수값을 제공할 수도 있음
@@ -22,6 +23,12 @@ public interface DriveLicenseAble { // 분류 기준만 제공
     default void defaultMethod() { // 재정의를 해도 되고 안해도 되는 함수
         System.out.println("Default Method");
     }
+    ///////////////// default //////////////////////
+    // abstract 메소드가 추가되거나 삭제되면 구현 클래스에서 오류 => 오류 방지하기 위해서 default 함수 제공
+    // 무조건 구현 클래스에서 재정의 해도 되고 안해도 됨
+    // 만약 재정의하지 않을 경우 인터페이스 정의된 default 메소드를 사용
+    ////////////////////////////////////////////////
+
     static void staticMethod() { // 인터페이스 안에 살고 있는 함수 (구현 클래스에서 재정의 불가능)
         System.out.println("Static Method");
     }

@@ -1,4 +1,4 @@
 package me.day14.interfaces.uses;
 
-public class HighStudent extends Person {
+public class HighStudent extends Person implements StudentSaleAble {
 }

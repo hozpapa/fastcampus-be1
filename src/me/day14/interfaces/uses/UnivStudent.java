@@ -1,6 +1,6 @@
 package me.day14.interfaces.uses;
 
-public class UnivStudent extends Person implements DriveLicenseAble {
+public class UnivStudent extends Person implements DriveLicenseAble, StudentSaleAble {
     @Override
     public void renew() {
         System.out.println("UnivStudent - Renew Driver License");
