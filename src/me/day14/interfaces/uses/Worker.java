@@ -3,11 +3,11 @@ package me.day14.interfaces.uses;
 public class Worker implements DriveLicenseAble {
     @Override
     public void renew() {
-        System.out.println("Renew Driver License");
+        System.out.println("Worker - Renew Driver License");
     }
 
     @Override
-    public void renew1() {
-        System.out.println("Renew Worker License ... ");
+    public void defaultMethod() {
+        System.out.println("Worker - Default Method");
     }
 }

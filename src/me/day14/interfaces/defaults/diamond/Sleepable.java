@@ -1,4 +1,4 @@
-package me.day14.interfaces.defaults.problem;
+package me.day14.interfaces.defaults.diamond;
 
 public interface Sleepable {
     default void on() {
