@@ -1,6 +1,6 @@
 package me.day15.smartstore;
 
-public class SmartStoreApplication  {
+public class SmartStoreApplication  { // 싱글톤
 
     private SmartStoreApplication() {
     }

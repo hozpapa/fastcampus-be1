@@ -78,5 +78,14 @@ public class Customer {
 		return Objects.hash(serialNO, name, userID, spentTime, totalPay);
 	}
 
-
+	@Override
+	public String toString() {
+		return "Customer{" +
+				"serialNO='" + serialNO + '\'' +
+				", name='" + name + '\'' +
+				", userID='" + userID + '\'' +
+				", spentTime=" + spentTime +
+				", totalPay=" + totalPay +
+				'}';
+	}
 }
