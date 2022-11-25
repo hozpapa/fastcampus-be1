@@ -109,6 +109,7 @@ public class Customers { // 싱글톤
         for (int i = 0; i < size; i++) {
             newCustomers[i] = customers[i];
         }
+
         customers = newCustomers;
         capacity = size;
     }
@@ -127,6 +128,23 @@ public class Customers { // 싱글톤
         }
 
         customers = newCustomers;
+    }
+
+
+    public void print() {
+        for (int i = 0; i < size; i++) {
+            System.out.printf("No.  %4d => %s\n", (i + 1), customers[i]);
+        }
+    }
+
+    @Override
+    public String toString() {
+        String str = "";
+
+        for (int i = 0; i < size; i++) {
+            str += customers[i] + "\n";
+        }
+        return str;
     }
 
 

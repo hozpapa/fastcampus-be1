@@ -4,7 +4,7 @@ import me.day15.smartstore.customers.Customer;
 
 public class Main {
 	public static void main(String[] args) {;
-		// SmartStoreApplication.getInstance().test().run(); // test mode
+		// SmartStoreApplication.getInstance().test().run(); // builder patter, test mode
 		// SmartStoreApplication.getInstance().run(); // normal mode
 	}
 
