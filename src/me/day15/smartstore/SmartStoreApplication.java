@@ -1,8 +1,15 @@
 package me.day15.smartstore;
 
 public class SmartStoreApplication  { // 싱글톤
+    private static SmartStoreApplication smartStoreApplication;
 
-    private SmartStoreApplication() {
+    private SmartStoreApplication() {}
+
+    public static SmartStoreApplication getInstance() {
+        if (smartStoreApplication == null) {
+            smartStoreApplication = new SmartStoreApplication();
+        }
+        return smartStoreApplication;
     }
 
 
