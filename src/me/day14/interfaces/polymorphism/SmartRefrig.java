@@ -1,22 +1,24 @@
 package me.day14.interfaces.polymorphism;
 
-public class SmartRefrig extends Electronic implements SmartPhoneControllable {
+public class SmartRefrig extends Electronic implements SmartPhoneRefrigControllable {
     private int volume;
     private boolean isMute;
 
+     private String[] groceries = new String[] {"삼겹살", "우유", "무쌈", "깻잎"};
+
     @Override
     public void on() {
-        System.out.println(GeneralRefrig.class.getName() + " on");
+        System.out.println(SmartRefrig.class.getName() + " on");
     }
 
     @Override
     public void off() {
-        System.out.println(GeneralRefrig.class.getName() + " off");
+        System.out.println(SmartRefrig.class.getName() + " off");
     }
 
     @Override
     public void setVolume(int volume) {
-        if (volume >= RemoteControllable.MIN_VOLUME && volume <= RemoteControllable.MAX_VOLUME) {
+        if (volume >= SmartPhoneControllable.MIN_VOLUME && volume <= SmartPhoneControllable.MAX_VOLUME) {
             this.volume = volume;
         } else {
             System.out.println("Can't Set That Volume ... Too High or Lower");
@@ -32,11 +34,18 @@ public class SmartRefrig extends Electronic implements SmartPhoneControllable {
 
     @Override
     public void changeBattery() {
-        System.out.println(GeneralRefrig.class.getName() + " Change Battery...");
+        System.out.println(SmartRefrig.class.getName() + " Change Battery...");
     }
 
     @Override
     public void listenVoice() {
-        System.out.println(GeneralRefrig.class.getName() + " Listening Your Voice...");
+        System.out.println(SmartRefrig.class.getName() + " Listening Your Voice...");
+    }
+
+    @Override
+    public void showGroceries() {
+        for (String grocery: groceries) {
+            System.out.println(grocery);
+        }
     }
 }

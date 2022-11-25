@@ -15,16 +15,16 @@ public class Main {
             ((GeneralTV) remoteControllable3).setProductNo("0001");
             ((GeneralTV) remoteControllable3).setModelName("OLED");
             ((GeneralTV) remoteControllable3).setCompanyName("LG");
-            ((GeneralTV) remoteControllable3).setVolume(5); // 타입캐스팅 필요 없음 (인터페이스 제공하는 함수이기 때문)
+            ((GeneralTV) remoteControllable3).setVolume(5); // 타입 캐스팅 필요 없음 (인터페이스 제공하는 함수이기 때문)
             System.out.println(remoteControllable3);
             System.out.println();
         }
 
-        if (remoteControllable3 instanceof Electronic) {
+        if (remoteControllable3 instanceof Electronic) { // remoteControllable3 객체가 Electronic 로 타입 캐스팅이 가능하니 ?
             ((Electronic) remoteControllable3).setProductNo("1000");
             ((Electronic) remoteControllable3).setModelName("OLED2");
             ((Electronic) remoteControllable3).setCompanyName("SAMSUNG");
-            // ((Electronic) remoteControllable3).setVolume(5); // 부모 이름으로 타입 변경 => Electronic 형으로 변경 => setVolume 이 없어서 오류
+            // ((Electronic) remoteControllable3).setVolume(5); // 부모 타입 Electronic 형으로 변경 => setVolume 이 없어서 오류
             System.out.println(remoteControllable3);
             System.out.println();
         }
@@ -32,7 +32,8 @@ public class Main {
         // RemoteControllable 인터페이스 제공
         remoteControllable3.on();
         remoteControllable3.setVolume(100);
-        remoteControllable3.toggleMute();
+        remoteControllable3.toggleMute(); // unmute <-> mute
+        remoteControllable3.toggleMute(); // unmute <-> mute
         remoteControllable3.off();
         System.out.println(remoteControllable3);
         System.out.println();
@@ -75,5 +76,13 @@ public class Main {
             smartPhoneControllables[i].off();
             System.out.println();
         }
+
+        // 스마트폰 컨트롤러
+        //  - 냉장고 스마트폰 컨트롤러
+        //  - 티비 스마트폰 컨트롤러
+        // SmartRefrig showGroceries() (냉장고 기능)
+        SmartPhoneRefrigControllable smartPhoneRefrigControllable = new SmartRefrig();
+        smartPhoneRefrigControllable.showGroceries();
+
     }
 }

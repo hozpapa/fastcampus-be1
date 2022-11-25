@@ -26,7 +26,7 @@ public class GeneralMonitor extends Electronic implements RemoteControllable {
 
     @Override
     public void toggleMute() {
-        isMute = !isMute;
+        isMute = !isMute; // isMute: true -> false, isMute: false -> true
         System.out.println((isMute  ? "Mute" : "Unmute") + " Status ... ");
     }
 
