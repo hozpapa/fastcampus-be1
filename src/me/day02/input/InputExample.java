@@ -1,5 +1,6 @@
 package me.day02.input;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class InputExample {
@@ -7,7 +8,7 @@ public class InputExample {
         Scanner scanner = new Scanner(System.in);
 
         String name;
-        int age;
+        int age = 0;
         String gender; // 성별
         double height; // 키
         char alphabet; // 알파벳 (nextCharacter() 없음)
