@@ -1,6 +1,6 @@
 package me.day16.exception.examples.inheritance;
 
-public class ExceptionA extends Exception {
+public class ExceptionA extends Exception { // unchecked exception
     private final static String MESSAGE = "ExceptionA";
     public ExceptionA() {
         super(MESSAGE);

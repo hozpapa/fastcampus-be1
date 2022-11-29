@@ -8,7 +8,7 @@ public class UserDefinedExceptionExample {
         Scanner scanner = new Scanner(System.in);
         int money;
 
-        while (true) {
+        while (true) { // 무한정의 입력 기회가 있는 예외처리
             try {
                 System.out.print("input money: ");
                 money = scanner.nextInt();

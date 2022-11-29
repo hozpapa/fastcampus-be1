@@ -41,6 +41,8 @@ public class ClassCastExceptionExample {
         System.out.println("main exit ...");
     }
     public static void birth (Animal animal) throws ClassCastException {
+
+        // unchecked exception => "개발자 실수" (if-else)
 //        if (animal instanceof Mammal) {
 //            Mammal mammal = (Mammal) animal;
 //            System.out.println(mammal.getName() + " give birth to young");
