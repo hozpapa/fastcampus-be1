@@ -43,6 +43,11 @@ public class DoubleClassExample {
         System.out.println("Double.MIN_VALUE = " + Double.MIN_VALUE);
         System.out.println("Double.MAX_EXPONENT = " + Double.MAX_EXPONENT);
         System.out.println("Double.MIN_EXPONENT = " + Double.MIN_EXPONENT);
+
+        // 실수 연산
+        // NaN: 0.0d / 0.0
+        // Infinity: a / 0.0
+        // 정수 / 0 => ArithmeticException
         System.out.println("Double.NaN = " + Double.NaN);
         System.out.println("Double.NEGATIVE_INFINITY = " + Double.NEGATIVE_INFINITY);
         System.out.println("Double.POSITIVE_INFINITY = " + Double.POSITIVE_INFINITY);

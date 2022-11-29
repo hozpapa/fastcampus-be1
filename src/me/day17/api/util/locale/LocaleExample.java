@@ -19,10 +19,10 @@ public class LocaleExample {
         System.out.println();
 
         Locale localeJP = new Locale("ja", "JP");
-        System.out.println("localeJP.getDisplayLanguage() = " + localeJP.getDisplayLanguage());
-        System.out.println("localeJP.getLanguage() = " + localeJP.getLanguage());
-        System.out.println("localeJP.getDisplayCountry() = " + localeJP.getDisplayCountry());
-        System.out.println("localeJP.getCountry() = " + localeJP.getCountry());
+        System.out.println("localeJP.getDisplayLanguage() = " + localeJP.getDisplayLanguage()); // 언어 코드에 대한 풀 네임
+        System.out.println("localeJP.getLanguage() = " + localeJP.getLanguage()); // 언어 코드
+        System.out.println("localeJP.getDisplayCountry() = " + localeJP.getDisplayCountry()); // 나라 코드에 대한 풀 네임
+        System.out.println("localeJP.getCountry() = " + localeJP.getCountry()); // 나라 코드
         System.out.println();
 
         Locale localeUS = new Locale("en", "US");
@@ -51,13 +51,13 @@ public class LocaleExample {
     }
     private static void getDateWithDifferentLocales() {
         Calendar calendar = Calendar.getInstance();
-        calendar.set(113, 8, 19, 14, 22, 30);
+        calendar.set(2020, 8, 19, 14, 22, 30);
 
         Locale localeCN = Locale.SIMPLIFIED_CHINESE;
         Locale localeUS = new Locale("en", "US");
 
-        String cn = DateFormat.getDateInstance(DateFormat.MEDIUM, localeCN).format(calendar.getTime());
-        String us = DateFormat.getDateInstance(DateFormat.MEDIUM, localeUS).format(calendar.getTime());
+        String cn = DateFormat.getDateInstance(DateFormat.FULL, localeCN).format(calendar.getTime());
+        String us = DateFormat.getDateInstance(DateFormat.FULL, localeUS).format(calendar.getTime());
         System.out.println("cn = " + cn);
         System.out.println("us = " + us);
 

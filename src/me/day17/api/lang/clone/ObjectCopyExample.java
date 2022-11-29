@@ -1,11 +1,11 @@
 package me.day17.api.lang.clone;
 
-import me.day07.object.compare.Person;
+import me.day10.object.compare.Person;
 
 import java.util.Arrays;
 import java.util.Objects;
 
-public class ObjectCopyExample implements Cloneable {
+public class ObjectCopyExample implements Cloneable { // Object.clone(), Cloneable
     private int intVariable;
     private String strVariable;
     private Person[] personArray;
@@ -85,17 +85,18 @@ public class ObjectCopyExample implements Cloneable {
 
     @Override
     public ObjectCopyExample clone() throws CloneNotSupportedException {
+        // super (Object) => 객체의 필드에 대한 정보 전달 (Reflection) (str, int, array) => super.clone() => shallow copy
         ObjectCopyExample objectCopyExample = (ObjectCopyExample) super.clone(); // shallow copy
         objectCopyExample.personArray = new Person[personArray.length];
         for (int i = 0; i < objectCopyExample.personArray.length; i++) {
-//            objectCopyExample.personArray[i] = new Person();
-//            objectCopyExample.personArray[i].setName(personArray[i].getName());
-//            objectCopyExample.personArray[i].setGender(personArray[i].getGender());
-//            objectCopyExample.personArray[i].setBirthdate(personArray[i].getBirthdate());
-//            objectCopyExample.personArray[i].setRegistrationNumber(personArray[i].getRegistrationNumber());
+            objectCopyExample.personArray[i] = new Person();
+            objectCopyExample.personArray[i].setName(personArray[i].getName());
+            objectCopyExample.personArray[i].setGender(personArray[i].getGender());
+            objectCopyExample.personArray[i].setBirthdate(personArray[i].getBirthdate());
+            objectCopyExample.personArray[i].setRegistrationNumber(personArray[i].getRegistrationNumber());
 
-            objectCopyExample.personArray[i] = personArray[i];
-            // 배열 이름은 주소 저정이 되어있으므로 주소 복사가 됨 (잘못된 복사)
+//            objectCopyExample.personArray[i] = personArray[i];
+//             배열 이름은 주소 저정이 되어있으므로 주소 복사가 됨 (잘못된 복사)
         }
         return objectCopyExample;
     }

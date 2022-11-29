@@ -7,7 +7,7 @@ public class InstantExample1 {
     public static void main(String [] args) throws InterruptedException {
 
         Instant instant1 = Instant.now();
-        Thread.sleep(1000);
+        Thread.sleep(1000); // 1 sec
 
         Instant instant2 = Instant.now();
 

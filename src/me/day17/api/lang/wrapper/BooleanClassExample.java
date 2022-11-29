@@ -59,7 +59,7 @@ public class BooleanClassExample {
         System.out.println("toStringBoolean = " + toStringBoolean);
         System.out.println();
 
-        // logical operator
+        // logical operator &&, ||, ^
         System.out.println("Logical And = " + Boolean.logicalAnd((10 > 20), (20 > 10)));
         System.out.println("Logical Or = " + Boolean.logicalOr((10 > 20), (20 > 10)));
         System.out.println("Logical Xor = " + Boolean.logicalXor((10 > 20), (20 > 10)));

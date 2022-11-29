@@ -31,7 +31,7 @@ public class InstantExample2 {
         System.out.println();
         System.out.println();
 
-        System.out.println("1-2. 현재 시간의 타임스탬프 값을 구하기");
+        System.out.println("1-2. 현재 시간의 타임스탬프 값을 구하기"); // 타임 스탬프 <= Local now
         Instant current = Instant.now(); // 현재 시간의 Instant 객체 반환
         System.out.println("Current Instant = "+ current);
 

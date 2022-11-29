@@ -1,5 +1,6 @@
 package me.day17.api.lang.system;
 
+import java.io.File;
 import java.util.Properties;
 
 public class SystemPropertyExample {
@@ -9,6 +10,7 @@ public class SystemPropertyExample {
         System.out.println(System.getProperty("java.home"));
         System.out.println(System.getProperty("os.name"));
         System.out.println(System.getProperty("file.separator"));
+        System.out.println(File.separator); // local file IO => ".." + File.separator + "img" + File.separator + "dog.jpg"
         System.out.println(System.getProperty("user.name"));
         System.out.println(System.getProperty("user.home"));
         System.out.println(System.getProperty("user.dir"));

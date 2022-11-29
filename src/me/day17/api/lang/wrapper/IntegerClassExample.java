@@ -12,7 +12,8 @@ public class IntegerClassExample {
         ////////////////////////////////////////////////////////////
         /////////////////// int -> Integer (Boxing) ////////////////
         ////////////////////////////////////////////////////////////
-        Integer integer1 = 10;  // 새로운 주소 할당하지 않고 기존에 저장된 10이라는 값을 가지고 옴
+        int i = 10;
+        Integer integer1 = 10;  // boxing, 새로운 주소 할당하지 않고 기존에 저장된 10이라는 값을 가지고 옴
         Integer integer2 = Integer.valueOf(10);  // 새로운 주소 할당하지 않고 기존에 저장된 10이라는 값을 가지고 옴
         Integer integer3 = new Integer(10); // 객체 생성자를 통해서 사용하게 되면 새로운 주소 할당
         Integer integer4 = new Integer(10); // 객체 생성자를 통해서 사용하게 되면 새로운 주소 할당
@@ -74,17 +75,18 @@ public class IntegerClassExample {
         // int -> String
         int s = 10;
         String toStringInt = Integer.toString(s);
+        String toStringInt2 = s + "";
         System.out.println("toStringInt = " + toStringInt);
         System.out.println();
 
         // 16진수나 8진수 문자열을 10진수 정수로 바꾸기
-        int decodeHex = Integer.decode("0x10");
-        int decodeOctal = Integer.decode("010");
+        int decodeHex = Integer.decode("0x10"); // 16: 0x
+        int decodeOctal = Integer.decode("010"); // 8: 0
         System.out.println("decodeHex = " + decodeHex);
         System.out.println("decodeOctal = " + decodeOctal);
         System.out.println();
 
-        // 10진수 정수를 2진수나, 16진수, 8진수로 바꾸기
+        // 10진수 정수를 2진수나, 16진수, 8진수로 바꾸기 (programmers)
         String binaryString = Integer.toBinaryString(10);
         String hexString = Integer.toHexString(10);
         String octString = Integer.toOctalString(10);
@@ -92,7 +94,6 @@ public class IntegerClassExample {
         System.out.println("hexString = " + hexString);
         System.out.println("octString = " + octString);
         System.out.println();
-
 
     }
 }

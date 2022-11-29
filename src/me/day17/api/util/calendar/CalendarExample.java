@@ -112,7 +112,7 @@ public class CalendarExample {
         // 다른 Calendar 필드에는 영향 줄 수 있음
         System.out.println("calendar4.add() = " + calendar4.getTime());
 
-        calendar5.roll(Calendar.SECOND, 60);
+        calendar5.roll(Calendar.SECOND, 60); // 60초 => 1분
         // roll() 메소드는 전달된 Calendar 필드에서 일정 시간 만큼을 더하거나 빼줌
         // 다른 Calendar 필드에는 영향 주지 않음
         System.out.println("calendar5.roll() = " + calendar5.getTime());
