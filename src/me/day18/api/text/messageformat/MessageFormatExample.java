@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.text.ParseException;
+import java.text.ParsePosition;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -48,7 +49,11 @@ public class MessageFormatExample {
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
             Object[] objects = messageFormat2.parse(line);
+            SimplePerson simplePerson = new SimplePerson(
+                    (String) objects[0],
+                    Integer.parseInt((String) objects[1]));
             System.out.println(Arrays.toString(objects));
+            System.out.println(simplePerson);
             String results = MessageFormat.format(pattern2, objects);
             System.out.println("results = " + results);
         }

@@ -97,4 +97,6 @@ public class Person implements Comparable<Person> { // Comparable: Person 클래
         else return 1; // this.name.compareTo(o.name) > 0
 
     }
+
+
 }

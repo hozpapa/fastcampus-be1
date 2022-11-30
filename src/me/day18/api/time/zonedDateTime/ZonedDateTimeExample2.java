@@ -30,13 +30,13 @@ public class ZonedDateTimeExample2 {
         final var zonedDateTimeOfSeoul = ZonedDateTime.of(2018, 1, 1, 0, 0, 0, 0, ZoneId.of("Asia/Seoul"));
         final var zonedDateTimeOfTokyo = ZonedDateTime.of(2018, 1, 1, 0, 0, 0, 0, ZoneId.of("Asia/Tokyo"));
         // false, 둘은 다른 Region에서 사용하는 TimeZone을 사용하고 있기 때문
-        System.out.println(zonedDateTimeOfSeoul.equals(zonedDateTimeOfTokyo));
+        System.out.println(zonedDateTimeOfSeoul.equals(zonedDateTimeOfTokyo)); // false
 
-        final var offsetDateTimeOfSeoul = zonedDateTimeOfSeoul.toOffsetDateTime();
-        final var offsetDateTimeOfTokyo = zonedDateTimeOfTokyo.toOffsetDateTime();
+        final var offsetDateTimeOfSeoul = zonedDateTimeOfSeoul.toOffsetDateTime(); // +9
+        final var offsetDateTimeOfTokyo = zonedDateTimeOfTokyo.toOffsetDateTime(); // +9
         // true, 둘은 같은 Offset에 다른 Region이지만, OffsetDateTime은 ZoneRegion에 대한 정보는 없고 ZoneOffset에 대한 정보만 있기 때문에 동일한 것으로 취급
         // 같은 Region에서 사용하는 형식인지 아닌지는 알 수 없음
-        System.out.println(offsetDateTimeOfSeoul.equals(offsetDateTimeOfTokyo));
+        System.out.println(offsetDateTimeOfSeoul.equals(offsetDateTimeOfTokyo)); // true
 
         final var zonedDateTimeOfWinter = ZonedDateTime.of(2018, 1, 1, 0, 0, 0, 0, ZoneId.of("CET"));
         final var zonedDateTimeOfSummer = ZonedDateTime.of(2018, 6, 1, 0, 0, 0, 0, ZoneId.of("CET"));

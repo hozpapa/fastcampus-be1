@@ -29,6 +29,7 @@ public class Person implements Comparable<Person> {
 
     public Person() {}
 
+
     public Person(String name, Gender gender, String birthdate, String registrationNumber) {
         this.name = name;
         this.gender = gender;

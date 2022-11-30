@@ -10,8 +10,7 @@ public class LocalDateTimeExample2 {
         System.out.println(now);
         System.out.println();
 
-
-        //직접 변경
+        // 직접 변경
         LocalDateTime target = now
                 .withYear(2024)     //년 변경
                 .withMonth(10)      //월 변경

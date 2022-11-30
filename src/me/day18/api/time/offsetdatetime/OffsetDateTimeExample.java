@@ -26,12 +26,18 @@ public class OffsetDateTimeExample {
         // 1970-01-01T00:00+09:00
         final var unixTimeOfUTC9 = OffsetDateTime.of(1970, 1, 1, 0, 0, 0, 0, ZoneOffset.of("+9"));
         // false, 둘은 다른 ZoneOffset을 가짐
+        System.out.println(unixTimeOfUTC);
+        System.out.println(unixTimeOfUTC9);
         System.out.println(unixTimeOfUTC.equals(unixTimeOfUTC9));
+        System.out.println();
+
 
         // 1970-01-01T00:00
         final var unixTimeOfUTCLocalDateTime = unixTimeOfUTC.toLocalDateTime();
         // 1970-01-01T00:00
         final var unixTimeOfUTCL9ocalDateTime = unixTimeOfUTC9.toLocalDateTime();
+        System.out.println(unixTimeOfUTCLocalDateTime);
+        System.out.println(unixTimeOfUTCL9ocalDateTime);
         // true, LocalDateTime은 ZoneOffset이 없기 때문에 둘 다 똑같은 걸로 취급함
         System.out.println(unixTimeOfUTCLocalDateTime.equals(unixTimeOfUTCL9ocalDateTime));
     }

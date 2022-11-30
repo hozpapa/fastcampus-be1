@@ -35,6 +35,7 @@ public class ThreadExample {
         System.out.println("\n==========================================================");
         System.out.println("\t\t3. Runnable 익명 객체를 인자로 전달하여 Thread 생성");
         System.out.println("==========================================================");
+
         Thread anonymous1 = new Thread(new Runnable() {
             private static final int ITERATIONS = 10;
             private String name = "anonymous1";

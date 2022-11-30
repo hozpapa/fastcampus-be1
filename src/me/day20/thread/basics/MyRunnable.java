@@ -1,6 +1,6 @@
 package me.day20.thread.basics;
 
-public class MyRunnable implements Runnable {
+public class MyRunnable implements Runnable { // 스레드 내부에 작업단위 기술
     private static final int ITERATIONS = 10;
     private String name;
 

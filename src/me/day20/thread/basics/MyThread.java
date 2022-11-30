@@ -1,6 +1,6 @@
 package me.day20.thread.basics;
 
-public class MyThread extends Thread {
+public class MyThread extends Thread { // 스레드를 만듦
     private static final int ITERATIONS = 10;
     private String name;
 
@@ -9,7 +9,7 @@ public class MyThread extends Thread {
     }
 
     @Override
-    public void run() {
+    public void run() { // 독립적인 작업을 하는 단위
         for (int i = 0; i < ITERATIONS; i++) {
             System.out.println(name + " => " + i);
         }

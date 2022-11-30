@@ -19,7 +19,7 @@ public class MatcherClassExample1 {
         System.out.println(matcher.matches()); // 공백 포함. false
         System.out.println();
 
-        // 2. Grouping
+        // 2. Grouping (고급 문법)
         // find() - 패턴이 일치하는 다음 문자열이 존재다면 true 반환
         pattern = Pattern.compile(GROUP_REGEX);
         matcher = pattern.matcher("1D2S#10S*"); // 1D/2S#/10S*
@@ -33,7 +33,9 @@ public class MatcherClassExample1 {
         pattern = Pattern.compile(GROUP_NAME_REGEX);
         matcher = pattern.matcher("1D2S#10S*"); // 1D/2S#/10S*
         while (matcher.find()) {
-            System.out.println(matcher.group("score"));
+            System.out.print(matcher.group("score") + "/");
+            System.out.print(matcher.group("bonus") + "/");
+            System.out.println(matcher.group("option"));
         }
     }
 }

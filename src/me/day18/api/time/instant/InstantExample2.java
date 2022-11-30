@@ -58,7 +58,7 @@ public class InstantExample2 {
 
         ZonedDateTime zdtVancouver = instant.atZone(ZoneId.of("America/Vancouver"));
         // ZonedDateTime zdtVancouver = ZonedDateTime.ofInstant(instant, ZoneId.of("America/Vancouver")); 와 동일
-        System.out.println("Tine in Vancouver = " + zdtVancouver);
+        System.out.println("Time in Vancouver = " + zdtVancouver);
         System.out.println();
         System.out.println();
 

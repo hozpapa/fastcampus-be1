@@ -7,12 +7,16 @@ import java.time.temporal.ChronoUnit;
 
 public class LocalDateTimeExample3 {
     public static void main(String[] args) {
-        LocalDateTime startDateTime = LocalDateTime.of(2021,1,28,9,0,0);
+        LocalDateTime startDateTime =
+                LocalDateTime.of(2021,1,28,9,0,0);
         System.out.println(startDateTime);
 
-        LocalDateTime endDateTime = LocalDateTime.of(2023,3,31,18,0,0);
+        LocalDateTime endDateTime =
+                LocalDateTime.of(2023,3,31,18,0,0);
         System.out.println(endDateTime+"\n");
 
+        // 기간 크기 비교 (게시물 수정 날짜 비교)
+        // 기간 검색 (게시판 리스트 조회, 투표 결과 조회)
         if (startDateTime.isBefore(endDateTime)) {    //이전 날짜인지 비교
             System.out.println("진행중\n");
 
