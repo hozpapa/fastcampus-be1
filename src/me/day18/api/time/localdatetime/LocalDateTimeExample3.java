@@ -13,13 +13,13 @@ public class LocalDateTimeExample3 {
         LocalDateTime endDateTime = LocalDateTime.of(2023,3,31,18,0,0);
         System.out.println(endDateTime+"\n");
 
-        if(startDateTime.isBefore(endDateTime)){    //이전 날짜인지 비교
+        if (startDateTime.isBefore(endDateTime)) {    //이전 날짜인지 비교
             System.out.println("진행중\n");
 
-        }else if(startDateTime.isEqual(endDateTime)){ //동일 날짜인지 비교
+        } else if (startDateTime.isEqual(endDateTime)) { //동일 날짜인지 비교
             System.out.println("종료하기\n");
 
-        }else if(startDateTime.isAfter(endDateTime)){ //이후 날짜인지 비교
+        } else if (startDateTime.isAfter(endDateTime)) { //이후 날짜인지 비교
             System.out.println("종료됨\n");
         }
 

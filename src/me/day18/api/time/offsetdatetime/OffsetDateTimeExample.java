@@ -17,9 +17,9 @@ public class OffsetDateTimeExample {
 
         // 둘을 UTC로 변환했을 때 같은 시간이기 때문에 둘은 같은 시간이라고 볼 수 있음
         // 2018-05-06T18:45Z
-        System.out.println(barca.atZoneSameInstant(ZoneId.of("Z")));
+        System.out.println(barca.atZoneSameInstant(ZoneId.of("UTC")));
         // 2018-05-06T18:45Z
-        System.out.println(seoul.atZoneSameInstant(ZoneId.of("Z")));
+        System.out.println(seoul.atZoneSameInstant(ZoneId.of("UTC")));
 
         // 1970-01-01T00:00Z
         final var unixTimeOfUTC = OffsetDateTime.of(1970, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC);

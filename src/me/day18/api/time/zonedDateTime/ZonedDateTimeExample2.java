@@ -14,6 +14,7 @@ public class ZonedDateTimeExample2 {
         System.out.println(ZonedDateTime.of(LocalDateTime.of(2018, 10, 28, 2, 59, 59), ZoneId.of("CET")));
         // 2018-10-28T03:00+01:00[CET]
         System.out.println(ZonedDateTime.of(LocalDateTime.of(2018, 10, 28, 3, 0, 0), ZoneId.of("CET")));
+        System.out.println();
 
         // DST 등등의 Time Transition Rule을 사용하지 않는 ZoneRegion이나 ZoneOffset 같은 경우에는 겨울이나 여름이나 UTC 기준 시간이 동일
         // 2018-06-01T00:00+09:00[Asia/Seoul]
@@ -24,6 +25,7 @@ public class ZonedDateTimeExample2 {
         System.out.println(ZonedDateTime.of(LocalDateTime.of(2018, 6, 1, 0, 0, 0), ZoneId.of("+9")));
         // 2018-12-01T00:00+09:00
         System.out.println(ZonedDateTime.of(LocalDateTime.of(2018, 12, 1, 0, 0, 0), ZoneId.of("+9")));
+        System.out.println();
 
         final var zonedDateTimeOfSeoul = ZonedDateTime.of(2018, 1, 1, 0, 0, 0, 0, ZoneId.of("Asia/Seoul"));
         final var zonedDateTimeOfTokyo = ZonedDateTime.of(2018, 1, 1, 0, 0, 0, 0, ZoneId.of("Asia/Tokyo"));

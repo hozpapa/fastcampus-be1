@@ -23,15 +23,15 @@ public class InstantExample2 {
         Instant epoch = Instant.EPOCH; // Instant.ofEpochSecond(0)과 동일
         System.out.println("epoch = " + epoch);
 
-        Instant epochInFuture = Instant.ofEpochSecond(1_000_000_000);
+        Instant epochInFuture = Instant.ofEpochSecond(1_000_000_000); // 10억초 후
         System.out.println("epochInFuture = " + epochInFuture);
 
-        Instant epochInPast = Instant.ofEpochSecond(-1_000_000_000);
+        Instant epochInPast = Instant.ofEpochSecond(-1_000_000_000); // 10억초 전
         System.out.println("epochInPast = " + epochInPast);
         System.out.println();
         System.out.println();
 
-        System.out.println("1-2. 현재 시간의 타임스탬프 값을 구하기"); // 타임 스탬프 <= Local now
+        System.out.println("1-2. 현재 시간의 타임스탬프 값을 구하기");
         Instant current = Instant.now(); // 현재 시간의 Instant 객체 반환
         System.out.println("Current Instant = "+ current);
 
@@ -44,11 +44,16 @@ public class InstantExample2 {
         System.out.println();
 
         // Instant.atZone() ↔ ZoneDateTime.toInstant()
-        System.out.println("1-3. Instant와 ZonedDateTime 간 상호 변환하기");
-        ZonedDateTime zdtSeoul = Year.of(2002).atMonth(6).atDay(18).atTime(20, 30).atZone(ZoneId.of("Asia/Seoul"));
+        System.out.println("1-3. Instant 와 ZonedDateTime 간 상호 변환하기");
+        ZonedDateTime zdtSeoul = Year
+                .of(2002)
+                .atMonth(6)
+                .atDay(18)
+                .atTime(20, 30)
+                .atZone(ZoneId.of("Asia/Seoul"));
         System.out.println("Time in Seoul = " + zdtSeoul);
 
-        Instant instant = zdtSeoul.toInstant();
+        Instant instant = zdtSeoul.toInstant(); // seoul -> utc (-9)
         System.out.println("Instant = " + instant + ", Timestamp = " + instant.getEpochSecond());
 
         ZonedDateTime zdtVancouver = instant.atZone(ZoneId.of("America/Vancouver"));
@@ -58,7 +63,7 @@ public class InstantExample2 {
         System.out.println();
 
         System.out.println("1-4. 다른 유용한 메소드들");
-        Instant worldCup = Instant.ofEpochSecond(1024399800);
+        Instant worldCup = Instant.ofEpochSecond(1024399800); // 2002-06-18 11:30:00를 초로 표현한 것
         System.out.println("2002 World Cup = " + worldCup);
         System.out.println("10 seconds later = " + worldCup.plusSeconds(10));
         System.out.println("10 seconds earlier = " + worldCup.minusSeconds(10));

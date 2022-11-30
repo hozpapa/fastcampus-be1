@@ -37,12 +37,10 @@ public class LocalExample {
         date = new Date();
 
         // 2. Date -> LocalDate
-        LocalDate localDateSql = new java.sql.Date(date.getTime())
-                .toLocalDate();
+        LocalDate localDateSql = new java.sql.Date(date.getTime()).toLocalDate();
 
         // 3. Date -> LocalDateTime
-        LocalDateTime localDateTimeSql = new java.sql.Timestamp(date.getTime())
-                .toLocalDateTime();
+        LocalDateTime localDateTimeSql = new java.sql.Timestamp(date.getTime()).toLocalDateTime();
 
         // 4. Date, LocalDate, LocalDateTime
         System.out.println("date = " + date);
@@ -61,7 +59,7 @@ public class LocalExample {
         LocalDate localDateOfInstant = LocalDate.ofInstant(date.toInstant(), ZoneId.systemDefault());
 
         // 3. Date -> LocalDateTime
-        LocalDateTime localDateTimeOfInstant = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
+        LocalDateTime localDateTimeOfInstant = LocalDateTime.ofInstant(date.toInstant(), ZoneId.of("Europe/London"));
 
         // 4. Date, LocalDate, LocalDateTime
         System.out.println("date = " + date);
@@ -129,7 +127,7 @@ public class LocalExample {
         LocalDate localDate2 = LocalDate.now();
         
         // 2. LocalDate -> Date 변환
-        Instant instant1 = localDate2.atStartOfDay(ZoneId.systemDefault()).toInstant();
+        Instant instant1 = localDate2.atStartOfDay(ZoneId.systemDefault()).toInstant(); // 하루의 시작 시간을 얻음
         Date date4 = Date.from(instant1);
         
         // 3. LocalDate, Date 결과 출력

@@ -8,9 +8,9 @@ import java.util.Locale;
 public class DecimalFormatExample {
     public static void main(String[] args) throws ParseException {
         double number1 = 12345.678;
-        NumberFormat defaultFormat = NumberFormat.getNumberInstance();
-        NumberFormat spanishFormat = NumberFormat.getInstance(new Locale("es", "ES"));
-        NumberFormat japaneseFormat = NumberFormat.getInstance(Locale.JAPAN);
+        NumberFormat defaultFormat = NumberFormat.getNumberInstance(); // US
+        NumberFormat spanishFormat = NumberFormat.getInstance(new Locale("es", "ES")); // Spain
+        NumberFormat japaneseFormat = NumberFormat.getInstance(Locale.JAPAN); // Japan
 
         String defaultNumber = defaultFormat.format(number1);
         String spanishNumber = spanishFormat.format(number1);
@@ -18,7 +18,7 @@ public class DecimalFormatExample {
         System.out.println("defaultNumber = " + defaultNumber + " " + defaultFormat.getCurrency().getSymbol());
         System.out.println("spanishNumber = " + spanishNumber + " " + spanishFormat.getCurrency().getSymbol());
         System.out.println("japaneseNumber = " + japaneseNumber + " " + japaneseFormat.getCurrency().getSymbol());
-
+        System.out.println();
 
         DecimalFormat decimalFormat = new DecimalFormat();
         Number number2 = decimalFormat.parse("123,456,789");
