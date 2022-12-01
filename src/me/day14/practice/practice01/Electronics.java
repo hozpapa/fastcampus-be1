@@ -1,14 +1,14 @@
 package me.day14.practice.practice01;
 
-
-import java.util.Arrays;
 import java.util.Objects;
 
 public class Electronics {
-    private static final int DEFAULT_SIZE = 10;
+
     protected Electronic[] electronics;
-    private int size;
-    private int capacity;
+    protected static final int DEFAULT_SIZE = 10;
+    protected int size;
+    protected int capacity;
+
 
     protected Electronics() {
         electronics = new Electronic[DEFAULT_SIZE];
@@ -17,6 +17,8 @@ public class Electronics {
 
     public Electronics(Electronic[] electronics) {
         this.electronics = electronics;
+
+        capacity = electronics.length;
         size = electronics.length;
     }
 
@@ -26,11 +28,16 @@ public class Electronics {
 
     public boolean isEmpty() { return size == 0; }
 
-    public void set(int i, Electronic customer) { // i 번째 원소를 customer 로 수정
-        if (!(i >= 0 && i < size)) return;
-        if (customer == null) return;
+    private boolean isNullOrEmpty(Object object) {
+        if (object == null || Objects.equals(object, "")) return true;
+        return false;
+    }
 
-        electronics[i] = customer;
+    public void set(int i, Electronic electronic) { // i 번째 원소를 customer 로 수정
+        if (!(i >= 0 && i < size)) return;
+        if (electronic == null) return;
+
+        electronics[i] = electronic;
     }
 
     public Electronic get(int i) { // i 번째 원소 반환
@@ -39,38 +46,11 @@ public class Electronics {
         return electronics[i];
     }
 
-    public Electronic findByProductNo(String productNo) {
-        if (productNo == null || productNo.equals("")) return null; // 객체를 찾지 못함
+    public int indexOf(Electronic electronic) { // electronic 원소 인덱스 반환
+        if (electronic == null || isNullOrEmpty(electronic.getProductNo())) return -1; // 객체를 찾지 못함
 
         for (int i = 0; i < size; i++) {
-            if (electronics[i] == null || electronics[i].getProductNo() == null || electronics[i].getProductNo().equals("")) continue;
-            if (electronics[i].getProductNo().equals(productNo)) return electronics[i];
-        }
-        return null; // 객체를 찾지 못함
-    }
-
-    public Electronics[] groupByCompanyName() {
-        Electronics[] groups = { new Electronics(), new Electronics(), new Electronics() }; // SUMSUNG, LG, APPLE
-
-        for (int i = 0; i < Electronic.Company.values().length; i++) {
-            for (int j = 0; j < electronics.length; j++) {
-                if (electronics[j] == null || electronics[j].getCompanyName() == null) continue;
-
-                    if (electronics[j].getCompanyName().equals(Electronic.Company.values()[i])) {
-                        if (groups[i] != null) {
-                            groups[i].add(electronics[j]);
-                        }
-                    }
-                }
-        }
-        return groups;
-    }
-
-    public int indexOf(Electronic electronic) { // customer 원소 인덱스 반환
-        if (electronic == null || electronic.getProductNo() == null || electronic.getProductNo().equals("")) return -1; // 객체를 찾지 못함
-
-        for (int i = 0; i < size; i++) {
-            if (electronics[i] == null || electronics[i].getProductNo() == null || electronics[i].getProductNo().equals("")) continue;
+            if (electronics[i] == null || isNullOrEmpty(electronics[i].getProductNo())) continue;
             if (electronics[i].getProductNo().equals(electronic.getProductNo())) return i;
         }
         return -1; // 객체를 찾지 못함
@@ -78,7 +58,7 @@ public class Electronics {
 
 
     public void add(Electronic electronic) { // 가장 마지막에 원소 추가
-        if (electronics == null) return;
+        if (electronic == null) return;
 
         if (size < capacity) {
             electronics[size] = electronic;
@@ -123,7 +103,7 @@ public class Electronics {
         size--;
     }
 
-    public void pop(Electronic electronic) { // customer 원소 삭제
+    public void pop(Electronic electronic) { // electronic 원소 삭제
         if (electronic == null) return;
 
         pop(indexOf(electronic));
@@ -162,21 +142,44 @@ public class Electronics {
         }
     }
 
+    public Electronic findByProductNo(String productNo) {
+        if (isNullOrEmpty(productNo)) return null; // 객체를 찾지 못함
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Electronics that = (Electronics) o;
-        return size == that.size && capacity == that.capacity && Arrays.equals(electronics, that.electronics);
+        for (int i = 0; i < size; i++) {
+            if (electronics[i] == null || isNullOrEmpty(electronics[i].getProductNo())) continue;
+            if (electronics[i].getProductNo().equals(productNo)) return electronics[i];
+        }
+        return null; // 객체를 찾지 못함
     }
 
-    @Override
-    public int hashCode() {
-        int result = Objects.hash(size, capacity);
-        result = 31 * result + Arrays.hashCode(electronics);
-        return result;
+    // **
+    public Electronics[] groupByCompanyName() {
+        Electronics[] groups = { new Electronics(), new Electronics(), new Electronics() };
+
+        for (int i = 0; i < Electronic.Company.values().length; i++) { // SAMSUNG (0), LG (1), APPLE (2) (enumerate)
+            for (int j = 0; j < electronics.length; j++) {
+                if (isNullOrEmpty(electronics[j].getCompanyName())) continue;
+                if (Electronic.Company.values()[i] == electronics[j].getCompanyName()) {
+                    groups[i].add(electronics[j]);
+                }
+            }
+        }
+        return groups;
+    }
+
+    public ClassifiedElectronicsGroup groupByCompanyName2() {
+        ClassifiedElectronicsGroup classifiedElectronicsGroup = new ClassifiedElectronicsGroup();
+
+        for (int i = 0; i < Electronic.Company.values().length; i++) { // SAMSUNG (0), LG (1), APPLE (2) (enumerate)
+            for (int j = 0; j < electronics.length; j++) {
+                if (isNullOrEmpty(electronics[j].getCompanyName())) continue;
+                if (classifiedElectronicsGroup.get(i).getCompany() == electronics[j].getCompanyName()) {
+                    classifiedElectronicsGroup.get(i).add(electronics[j]);
+                }
+            }
+            //classifiedElectronicsGroup.get(i).trimToSize();
+        }
+        return classifiedElectronicsGroup;
     }
 
     @Override
@@ -188,5 +191,4 @@ public class Electronics {
         }
         return str;
     }
-
 }

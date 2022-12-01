@@ -66,7 +66,7 @@ public class MobileElectronic extends Electronic {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         MobileElectronic that = (MobileElectronic) o;
-        return communicationMethod == that.communicationMethod && weight.equals(that.weight);
+        return communicationMethod == that.communicationMethod && Objects.equals(weight, that.weight);
     }
 
     @Override

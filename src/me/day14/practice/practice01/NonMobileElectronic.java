@@ -44,7 +44,7 @@ public class NonMobileElectronic extends Electronic {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         NonMobileElectronic that = (NonMobileElectronic) o;
-        return address.equals(that.address);
+        return Objects.equals(address, that.address);
     }
 
     @Override

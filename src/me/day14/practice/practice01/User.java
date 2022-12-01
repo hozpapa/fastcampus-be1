@@ -1,18 +1,17 @@
 package me.day14.practice.practice01;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class User {
-    private static final int MAX_ELECTRONIC_DEVICE = 100;
     private String userId;
     private String userPassword;
     private String userPhoneNumber;
     private String userEmail;
-    private String userBirthDate;
+    private LocalDate userBirthDate;
     private Electronics electronicDevice;
 
-    public User() {
-    }
+    public User() {}
 
     public User(String userId, String userPassword, String userEmail) {
         this.userId = userId;
@@ -20,14 +19,15 @@ public class User {
         this.userEmail = userEmail;
     }
 
-    public User(String userId, String userPassword, String userPhoneNumber, String userEmail) {
+    public User(String userId, String userPassword, String userPhoneNumber, String userEmail, LocalDate userBirthDate) {
         this.userId = userId;
         this.userPassword = userPassword;
         this.userPhoneNumber = userPhoneNumber;
         this.userEmail = userEmail;
+        this.userBirthDate = userBirthDate;
     }
 
-    public User(String userId, String userPassword, String userPhoneNumber, String userEmail, String userBirthDate, Electronics electronicDevice) {
+    public User(String userId, String userPassword, String userPhoneNumber, String userEmail, LocalDate userBirthDate, Electronics electronicDevice) {
         this.userId = userId;
         this.userPassword = userPassword;
         this.userPhoneNumber = userPhoneNumber;
@@ -68,11 +68,11 @@ public class User {
         this.userEmail = userEmail;
     }
 
-    public String getUserBirthDate() {
+    public LocalDate getUserBirthDate() {
         return userBirthDate;
     }
 
-    public void setUserBirthDate(String userBirthDate) {
+    public void setUserBirthDate(LocalDate userBirthDate) {
         this.userBirthDate = userBirthDate;
     }
 
@@ -89,7 +89,7 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return userId.equals(user.userId) && userPassword.equals(user.userPassword) && userPhoneNumber.equals(user.userPhoneNumber) && userEmail.equals(user.userEmail) && userBirthDate.equals(user.userBirthDate) && electronicDevice.equals(user.electronicDevice);
+        return Objects.equals(userId, user.userId) && Objects.equals(userPassword, user.userPassword) && Objects.equals(userPhoneNumber, user.userPhoneNumber) && Objects.equals(userEmail, user.userEmail) && Objects.equals(userBirthDate, user.userBirthDate) && Objects.equals(electronicDevice, user.electronicDevice);
     }
 
     @Override
@@ -104,7 +104,7 @@ public class User {
                 ", userPassword='" + userPassword + '\'' +
                 ", userPhoneNumber='" + userPhoneNumber + '\'' +
                 ", userEmail='" + userEmail + '\'' +
-                ", userBirthDate='" + userBirthDate + '\'' +
+                ", userBirthDate=" + userBirthDate +
                 ", electronicDevice=" + electronicDevice +
                 '}';
     }

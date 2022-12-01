@@ -1,20 +1,18 @@
 package me.day14.practice.practice01;
 
-
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Objects;
 
 public class Electronic {
-    public enum Company { SAMSUNG, LG, APPLE }
-    public enum AuthMethod { FINGERPRINT, PATTERN, PIN, FACE }
+    public enum Company { SAMSUNG, LG, APPLE } // 전자제품을 정의하기 위해 필요
+    public enum AuthMethod { FINGERPRINT, PATTERN, PIN, FACE } // 전자제품을 인증하기 위해 필요
 
     protected String productNo;
     protected String modelName;
     protected Company companyName;
     protected LocalDate dateOfMade;
     protected AuthMethod[] authMethod;
-
 
     public Electronic() {
     }
@@ -94,7 +92,7 @@ public class Electronic {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Electronic that = (Electronic) o;
-        return productNo.equals(that.productNo) && modelName.equals(that.modelName) && companyName == that.companyName && dateOfMade.equals(that.dateOfMade) && Arrays.equals(authMethod, that.authMethod);
+        return Objects.equals(productNo, that.productNo) && Objects.equals(modelName, that.modelName) && companyName == that.companyName && Objects.equals(dateOfMade, that.dateOfMade) && Arrays.equals(authMethod, that.authMethod);
     }
 
     @Override
