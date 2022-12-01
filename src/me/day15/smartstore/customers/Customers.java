@@ -43,9 +43,10 @@ public class Customers { // 싱글톤
     }
 
     public int indexOf(Customer customer) { // customer 원소 인덱스 반환
-        if (customer == null) return -1; // 객체를 찾지 못함
+        if (customer == null || customer.getSerialNO() == null || customer.getSerialNO().equals("")) return -1; // 객체를 찾지 못함
 
         for (int i = 0; i < size; i++) {
+            if (customers[i] == null || customers[i].getSerialNO() == null || customers[i].getSerialNO().equals("")) continue;
             if (customers[i].getSerialNO().equals(customer.getSerialNO())) return i;
         }
         return -1; // 객체를 찾지 못함
