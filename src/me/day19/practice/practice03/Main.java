@@ -25,8 +25,5 @@ public class Main {
 
         ClassifiedElectronicsGroup classifiedElectronicsGroup = electronics.groupByCompanyName2();
         System.out.println(classifiedElectronicsGroup);
-//        System.out.println(classifiedElectronicsGroup.get(0).getCompany() + " => " + classifiedElectronicsGroup.get(0) + "\n");
-//        System.out.println(classifiedElectronicsGroup.get(1).getCompany() + " => " + classifiedElectronicsGroup.get(1) + "\n");
-//        System.out.println(classifiedElectronicsGroup.get(2).getCompany() + " => " + classifiedElectronicsGroup.get(2) + "\n");
     }
 }
