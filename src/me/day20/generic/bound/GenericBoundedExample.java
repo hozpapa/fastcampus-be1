@@ -13,7 +13,7 @@ public class GenericBoundedExample {
         randomNotes.add(new Note("4001", "모닝글로리", false));
 
 
-        for (int i = 0; i < randomNotes.getCount(); i++) {
+        for (int i = 0; i < randomNotes.getSize(); i++) {
             randomNotes.get(i).setHasLine(true);
             System.out.println("randomNotes.getGifts().get(i) = " + randomNotes.get(i));
         }
@@ -37,7 +37,7 @@ public class GenericBoundedExample {
         randomPens.add(new Pen("4001", "모닝글로리", "파랑"));
 
 
-        for (int i = 0; i < randomPens.getCount(); i++) {
+        for (int i = 0; i < randomPens.getSize(); i++) {
             randomPens.get(i).setInkColor("검정");
             System.out.println("randomPens.getGifts().get(i) = " + randomPens.get(i));
         }
@@ -60,7 +60,7 @@ public class GenericBoundedExample {
         randomTables.add(new Tablet("3001", "APPLE", "IPAD-PRO3", false));
         randomTables.add(new Tablet("4001", "SAMSUNG", "GALAXY-TAB S8+", true));
 
-        for (int i = 0; i < randomTables.getCount(); i++) {
+        for (int i = 0; i < randomTables.getSize(); i++) {
             randomTables.get(i).setHasPencil(true);
             System.out.println("randomTables.getGifts().get(i) = " + randomTables.get(i));
         }
@@ -83,7 +83,7 @@ public class GenericBoundedExample {
         randomSmartPhone.add(new SmartPhone("3001", "LG", 3, 10));
         randomSmartPhone.add(new SmartPhone("4001", "SAMSUNG", 2, 15));
 
-        for (int i = 0; i < randomSmartPhone.getCount(); i++) {
+        for (int i = 0; i < randomSmartPhone.getSize(); i++) {
             randomSmartPhone.get(i).setNumOfCameras(3);
             randomSmartPhone.get(i).setNumOfSensors(20);
             System.out.println("randomSmartPhone.getGifts().get(i) = " + randomSmartPhone.get(i));
@@ -101,6 +101,6 @@ public class GenericBoundedExample {
 
         //////////////////////////////////////////////////////////////////////////////////////////
 
-        // Gifts<Person> randomPerson = new Gifts<>(); // 불가능, 사람은 아이템이 아니기 때문
+//         Gifts<Person> randomPerson = new Gifts<>(); // 불가능, 사람은 아이템이 아니기 때문
     }
 }

@@ -4,7 +4,7 @@ import java.util.*;
 
 public class ArrayListExample {
     public static void main(String[] args) {
-        List<Integer> arrayList = new ArrayList<>(2); // 다형성
+        ArrayList<Integer> arrayList = new ArrayList<>(2); // 다형성
         System.out.println("arrayList.size() => " + arrayList.size());
         System.out.println();
 
@@ -52,6 +52,8 @@ public class ArrayListExample {
                 return Integer.compare(o1, o2);
             }
         });
+        System.out.println("sort() => " + arrayList);
+
         arrayList.sort(null); // new ArrayList<Integer>()
         System.out.println("sort() => " + arrayList);
         Collections.sort(arrayList, new Comparator<Integer>() {
@@ -64,6 +66,7 @@ public class ArrayListExample {
         System.out.println(arrayList);
         System.out.println();
 
+        /////////////////////////////////////////////////////////////// 여기까지 (22.12.02)
         // 일부 원소를 찾아 첫번째로 만난 원소의 인덱스 반환
         System.out.println("arrayList.indexOf(100) => " + arrayList.indexOf(100)); // 앞에서 부터 찾음
         System.out.println("arrayList.lastIndexOf(100) => " + arrayList.lastIndexOf(100)); // 뒤에서 부터 찾음

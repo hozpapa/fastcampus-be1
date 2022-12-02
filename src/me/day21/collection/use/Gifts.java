@@ -1,6 +1,7 @@
 package me.day21.collection.use;
 
 
+import me.day20.generic.wildcard.course.register.Person;
 import me.day21.collection.use.gift.Item;
 
 import java.util.Arrays;
@@ -265,7 +266,7 @@ public class Gifts<T extends Item> {
     public void setSize(int size) {
         this.size = size;
     }
-
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

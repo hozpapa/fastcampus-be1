@@ -6,7 +6,7 @@ import me.day20.generic.bound.item.Item;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Gifts<T extends Item> {
+public class Gifts<T extends Item> { // 클래스 계층도에서 Item 이하의 객체 타입만 들어올 수 있음
 
     private static final int DEFAULT_SIZE = 10;
     private int capacity;

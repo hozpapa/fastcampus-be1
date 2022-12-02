@@ -13,18 +13,18 @@ public class GenericWildCardExample {
         Course<Animal> animalCourse = new Course<>("반려동물 사회성 기르기", Course.RegisterStudentType.ANIMAL, 5);
 
 
-        Person person = new Person();
+        Person person = new Person(); // PersonCourse
         personCourse.add(person);
-//        studentCourse.add(person); // 컴파일 오류.
-//        workerCourse.add(person); // 컴파일 오류.
-//        highStudentCourse.add(person); // 컴파일 오류.
-//        univStudentCourse.add(person); // 컴파일 오류.
-//        animalCourse.add(person); // 컴파일 오류.
+//        studentCourse.add(person); // 컴파일 오류 (제너릭). Person is not a Student
+//        workerCourse.add(person); // 컴파일 오류 (제너릭). Person is not a Worker
+//        highStudentCourse.add(person); // 컴파일 오류 (제너릭). Person is not a High Student
+//        univStudentCourse.add(person); // 컴파일 오류 (제너릭). Person is not an Univ Student
+//        animalCourse.add(person); // 컴파일 오류 (제너릭). Person is an Animal
         System.out.println();
 
-        Student student = new Student();
-        personCourse.add(student);
-        studentCourse.add(student);
+        Student student = new Student(); // PersonCourse, StudentCourse
+        personCourse.add(student); // Student is a Person
+        studentCourse.add(student); // Student is a Student
 //        workerCourse.add(student); // 컴파일 오류.
 //        highStudentCourse.add(student); // 컴파일 오류.
 //        univStudentCourse.add(student); // 컴파일 오류.
@@ -32,7 +32,7 @@ public class GenericWildCardExample {
         System.out.println();
 
 
-        Worker worker = new Worker();
+        Worker worker = new Worker(); // PersonCourse, WorkerCourse
         personCourse.add(worker);
 //        studentCourse.add(worker); // 컴파일 오류.
         workerCourse.add(worker);
@@ -42,7 +42,7 @@ public class GenericWildCardExample {
         System.out.println();
 
 
-        HighStudent highStudent = new HighStudent();
+        HighStudent highStudent = new HighStudent(); // PersonCourse, StudentCourse, HighStudentCourse
         personCourse.add(highStudent);
         studentCourse.add(highStudent);
 //        workerCourse.add(highStudent); // 컴파일 오류.
@@ -52,7 +52,7 @@ public class GenericWildCardExample {
         System.out.println();
 
 
-        UnivStudent univStudent = new UnivStudent();
+        UnivStudent univStudent = new UnivStudent(); // PersonCourse, StudentCourse, UnivStudentCourse
         personCourse.add(univStudent);
         studentCourse.add(univStudent);
 //        workerCourse.add(univStudent); // 컴파일 오류.
@@ -61,7 +61,7 @@ public class GenericWildCardExample {
 //        animalCourse.add(univStudent); // 컴파일 오류.
         System.out.println();
 
-        Animal animal = new Animal();
+        Animal animal = new Animal(); // AnimalCourse
 //        personCourse.add(animal); // 컴파일 오류.
 //        studentCourse.add(animal); // 컴파일 오류.
 //        workerCourse.add(animal); // 컴파일 오류.

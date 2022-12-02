@@ -13,7 +13,7 @@ public class Course<T> {
 
     private String courName;
     private RegisterStudentType registerStudentType;
-    private T[] registerStudents;
+    private T[] registerStudents; // 수강생 등록
     private int count = 0;
     private int size = 0;
 

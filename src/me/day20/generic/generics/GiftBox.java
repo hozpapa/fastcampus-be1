@@ -5,8 +5,7 @@ import java.util.Objects;
 public class GiftBox<T> { // T: type, E: element, K - V: key-value
     private T gift;
 
-    public GiftBox() {
-    }
+    public GiftBox() {}
 
     public GiftBox(T gift) {
         this.gift = gift;

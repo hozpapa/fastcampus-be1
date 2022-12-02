@@ -4,8 +4,8 @@ package me.day20.generic.inheritance;
 import java.util.Objects;
 
 public class Product<T, M> {
-    private T kind;
-    private M model;
+    protected T kind;
+    protected M model;
 
     public Product() {
     }
