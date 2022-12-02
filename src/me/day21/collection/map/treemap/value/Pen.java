@@ -1,17 +1,23 @@
-package me.day20.generic.bound.gift;
+package me.day21.collection.map.treemap.value;
 
 import java.util.Objects;
 
-public abstract class Item {
-
+public class Pen {
     protected String productNo;
     protected String companyName;
-    public Item() {
+    protected String inkColor;
+
+    public Pen() {
     }
 
-    public Item(String productNo, String companyName) {
+    public Pen(String productNo) {
+        this.productNo = productNo;
+    }
+
+    public Pen(String productNo, String companyName, String inkColor) {
         this.productNo = productNo;
         this.companyName = companyName;
+        this.inkColor = inkColor;
     }
 
     public String getProductNo() {
@@ -30,24 +36,33 @@ public abstract class Item {
         this.companyName = companyName;
     }
 
+    public String getInkColor() {
+        return inkColor;
+    }
+
+    public void setInkColor(String inkColor) {
+        this.inkColor = inkColor;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Item item = (Item) o;
-        return productNo.equals(item.productNo) && companyName.equals(item.companyName);
+        Pen pen = (Pen) o;
+        return Objects.equals(productNo, pen.productNo) && Objects.equals(companyName, pen.companyName) && Objects.equals(inkColor, pen.inkColor);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(productNo, companyName);
+        return Objects.hash(productNo, companyName, inkColor);
     }
 
     @Override
     public String toString() {
-        return "Item{" +
+        return "Pen{" +
                 "productNo='" + productNo + '\'' +
                 ", companyName='" + companyName + '\'' +
+                ", inkColor='" + inkColor + '\'' +
                 '}';
     }
 }

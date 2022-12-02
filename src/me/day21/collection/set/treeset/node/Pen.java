@@ -1,8 +1,10 @@
-package me.day20.generic.bound.gift;
+package me.day21.collection.set.treeset.node;
 
 import java.util.Objects;
 
-public class Pen extends Item {
+public class Pen implements Comparable<Pen>{
+    protected String productNo;
+    protected String companyName;
     protected String inkColor;
 
     public Pen() {
@@ -47,7 +49,7 @@ public class Pen extends Item {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Pen pen = (Pen) o;
-        return productNo.equals(pen.productNo) && companyName.equals(pen.companyName) && inkColor.equals(pen.inkColor);
+        return Objects.equals(productNo, pen.productNo) && Objects.equals(companyName, pen.companyName) && Objects.equals(inkColor, pen.inkColor);
     }
 
     @Override
@@ -62,5 +64,10 @@ public class Pen extends Item {
                 ", companyName='" + companyName + '\'' +
                 ", inkColor='" + inkColor + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Pen o) {
+        return this.productNo.compareTo(o.productNo) * -1;
     }
 }

@@ -35,8 +35,9 @@ public class ProductMap<K, V> extends HashMap {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ProductMap<?, ?> product = (ProductMap<?, ?>) o;
-        return key.equals(product.key) && value.equals(product.value);
+        if (!super.equals(o)) return false;
+        ProductMap<?, ?> that = (ProductMap<?, ?>) o;
+        return Objects.equals(key, that.key) && Objects.equals(value, that.value);
     }
 
     @Override

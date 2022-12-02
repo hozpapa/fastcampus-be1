@@ -47,7 +47,7 @@ public class ImplementExample {
         storage.add(new Clothes("니트", "겨울", "베이지"));
         System.out.println();
 
-        for (int i = 0; i < storage.getCount(); i++) {
+        for (int i = 0; i < storage.getSize(); i++) {
             System.out.println("storage.get(i) = " + storage.get(i));
         }
 

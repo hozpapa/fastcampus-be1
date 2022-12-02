@@ -1,6 +1,6 @@
 package me.day20.generic.wildcard.course;
 
-import me.day13.generic.wildcard.course.register.Person;
+import me.day20.generic.wildcard.course.register.Person;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -110,13 +110,12 @@ public class Course<T> {
     }
 
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Course<?> course = (Course<?>) o;
-        return courName.equals(course.courName) && registerStudentType == course.registerStudentType && Arrays.equals(registerStudents, course.registerStudents);
+        return count == course.count && size == course.size && Objects.equals(courName, course.courName) && registerStudentType == course.registerStudentType && Arrays.equals(registerStudents, course.registerStudents);
     }
 
     @Override

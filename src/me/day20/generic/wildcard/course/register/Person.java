@@ -49,7 +49,7 @@ public class Person {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Person person = (Person) o;
-        return name.equals(person.name) && gender == person.gender && regNum.equals(person.regNum);
+        return Objects.equals(name, person.name) && gender == person.gender && Objects.equals(regNum, person.regNum);
     }
 
     @Override

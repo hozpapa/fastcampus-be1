@@ -1,4 +1,4 @@
-package me.day20.generic.bound.gift;
+package me.day21.collection.use.gift;
 
 import java.util.Objects;
 
@@ -62,8 +62,9 @@ public class SmartPhone extends Item {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
         SmartPhone that = (SmartPhone) o;
-        return numOfCameras == that.numOfCameras && numOfSensors == that.numOfSensors && productNo.equals(that.productNo) && companyName.equals(that.companyName);
+        return numOfCameras == that.numOfCameras && numOfSensors == that.numOfSensors && Objects.equals(modelName, that.modelName);
     }
 
     @Override

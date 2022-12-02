@@ -53,7 +53,7 @@ public class Worker extends Person {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Worker worker = (Worker) o;
-        return workerNo.equals(worker.workerNo) && department.equals(worker.department) && position.equals(worker.position);
+        return Objects.equals(workerNo, worker.workerNo) && Objects.equals(department, worker.department) && Objects.equals(position, worker.position);
     }
 
     @Override

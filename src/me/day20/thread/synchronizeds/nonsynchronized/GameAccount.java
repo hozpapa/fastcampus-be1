@@ -59,7 +59,7 @@ public class GameAccount { // 공유된 객체
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GameAccount that = (GameAccount) o;
-        return userID.equals(that.userID) && userPassword.equals(that.userPassword);
+        return Objects.equals(userID, that.userID) && Objects.equals(userPassword, that.userPassword);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package me.day20.generic.bound.gift;
+package me.day21.collection.use.gift;
 
 import java.util.Objects;
 
@@ -47,8 +47,9 @@ public class Note extends Item {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
         Note note = (Note) o;
-        return hasLine == note.hasLine && productNo.equals(note.productNo) && companyName.equals(note.companyName);
+        return hasLine == note.hasLine;
     }
 
     @Override

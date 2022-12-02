@@ -1,7 +1,7 @@
 package me.day20.generic.method;
 
-import me.day20.generic.bound.gift.Note;
-import me.day20.generic.bound.gift.Pen;
+import me.day20.generic.bound.item.Note;
+import me.day20.generic.bound.item.Pen;
 import me.day20.generic.method.decoration.Decoration;
 import me.day20.generic.method.decoration.Decorations;
 import me.day20.generic.method.decoration.DryFlower;

@@ -1,27 +1,27 @@
 package me.day20.generic.bound;
 
 
-import me.day20.generic.bound.gift.Item;
+import me.day20.generic.bound.item.Item;
 
 import java.util.Arrays;
 import java.util.Objects;
 
 public class Gifts<T extends Item> {
 
-    private static final int DEFULAT_SIZE = 10;
-    private int size;
+    private static final int DEFAULT_SIZE = 10;
+    private int capacity;
 
     private T[] gifts;
-    private int count;
+    private int size;
 
     public Gifts() {
-        gifts = (T[]) new Item[DEFULAT_SIZE];
-        this.size = DEFULAT_SIZE;
+        gifts = (T[]) new Item[DEFAULT_SIZE];
+        this.capacity = DEFAULT_SIZE;
     }
 
-    public Gifts(int size) {
-        gifts = (T[]) new Item[size];
-        this.size = size;
+    public Gifts(int capacity) {
+        gifts = (T[]) new Item[capacity];
+        this.capacity = capacity;
     }
 
     public T get(int i) {
@@ -34,13 +34,13 @@ public class Gifts<T extends Item> {
 
 
     public void add(T element) {
-        if (count < size) {
-            gifts[count] = element;
-            count++;
+        if (size < capacity) {
+            gifts[size] = element;
+            size++;
         } else {
-            T[] origin = Arrays.copyOf(gifts, count);
-            size *= 2;
-            gifts = Arrays.copyOf(origin, size);
+            T[] origin = Arrays.copyOf(gifts, size);
+            capacity *= 2;
+            gifts = Arrays.copyOf(origin, capacity);
             add(element);
         }
     }
@@ -63,7 +63,7 @@ public class Gifts<T extends Item> {
 
     public void remove(T element) {
         int elementIndex = -1;
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < size; i++) {
             if (gifts[i] != null) {
                 if (gifts[i].equals(element)) {
                     elementIndex = i;
@@ -74,22 +74,21 @@ public class Gifts<T extends Item> {
             System.out.println(element + " can't be found.");
         } else {
             gifts[elementIndex] = null;
-            for (int i = elementIndex+1; i < count; i++) {
+            for (int i = elementIndex+1; i < size; i++) {
                 gifts[i-1] = gifts[i];
             }
-            count--;
+            size--;
 
             System.out.println(element + " removed successfully.");
         }
     }
 
-
-    public int getSize() {
-        return size;
+    public int getCapacity() {
+        return capacity;
     }
 
-    public void setSize(int size) {
-        this.size = size;
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 
     public T[] getGifts() {
@@ -100,12 +99,12 @@ public class Gifts<T extends Item> {
         this.gifts = gifts;
     }
 
-    public int getCount() {
-        return count;
+    public int getSize() {
+        return size;
     }
 
-    public void setCount(int count) {
-        this.count = count;
+    public void setSize(int size) {
+        this.size = size;
     }
 
     @Override
@@ -113,12 +112,12 @@ public class Gifts<T extends Item> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Gifts<?> that = (Gifts<?>) o;
-        return size == that.size && count == that.count && Arrays.equals(gifts, that.gifts);
+        return capacity == that.capacity && size == that.size && Arrays.equals(gifts, that.gifts);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(size, count);
+        int result = Objects.hash(capacity, size);
         result = 31 * result + Arrays.hashCode(gifts);
         return result;
     }
@@ -126,9 +125,9 @@ public class Gifts<T extends Item> {
     @Override
     public String toString() {
         return "RandomGiftBox{" +
-                "size=" + size +
+                "capacity=" + capacity +
                 ", gifts=" + Arrays.toString(gifts) +
-                ", count=" + count +
+                ", size=" + size +
                 '}';
     }
 }

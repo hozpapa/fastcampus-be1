@@ -1,6 +1,7 @@
 package me.day20.generic.bound;
 
-import me.day20.generic.bound.gift.*;
+import me.day20.generic.bound.item.*;
+import me.day20.generic.wildcard.course.register.Person;
 
 public class GenericBoundedExample {
     public static void main(String[] args) {
@@ -98,5 +99,8 @@ public class GenericBoundedExample {
         System.out.println();
 
 
+        //////////////////////////////////////////////////////////////////////////////////////////
+
+        // Gifts<Person> randomPerson = new Gifts<>(); // 불가능, 사람은 아이템이 아니기 때문
     }
 }

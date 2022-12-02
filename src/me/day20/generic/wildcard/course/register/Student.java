@@ -42,7 +42,7 @@ public class Student extends Person {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Student student = (Student) o;
-        return stuNo.equals(student.stuNo) && grade.equals(student.grade);
+        return Objects.equals(stuNo, student.stuNo) && Objects.equals(grade, student.grade);
     }
 
     @Override

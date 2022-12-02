@@ -54,12 +54,12 @@ public class Car { // 테스라만 만드는 공장
         Car.numOfCar = numOfCar;
     }
 
-    @Override // Object equals()
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Car car = (Car) o;
-        return speed == car.speed && ID.equals(car.ID) && modelName.equals(car.modelName);
+        return speed == car.speed && Objects.equals(ID, car.ID) && Objects.equals(modelName, car.modelName);
     }
 
     @Override

@@ -40,15 +40,13 @@ public class Student {
         this.age = age;
     }
 
-    @Override // 재정의
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
-        Student student = (Student) o; // Object o
-        return age == student.age && studentId.equals(student.studentId) && name.equals(student.name);
+        Student student = (Student) o;
+        return age == student.age && Objects.equals(studentId, student.studentId) && Objects.equals(name, student.name);
     }
-
 
     // equals() 함수의 효율성을 높여주기 위한 용도
     // 1. hashCode 가 다르면 두 객체는 다름 (equals()를 보지 않아도 됨)

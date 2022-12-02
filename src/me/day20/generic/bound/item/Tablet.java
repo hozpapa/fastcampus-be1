@@ -1,4 +1,4 @@
-package me.day20.generic.bound.gift;
+package me.day20.generic.bound.item;
 
 import java.util.Objects;
 

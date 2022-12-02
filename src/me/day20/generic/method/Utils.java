@@ -9,7 +9,7 @@ public interface Utils {
         return box;
     }
 
-    static <T, D> void decoration(Box<T> box, Decorations decoration) {
+    static <T> void decoration(Box<T> box, Decorations decoration) {
         System.out.println(box + " is decorated with "+ decoration);
     }
 

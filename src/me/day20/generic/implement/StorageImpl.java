@@ -5,20 +5,20 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class StorageImpl<T extends Clothes> implements Storage<T> {
-    private static final int DEFULAT_SIZE = 10;
-    private int size;
+    private static final int DEFAULT_SIZE = 10;
+    private int capacity;
 
     private T[] list;
-    private int count;
+    private int size;
 
     public StorageImpl() {
-        list = (T[]) new Clothes[DEFULAT_SIZE];
-        this.size = DEFULAT_SIZE;
+        list = (T[]) new Clothes[DEFAULT_SIZE];
+        this.capacity = DEFAULT_SIZE;
     }
 
-    public StorageImpl(int size) {
-        list = (T[]) new Clothes[size];
-        this.size = size;
+    public StorageImpl(int capacity) {
+        list = (T[]) new Clothes[capacity];
+        this.capacity = capacity;
     }
 
     public T get(int i) {
@@ -26,20 +26,20 @@ public class StorageImpl<T extends Clothes> implements Storage<T> {
     }
 
     public void add(T element) {
-        if (count < size) {
-            list[count] = element;
-            count++;
+        if (size < capacity) {
+            list[size] = element;
+            size++;
         } else {
-            T[] origin = Arrays.copyOf(list, count);
-            size *= 2;
-            list = Arrays.copyOf(origin, size);
+            T[] origin = Arrays.copyOf(list, size);
+            capacity *= 2;
+            list = Arrays.copyOf(origin, capacity);
             add(element);
         }
     }
 
     public void remove(T element) {
         int elementIndex = -1;
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < size; i++) {
             if (list[i] != null) {
                 if (list[i].equals(element)) {
                     elementIndex = i;
@@ -50,13 +50,21 @@ public class StorageImpl<T extends Clothes> implements Storage<T> {
             System.out.println(element + " can't be found.");
         } else {
             list[elementIndex] = null;
-            for (int i = elementIndex+1; i < count; i++) {
+            for (int i = elementIndex+1; i < size; i++) {
                 list[i-1] = list[i];
             }
-            count--;
+            size--;
 
             System.out.println(element + " removed successfully.");
         }
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 
     public int getSize() {
@@ -75,25 +83,18 @@ public class StorageImpl<T extends Clothes> implements Storage<T> {
         this.list = list;
     }
 
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         StorageImpl<?> storage = (StorageImpl<?>) o;
-        return size == storage.size && count == storage.count && Arrays.equals(list, storage.list);
+        return capacity == storage.capacity && size == storage.size && Arrays.equals(list, storage.list);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(size, count);
+        int result = Objects.hash(capacity, size);
         result = 31 * result + Arrays.hashCode(list);
         return result;
     }
@@ -101,9 +102,9 @@ public class StorageImpl<T extends Clothes> implements Storage<T> {
     @Override
     public String toString() {
         return "StorageImpl{" +
-                "size=" + size +
+                "capacity=" + capacity +
                 ", list=" + Arrays.toString(list) +
-                ", count=" + count +
+                ", size=" + size +
                 '}';
     }
 }

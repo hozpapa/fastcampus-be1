@@ -24,8 +24,8 @@ public class GiftBox { // RandomGiftBox
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        GiftBox that = (GiftBox) o;
-        return gift.equals(that.gift);
+        GiftBox giftBox = (GiftBox) o;
+        return Objects.equals(gift, giftBox.gift);
     }
 
     @Override

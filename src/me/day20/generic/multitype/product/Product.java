@@ -36,7 +36,7 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return modelName.equals(product.modelName) && companyName.equals(product.companyName);
+        return Objects.equals(modelName, product.modelName) && Objects.equals(companyName, product.companyName);
     }
 
     @Override
