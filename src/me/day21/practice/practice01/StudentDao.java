@@ -6,11 +6,11 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 public class StudentDao {
-    private static StudentDao studentDao;
-    private Map<String, Student> map = DataBase.getInstance().getTableList().get(0).getData();
+    private static StudentDao studentDao; // singleton
+    private Map<String, Student> map = DataBase.getInstance().get(0).getData(); // get data stored in database.
 
-    public static StudentDao getInstance() {
-        if (studentDao == null) {
+    public static StudentDao getInstance() { // singleton
+        if ( studentDao == null ) {
             studentDao = new StudentDao();
         }
         return studentDao;
@@ -22,23 +22,30 @@ public class StudentDao {
      * @return: select된 Student 반환
      * */
     public Student select(String key) {
-        // TODO: select 함수 구현
+        if ( key == null ) return null;
+
+        if ( map.containsKey(key) ) {
+            return map.get(key);
+        }
         return null;
     }
 
 
     public Students select(Predicate<Student> condition) {
+        if ( condition == null ) return null;
+
         Students students = new Students();
         Iterator<String> iterator = map.keySet().iterator();
-        while (iterator.hasNext()) {
+
+        while ( iterator.hasNext() ) {
             String num = iterator.next();
             Student student = map.get(num);
+            if ( student == null ) continue;;
 
-            if (condition != null) {
-                if (condition.test(student)) {
-                    students.getStudents().add(student);
-                }
+            if ( condition.test(student) ) {
+                students.add(student);
             }
+
         }
 
         return students;
@@ -47,8 +54,8 @@ public class StudentDao {
 
     public Students select() {
         Students studentAll = new Students();
-        for (Student student : map.values()) {
-            studentAll.getStudents().add(student);
+        for ( Student student : map.values() ) {
+            studentAll.add(student);
         }
         return studentAll;
     }
@@ -60,8 +67,13 @@ public class StudentDao {
      * @exception: 현재 DB에 있는 객체들과 중복된 키를 가질 수 없음
      * */
     public Student insert(String key, Student student) {
-        // TODO: insert 함수 구현
-        return null;
+        if ( key == null ) return null;
+        if ( student == null ) return null;
+
+        if ( !map.containsKey(key) ) {
+            map.put(key, student);
+        }
+        return student;
     }
 
     /**
@@ -70,38 +82,48 @@ public class StudentDao {
      * @exception: 현재 DB에 있는 객체들과 중복된 키를 가질 수 없음
      * */
     public int insert(List<String> keys, Students students) {
-        // TODO: insert 함수 구현
-        return 0;
+        if ( keys.size() != students.size() ) return 0;
+
+        int count = 0;
+        int size = keys.size();
+        for ( int i = 0; i < size; i++ ) {
+            if ( !map.containsKey(keys.get(i)) ) {
+                map.put(keys.get(i), students.get(i));
+                count++;
+            }
+        }
+        return count;
     }
 
     public int update(Predicate<Student> condition, Column column, Object value) {
+        if ( condition == null ) return 0;
+        if ( column == null || column.getColumnName() == null ) return 0;
+        if ( value == null ) return 0;
+
         int count = 0;
         Iterator<String> iterator = map.keySet().iterator();
-        while (iterator.hasNext()) {
+        while ( iterator.hasNext() ) {
             String num = iterator.next();
             Student student = map.get(num);
 
-            if (condition != null) {
-                if (condition.test(student)) {
-                    if (column != null && column.getColumnName() != null) {
-                        if (column.getColumnName().equals("sId")) {
-                            map.get(num).setsId((String) value);
-                        } else if (column.getColumnName().equals("sPw")) {
-                            map.get(num).setsPw((String) value);
-                        } else if (column.getColumnName().equals("sName")) {
-                            map.get(num).setsName((String) value);
-                        } else if (column.getColumnName().equals("sAge")) {
-                            map.get(num).setsAge((Integer) value);
-                        } else if (column.getColumnName().equals("sGender")) {
-                            map.get(num).setsGender((String) value);
-                        } else if (column.getColumnName().equals("sMajor")) {
-                            map.get(num).setsMajor((String) value);
-                        } else {
-                            continue;
-                        }
-                        count++;
-                    }
+            if ( condition.test(student) ) {
+                String columName = column.getColumnName();
+
+                // sId 이외의 다른 요소 모두 삭제 가능
+                if ( columName.equals("sPw") ) {
+                    student.setsPw((String) value);
+                } else if ( columName.equals("sName") ) {
+                    student.setsName((String) value);
+                } else if ( columName.equals("sAge") ) {
+                    student.setsAge((Integer) value);
+                } else if ( columName.equals("sGender") ) {
+                    student.setsGender((String) value);
+                } else if ( columName.equals("sMajor") ) {
+                    student.setsMajor((String) value);
+                } else {
+                    continue;
                 }
+                count++;
             }
         }
 
@@ -113,18 +135,19 @@ public class StudentDao {
     }
 
     public int delete(Predicate<Student> condition) {
+        if ( condition == null ) return 0;
+
         int count = 0;
         Iterator<String> iterator = map.keySet().iterator();
-        while (iterator.hasNext()) {
+        while ( iterator.hasNext() ) {
             String num = iterator.next();
             Student student = map.get(num);
 
-            if (condition != null) {
-                if (condition.test(student)) {
-                    iterator.remove();
-                    count++;
-                }
+            if ( condition.test(student) ) {
+                iterator.remove();
+                count++;
             }
+
         }
 
         return count;
@@ -135,8 +158,13 @@ public class StudentDao {
      * @return: 삭제된 Student 반환
      * */
     public Student delete(String key) {
-        // TODO: delete 함수 구현
-        return null;
+        if ( key == null ) return null;
+
+        Student student = null;
+        if ( map.containsKey(key) ) {
+            student = map.remove(key);
+        }
+        return student;
     }
 
 }

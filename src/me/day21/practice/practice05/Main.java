@@ -16,16 +16,17 @@ public class Main {
                 "}";
 
         Map<String, Object> jsonMap = parseJsonString(jsonString);
-        jsonMap.keySet().stream().forEach(k -> {
-            System.out.println("key = " + k);
-            System.out.println("value = " + jsonMap.get(k));
+
+        jsonMap.entrySet().stream().forEach(entry -> {
+            System.out.println("key = " + entry.getKey());
+            System.out.println("value = " + entry.getValue());
             System.out.println();
         });
 
     }
 
     public static Map<String, Object> parseJsonString(String jsonString) {
-        String[] jsonArr = jsonString.replaceAll("[{}\\[\\]\\s\"]", "").split(",");
+        String[] jsonArr = jsonString.replaceAll("[{}\\[\\]\"]", "").split(",");
 
         String key = "";
         String value = "";
@@ -44,15 +45,15 @@ public class Main {
                 key = jsonArr[i].substring(0, idx);
                 value = jsonArr[i].substring(idx + 1);
 
-                jsonMap.put(key, value);
-                values.add(value);
+                jsonMap.put(key.strip(), value.strip());
+                values.add(value.strip());
             } else {
                 saveKey = key;
-                values.add(jsonArr[i]);
+                values.add(jsonArr[i].strip());
             }
         }
         if (values.size() > 1) {
-            jsonMap.put(saveKey, values);
+            jsonMap.put(saveKey.strip(), values);
         }
 
         return jsonMap;

@@ -23,12 +23,12 @@ public class DataBase {
     }
 
 
-    public List<Table> getTableList() {
-        return tableList;
+    public Table get(int i) {
+        return tableList.get(i);
     }
 
-    public void setTableList(List<Table> tableList) {
-        this.tableList = tableList;
+    public boolean add(Table table) {
+        return tableList.add(table);
     }
 
     @Override

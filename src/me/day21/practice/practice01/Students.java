@@ -1,33 +1,29 @@
 package me.day21.practice.practice01;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-public class Students {
-    private List<Student> students;
+public class Students extends ArrayList<Student>{
+
+    public Students(int initialCapacity) {
+        super(initialCapacity);
+    }
 
     public Students() {
-        students = new ArrayList<>();
     }
 
-    public Students(List<Student> students) {
-        this.students = students;
+    public Students(Collection<? extends Student> c) {
+        super(c);
     }
 
-    public List<Student> getStudents() {
-        return students;
+    public void print() {
+        if (super.size() == 0) {
+            System.out.println("Nothing to print in array.");
+            return;
+        }
+
+        for (int i = 0; i < super.size(); i++) {
+            System.out.println(super.get(i));
+        }
     }
 
-    public void setStudents(List<Student> students) {
-        this.students = students;
-    }
-
-    @Override
-    public String toString() {
-        return "Students{" +
-                "students=" + students +
-                '}';
-    }
 }
