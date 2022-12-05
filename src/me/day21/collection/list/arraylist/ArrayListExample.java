@@ -63,6 +63,14 @@ public class ArrayListExample {
             }
         }); // Comparable (natural ordering)
         System.out.println("sort() => " + arrayList);
+
+        Collections.sort(arrayList, Comparator.naturalOrder());
+        System.out.println("sort() => " + arrayList);
+
+        Collections.sort(arrayList, Comparator.reverseOrder());
+        System.out.println("sort() => " + arrayList);
+
+
         System.out.println(arrayList);
         System.out.println();
 

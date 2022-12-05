@@ -39,8 +39,7 @@ public class SmartStoreApplication  { // 싱글톤
 
         for (int i = 0; i < 20; i++) {
             allCustomers.add(new Customer(
-                    Character.toString((char) ('a' + i)), (char) ('a' + i) + "12345",
-                    i * 10, i * 100000));
+                    Character.toString((char) ('a' + i)), (char) ('a' + i) + "12345", i * 10, i * 100000));
         }
         return this;
     }

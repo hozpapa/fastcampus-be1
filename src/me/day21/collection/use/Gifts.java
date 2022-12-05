@@ -1,7 +1,5 @@
 package me.day21.collection.use;
 
-
-import me.day20.generic.wildcard.course.register.Person;
 import me.day21.collection.use.gift.Item;
 
 import java.util.Arrays;
@@ -9,15 +7,15 @@ import java.util.Objects;
 
 public class Gifts<T extends Item> {
 
-    private static final int DEFULAT_SIZE = 2;
+    private static final int DEFAULT_SIZE = 2;
     private int capacity;
 
     private T[] gifts;
     private int size;
 
     public Gifts() {
-        gifts = (T[]) new Item[DEFULAT_SIZE];
-        this.capacity = DEFULAT_SIZE;
+        gifts = (T[]) new Item[DEFAULT_SIZE];
+        this.capacity = DEFAULT_SIZE;
     }
 
     public Gifts(int capacity) {
@@ -48,22 +46,25 @@ public class Gifts<T extends Item> {
         return (size == 0);
     }
 
-    public int isDuplicatedKey(T element) {
+    private int checkDuplicatedKey(T element) {
         for (int i = 0; i < size; i++) {
-            if (gifts[i] != null) {
-                if (gifts[i].getProductNo() != null) {
-                    if (gifts[i].getProductNo().equals(element.getProductNo())) {
-                        return i;
-                    }
-                }
+            if (gifts[i] == null) continue;
+            if (gifts[i].getProductNo() == null) continue;;
+
+            if (gifts[i].getProductNo().equals(element.getProductNo())) {
+                return i;
             }
+
         }
         return -1;
     }
 
+    private boolean checkRangeForAdd(int i) {
+        return (i >= 0 && i <= size);
+    }
 
-    public boolean isIndexInRange(int i, boolean isAddMethod) {
-        return isAddMethod ? (i >= 0 && i <= size) : (i >= 0 && i < size);
+    private boolean checkRange(int i) {
+        return (i >= 0 && i < size);
     }
 
 
@@ -73,7 +74,7 @@ public class Gifts<T extends Item> {
             return null;
         }
 
-        if (!isIndexInRange(i , false)) {
+        if (!checkRange(i)) {
             System.out.println("Input index [" + i + "] is too small or large." );
             return null;
         }
@@ -88,7 +89,7 @@ public class Gifts<T extends Item> {
             return;
         }
 
-        if (!isIndexInRange(i , false)) {
+        if (!checkRange(i)) {
             System.out.println("Input index [" + i + "] is too small or large." );
             return;
         }
@@ -98,7 +99,7 @@ public class Gifts<T extends Item> {
             return;
         }
 
-        int duplicatedIdx = isDuplicatedKey(element);
+        int duplicatedIdx = checkDuplicatedKey(element);
         if (duplicatedIdx != -1) {
             System.out.println("Duplicated productNo. Duplicated element => " + gifts[duplicatedIdx]);
             return;
@@ -114,7 +115,7 @@ public class Gifts<T extends Item> {
             return null;
         }
 
-        int duplicatedIdx = isDuplicatedKey(element);
+        int duplicatedIdx = checkDuplicatedKey(element);
         if (duplicatedIdx != -1) {
             System.out.println("Duplicated productNo. Duplicated element => " + gifts[duplicatedIdx]);
             return null;
@@ -133,7 +134,7 @@ public class Gifts<T extends Item> {
     }
 
     public T add(int i, T element) {
-        if (!isIndexInRange(i , true)) {
+        if (!checkRangeForAdd(i)) {
             System.out.println("Input index [" + i + "] is too small or large." );
             return null;
         }
@@ -143,7 +144,7 @@ public class Gifts<T extends Item> {
             return null;
         }
 
-        int duplicatedIdx = isDuplicatedKey(element);
+        int duplicatedIdx = checkDuplicatedKey(element);
         if (duplicatedIdx != -1) {
             System.out.println("Duplicated productNo. Duplicated element => " + gifts[duplicatedIdx]);
             return null;
@@ -194,7 +195,7 @@ public class Gifts<T extends Item> {
             return null;
         }
 
-        if (!isIndexInRange(i , false)) {
+        if (!checkRange(i)) {
             System.out.println("Input index [" + i + "] is too small or large." );
             return null;
         }

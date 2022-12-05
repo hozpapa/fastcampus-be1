@@ -70,7 +70,7 @@ public class Electronics {
 
     }
     public void add(int i, Electronic electronic) { // i 번째 원소 추가
-        if (!(i >= 0 && i < size)) return;
+        if (!(i >= 0 && i <= size)) return;
         if (electronic == null) return;
 
         if (size < capacity) {
