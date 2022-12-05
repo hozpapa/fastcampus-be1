@@ -11,14 +11,17 @@ public class Main {
         List<String> stringList = init();
 
         //error(stringList);
-        //solution0(stringList);
-        //solution1(stringList);
-        solution2(stringList);
-        //solution3(stringList);
+//        solution1(stringList);
+//        solution2(stringList);
+        solution3(stringList);
+//        solution4(stringList);
+//        solution5(stringList);
+//        solution6(stringList);
+//        solution7(stringList);
     }
 
     public static List<String> init() {
-        List<String> stringList = new ArrayList<String>();
+        List<String> stringList = new ArrayList<>();
         stringList.add("a");
         stringList.add("b");
         stringList.add("c");
@@ -38,7 +41,37 @@ public class Main {
         }
         System.out.println("stringList = " + stringList);
     }
-    public static void solution0(List<String> stringList) {
+    public static void solution1(List<String> stringList) {
+        // 역순으로 순회하며 삭제
+        System.out.println("stringList = " + stringList);
+        for( int i = stringList.size() - 1; i >= 0; i-- ) {
+            String str = stringList.get(i);
+            if ( str.equals("a") ) {
+                stringList.remove(str);
+            }
+        }
+
+        System.out.println("stringList = " + stringList);
+    }
+
+    public static void solution2(List<String> stringList) {
+        // for loop에서 삭제할 요소를 찾고 removeAll()으로 삭제
+        List<String> removed = new ArrayList<>();
+        for ( String str : stringList ) {
+            if ( str.equals("a") ) {
+                removed.add(str);
+            }
+        }
+        stringList.removeAll(removed);
+        System.out.println("stringList = " + stringList);
+    }
+
+    public static void solution3(List<String> stringList) {
+        // removeIf()로 요소 삭제
+        stringList.removeIf(str -> str.equals("a"));
+        System.out.println("stringList = " + stringList);
+    }
+    public static void solution4(List<String> stringList) {
         // try-catch 작성
         // 스레드가 컬렉션을 반복하는 동안 컬렉션이 수정되서 나는 오류
         // 일반적으로 허용하지 않음
@@ -55,7 +88,7 @@ public class Main {
         }
         System.out.println("stringList = " + stringList);
     }
-    public static void solution1(List<String> stringList) {
+    public static void solution5(List<String> stringList) {
         // remove 하고 break 로 빠져나가기
         // 1개의 element가 아닌 여러개의 element를 remove 하는 경우 한계가 존재
         System.out.println("stringList = " + stringList);
@@ -67,7 +100,7 @@ public class Main {
         }
         System.out.println("stringList = " + stringList);
     }
-    public static void solution2(List<String> stringList) {
+    public static void solution6(List<String> stringList) {
         // iterator를 통해 List 자체가 아닌 iterator를 제거
         // 멀티 쓰레드 환경에서는 오류 발생할 수도 있음
         System.out.println("stringList = " + stringList);
@@ -80,7 +113,7 @@ public class Main {
         }
         System.out.println("stringList = " + stringList);
     }
-    public static void solution3(List<String> stringList) {
+    public static void solution7(List<String> stringList) {
         List<String> copy = new CopyOnWriteArrayList<>(stringList);
         // ArrayList 요소 복사해서 전달
         // 내부를 변경하는 작업은 항상 복사본을 만들어서 수행하도록 구현
