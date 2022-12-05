@@ -6,9 +6,13 @@ import java.util.stream.IntStream;
 
 public class ListExample {
     public static void main(String[] args) {
+        // Arrays => List => ArrayList, LinkedList, Vector
         // List는 인터페이스이기 때문에 객체 생성이나 추가, 삭제, 수정 연산 불가능 (UnsupportedOperationException)
 
-        List<Integer> intStreamList = IntStream.range(1, 11).mapToObj(i -> Integer.valueOf(i)).collect(Collectors.toList());
+        List<Integer> intStreamList =  // stream
+                IntStream.range(1, 11)
+                        .mapToObj(i -> Integer.valueOf(i)) // int -> Integer
+                        .collect(Collectors.toList());
         System.out.println("intStreamList = " + intStreamList);
         System.out.println();
 
@@ -113,6 +117,24 @@ public class ListExample {
         System.out.println("list.isEmpty() = " + list.isEmpty());
         System.out.println();
 
+        /////////////////////////////////////////////////////////////////////////
+        // List (컬렉션) -> Array (객체 배열)
+        List<String> stringList = new ArrayList<>();
+        for (int i = 'a'; i <= 'z'; i++) {
+            stringList.add(Character.toString(i));
+        }
+        System.out.println("stringList = " + stringList);
+
+        // List (동적) -> toArray() -> Array (정적)
+        // 더이상 데이터를 추가 / 삭제하지 않겠다 !
+        String[] stringArray = stringList.toArray(new String[stringList.size()]);
+        System.out.println("stringArray = " + Arrays.toString(stringArray));
+
+
+        // Array (객체 배열) -> List (컬렉션)
+        // 데이터를 추가 / 삭제하고 싶은 경우
+        List<String> stringList1 = new ArrayList<>(Arrays.asList(stringArray));
+        System.out.println("stringList1 = " + stringList1);
 
     }
 }

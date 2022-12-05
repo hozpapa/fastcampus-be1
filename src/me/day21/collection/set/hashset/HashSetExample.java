@@ -32,7 +32,8 @@ public class HashSetExample {
         System.out.println();
 
         // 컬렉션 요소 모두 추가 (합집합)
-        System.out.println("hashSet.addAll(Set.of(100, 200)) = " + hashSet.addAll(Set.of(100, 200)));
+        System.out.println("hashSet.addAll(Set.of(100, 200)) = "
+                + hashSet.addAll(Set.of(100, 200)));
         System.out.println("hashSet = " + hashSet);
         System.out.println("hashSet.size() = " + hashSet.size());
         System.out.println();
@@ -49,11 +50,14 @@ public class HashSetExample {
 
         // 인덱스가 없으므로 인덱스를 통해 원소를 검색하는 함수 없음
 //        hashSet.add(1, Integer.valueOf(1));
-//        hashSet.get()
+//        hashSet.get(i)
 //        hashSet.indexOf()
 //        hashSet.lastIndexOf()
 //        hashSet.subList(1, 2);
-        hashSet.remove(Integer.valueOf(1)); // 인덱스를 통해 삭제하는 것이 아니라 1라는 object 삭제
+
+
+        hashSet.remove(1); // element 1
+        hashSet.remove(Integer.valueOf(1)); // element 1, 인덱스를 통해 삭제하는 것이 아니라 1라는 object 삭제
         System.out.println("hashSet = " + hashSet);
         System.out.println("hashSet.size() = " + hashSet.size());
         System.out.println();
@@ -105,6 +109,7 @@ public class HashSetExample {
         String[] stringArray = stringSet.toArray(new String[stringSet.size()]);
         System.out.println("stringArray = " + Arrays.toString(stringArray));
 
+        // Array -> Set
         Set<String> stringSet1 = new HashSet<>(Arrays.asList(stringArray));
         System.out.println("stringSet1 = " + stringSet1);
 

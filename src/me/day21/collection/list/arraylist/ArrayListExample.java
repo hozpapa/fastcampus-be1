@@ -74,7 +74,7 @@ public class ArrayListExample {
         System.out.println(arrayList);
         System.out.println();
 
-        /////////////////////////////////////////////////////////////// 여기까지 (22.12.02)
+        ///////////////////////////////////////////////////////////////
         // 일부 원소를 찾아 첫번째로 만난 원소의 인덱스 반환
         System.out.println("arrayList.indexOf(100) => " + arrayList.indexOf(100)); // 앞에서 부터 찾음
         System.out.println("arrayList.lastIndexOf(100) => " + arrayList.lastIndexOf(100)); // 뒤에서 부터 찾음
@@ -94,8 +94,9 @@ public class ArrayListExample {
         System.out.println();
 
         // 현재 컬렉션과 주어진 컬렉션 사이의 교집합 반환
-        System.out.println("arrayList.retainAll(List.of(3, 4, 5, 6, 7)) => "
-                + arrayList.retainAll(List.of(3, 4, 5, 6, 7)));
+        System.out.println(arrayList);
+        System.out.println("arrayList.retainAll(List.of(3, 4, 5, 6, 7, 1000)) => "
+                + arrayList.retainAll(List.of(3, 4, 5, 6, 7, 1000)));
         System.out.println(arrayList);
         System.out.println();
 
@@ -109,13 +110,15 @@ public class ArrayListExample {
 //        System.out.println("arrayList.remove(5) = " + arrayList.remove(-1)); // IndexOutOfBoundsException
 //        System.out.println("arrayList.remove(5) = " + arrayList.remove(20)); // IndexOutOfBoundsException
 
+
+        // 순회를 하면서 remove 하는 것은 위험! (왜? 삭제 후 인덱스가 re-indexing 되면서 인덱스가 바뀔 수 있음)
         // 인덱스로 원소 삭제
         System.out.println("arrayList.remove(2) = "
-                + arrayList.remove(2));
+                + arrayList.remove(2)); // index 2
 
         // 값으로 원소 삭제
         System.out.println("arrayList.remove(Integer.valueOf(5)) = "
-                + arrayList.remove(Integer.valueOf(5)));
+                + arrayList.remove(Integer.valueOf(5))); // element 5
 //        arrayList.remove(2); // index (remove(int))
 //        arrayList.remove(Integer.valueOf(2)); // element (remove(Integer))
 
@@ -140,11 +143,14 @@ public class ArrayListExample {
         }
         System.out.println("stringList = " + stringList);
 
+        // List (동적) -> toArray() -> Array (정적)
+        // 더이상 데이터를 추가 / 삭제하지 않겠다 !
         String[] stringArray = stringList.toArray(new String[stringList.size()]);
         System.out.println("stringArray = " + Arrays.toString(stringArray));
 
 
         // Array (객체 배열) -> List (컬렉션)
+        // 데이터를 추가 / 삭제하고 싶은 경우
         List<String> stringList1 = new ArrayList<>(Arrays.asList(stringArray));
         System.out.println("stringList1 = " + stringList1);
         

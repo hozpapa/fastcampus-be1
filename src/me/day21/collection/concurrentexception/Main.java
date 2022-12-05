@@ -1,19 +1,16 @@
 package me.day21.collection.concurrentexception;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Main {
     public static void main(String[] args) {
         List<String> stringList = init();
 
-        //error(stringList);
+//        error(stringList);
 //        solution1(stringList);
 //        solution2(stringList);
-        solution3(stringList);
+//        solution3(stringList);
 //        solution4(stringList);
 //        solution5(stringList);
 //        solution6(stringList);
@@ -33,6 +30,10 @@ public class Main {
 
         // 순회 중 삭제되는 경우
         // 순회 중 삭제되면 처음 순회하려고 했던 배열의 사이즈가 달라지면서 인덱스가 맞지 않아 생기는 오류
+        // "a", "b", "c", "d", "a"
+        //  0    1    2    3    4
+        //       0    1    2    3
+
         System.out.println("stringList = " + stringList);
         for( String str : stringList ) {
             if ( str.equals("a") ) {
@@ -62,11 +63,11 @@ public class Main {
                 removed.add(str);
             }
         }
-        stringList.removeAll(removed);
+        stringList.removeAll(removed); // ConcurrentException Handling 해줌
         System.out.println("stringList = " + stringList);
     }
 
-    public static void solution3(List<String> stringList) {
+    public static void solution3(List<String> stringList) { // solution6와 같음
         // removeIf()로 요소 삭제
         stringList.removeIf(str -> str.equals("a"));
         System.out.println("stringList = " + stringList);
@@ -104,7 +105,7 @@ public class Main {
         // iterator를 통해 List 자체가 아닌 iterator를 제거
         // 멀티 쓰레드 환경에서는 오류 발생할 수도 있음
         System.out.println("stringList = " + stringList);
-        Iterator<String> iterator = stringList.iterator();
+        Iterator<String> iterator = stringList.iterator(); // Set, Map => index 의 개념이 없음
         while(iterator.hasNext()) {
             String str = iterator.next(); // 현재 요소를 기본 컬렉션에서 제거 (next() 후에 호출)
             if ( str.equals("a") ) {

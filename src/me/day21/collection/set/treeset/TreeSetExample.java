@@ -2,14 +2,11 @@ package me.day21.collection.set.treeset;
 
 import me.day21.collection.set.treeset.node.Pen;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.TreeSet;
-import java.util.Set;
+import java.util.*;
 
 public class TreeSetExample {
     public static void main(String[] args) {
-        Set<Integer> treeSet = new TreeSet<>();
+        Set<Integer> treeSet = new TreeSet<>(); // 크기 순서
 
         // 원소 추가
         // 원소를 추가할 때 이진 탐색 트리에 저장하여 객체 크기 순서가 유지될 수 있도록 만듦 (정렬됨)
@@ -100,8 +97,15 @@ public class TreeSetExample {
 
         //////////////////////////////////////////////////////////////////////////
         // TreeSet의 원소가 객체인 경우
-        Set<Pen> penSet = new TreeSet<>();
-
+        Set<Pen> penSet = new TreeSet<>(); // 크기 순서 (객체 Comparable, Comparator)
+        Set<Pen> penSet1 = new TreeSet<>(new Comparator<Pen>() {
+            @Override
+            public int compare(Pen o1, Pen o2) {
+                return o1.getCompanyName().compareTo(o2.getCompanyName());
+            }
+        });
+        // Pen => Comparable, Comparator (ClassCastException)
+        // 인터페이스 형 = new 인터페이스 구현 클래스()
 
         // 원소 추가
         // 원소를 추가할 때 이진 탐색 트리에 저장하여 객체 크기 순서가 유지될 수 있도록 만듦 (정렬됨)

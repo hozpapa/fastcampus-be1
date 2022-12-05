@@ -120,20 +120,20 @@ public class SetExample {
         System.out.println();
 
         /////////////////////////////////////////////////////////////////////////
-        // List (컬렉션) -> Array (객체 배열)
-        List<String> stringList = new ArrayList<>();
+        // Set (컬렉션) -> Array (객체 배열)
+        Set<String> stringsSet = new HashSet<>();
         for (int i = 'a'; i <= 'z'; i++) {
-            stringList.add(Character.toString(i));
+            stringsSet.add(Character.toString(i));
         }
-        System.out.println("stringList = " + stringList);
+        System.out.println("stringList = " + stringsSet);
 
-        String[] stringArray = stringList.toArray(new String[stringList.size()]);
+        String[] stringArray = stringsSet.toArray(new String[stringsSet.size()]);
         System.out.println("stringArray = " + Arrays.toString(stringArray));
 
 
-        // Array (객체 배열) -> List (컬렉션)
-        List<String> stringList1 = new ArrayList<>(Arrays.asList(stringArray));
-        System.out.println("stringList1 = " + stringList1);
+        // Array (객체 배열) -> Set (컬렉션)
+        Set<String> stringSet1 = new HashSet<>(Arrays.asList(stringArray));
+        System.out.println("stringList1 = " + stringSet1);
 
     }
 }
