@@ -5,15 +5,21 @@ import java.util.*;
 public class HashMapExample {
     public static void main(String[] args) {
         // Set - 키가 hashCode()로 정의
+        // HashSet() => HashMap()
+        // HashSet(Element) => HashMap(Element, Dump) => Element 중복 불가능
+        // HashMap(Key, Value) => Key 중복 불가능
+
         // Map - 원하는 값으로 키 지정 가능
         //       키와 값에 null을 허용
-        Map<Integer, String> hashMap = new HashMap<>();
+        Map<Integer, String> hashMap = new HashMap<>(); // hashCode(Key) => Value
 
         // 원소 추가 => put()
         // 키 저장 순서가 유지되지 않을 수 있음
         for (int i = 1; i <= 10 ; i++) {
             if (!hashMap.containsKey(i)) {
-                hashMap.put(i, Character.toString((i - 1) + 'a'));
+                hashMap.put(i, Character.toString((i - 1) + 'a')); // 원소 추가
+            } else {
+                // 원소 수정
             }
         }
         System.out.println("hashMap = " + hashMap);
@@ -54,7 +60,7 @@ public class HashMapExample {
         System.out.println();
 
         ////////////////////////////////////////////////////////
-        // 원소 수정 => replace()
+        // 원소 수정 => replace() => key 유무 체크 후 key 가 있으면 put 을 통해 원소 수정
         hashMap.replace(-1, "a"); // -1과 같은 키는 없기 때문에 아무런 영향이 없음
         System.out.println("hashMap = " + hashMap);
         hashMap.replace(1, "abcde!@@");
@@ -81,7 +87,7 @@ public class HashMapExample {
         System.out.println();
 
         // 원소 반복하기
-        for (Map.Entry<Integer, String> entry: hashMap.entrySet()) {
+        for (Map.Entry<Integer, String> entry: hashMap.entrySet()) { // hashMap.entrySet(): Set<Map.Entry<>>
             Integer key = entry.getKey();
             String value = entry.getValue();
             System.out.println( "key => " + key + ", value => " + value);
@@ -101,6 +107,7 @@ public class HashMapExample {
         hashMap.remove(1);
         hashMap.remove(2);
         hashMap.remove(null);
+       // hashMap.remove(1, "aaa");
         System.out.println("hashMap = " + hashMap);
         System.out.println("hashMap.size() = " + hashMap.size());
         System.out.println();
@@ -115,6 +122,9 @@ public class HashMapExample {
 
         //////////////////////////////////////////////////////////////////////////
         // Map (컬렉션) -> Array (객체 배열)
+        // Keys, Values
+        // Map => Object[]
+        // Map => Map.Entry[]
         Map<Integer, String> hashMap1 = new HashMap<>();
         for (int i = 1; i <= 10 ; i++) {
             hashMap1.put(i, Character.toString((i-1) + 'a'));
@@ -131,6 +141,7 @@ public class HashMapExample {
         System.out.println("entries = " + Arrays.toString(entries));
         System.out.println();
 
+        // Array (객체 배열) -> Map (컬렉션)
         Map<Integer, String> hashMap2 = new HashMap<>(Map.ofEntries(entries));
         System.out.println("hashMap2 = " + hashMap2);
     }

@@ -10,7 +10,10 @@ public class TreeMapExample {
         // Set - 키가 hashCode()로 정의
         // Map - 원하는 값으로 키 지정 가능
         //       키와 값에 null을 허용
+
+        // Key, Value => 뭘 가지고 크기 비교를 할까요? Key를 통해 크기 비교 (**)
         Map<Integer, String> treeMap = new TreeMap<>();
+
 
         // 원소 추가 => put()
         // 원소를 추가할 때 이진 탐색 트리에 저장하여 키 (**) 크기 순서가 유지될 수 있도록 만듦 (정렬됨)
@@ -106,6 +109,9 @@ public class TreeMapExample {
 
         System.out.println("treeMap.isEmpty() = " + treeMap.isEmpty());
         System.out.println();
+
+
+
 
         //////////////////////////////////////////////////////////////////////////
         // TreeMap의 원소가 객체인 경우
