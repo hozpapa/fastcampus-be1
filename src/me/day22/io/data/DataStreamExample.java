@@ -1,7 +1,5 @@
 package me.day22.io.data;
 
-import me.day16.io.buffered.BufferedStreamExample;
-
 import java.io.*;
 
 public class DataStreamExample {

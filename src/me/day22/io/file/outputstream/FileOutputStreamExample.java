@@ -1,7 +1,5 @@
 package me.day22.io.file.outputstream;
 
-import me.day16.io.file.inputstream.FileInputStreamExample;
-
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;

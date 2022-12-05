@@ -1,8 +1,5 @@
 package me.day22.io.file.copy;
 
-import me.day16.io.data.DataStreamExample;
-import me.day16.io.file.outputstream.FileOutputStreamExample;
-
 import java.io.*;
 
 public class ImageCopyExample {

@@ -1,11 +1,7 @@
 package me.day22.io.file.method;
 
-import me.day16.io.data.DataStreamExample;
-
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
 public class FileExample {
     public static void main(String[] args) throws IOException {

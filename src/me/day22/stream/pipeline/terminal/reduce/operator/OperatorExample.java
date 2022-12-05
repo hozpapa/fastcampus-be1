@@ -1,6 +1,6 @@
 package me.day22.stream.pipeline.terminal.reduce.operator;
 
-import me.day16.stream.pipeline.terminal.reduce.Person;
+import me.day22.stream.pipeline.terminal.reduce.Person;
 
 import java.util.ArrayList;
 import java.util.List;

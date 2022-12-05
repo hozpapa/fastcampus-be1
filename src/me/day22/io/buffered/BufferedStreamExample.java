@@ -1,8 +1,5 @@
 package me.day22.io.buffered;
 
-import me.day12.exception.close.resources.TryWithResourceCloseExample;
-import me.day16.io.file.writer.FileWriterExample;
-
 import java.io.*;
 
 public class BufferedStreamExample {

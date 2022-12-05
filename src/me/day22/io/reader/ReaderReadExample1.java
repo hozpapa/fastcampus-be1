@@ -1,7 +1,5 @@
 package me.day22.io.reader;
 
-import me.day12.api.text.messageformat.MessageFormatExample;
-
 import java.io.*;
 
 public class ReaderReadExample1 {

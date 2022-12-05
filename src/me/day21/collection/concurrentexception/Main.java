@@ -8,16 +8,26 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Main {
     public static void main(String[] args) {
+        List<String> stringList = init();
+
+        //error(stringList);
+        //solution0(stringList);
+        //solution1(stringList);
+        solution2(stringList);
+        //solution3(stringList);
+    }
+
+    public static List<String> init() {
         List<String> stringList = new ArrayList<String>();
         stringList.add("a");
         stringList.add("b");
         stringList.add("c");
         stringList.add("d");
-
-        //error(stringList);
-        solution0(stringList);
+        stringList.add("a");
+        return stringList;
     }
     public static void error(List<String> stringList) {
+
         // 순회 중 삭제되는 경우
         // 순회 중 삭제되면 처음 순회하려고 했던 배열의 사이즈가 달라지면서 인덱스가 맞지 않아 생기는 오류
         System.out.println("stringList = " + stringList);
