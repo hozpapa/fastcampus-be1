@@ -106,11 +106,10 @@ public class TreeSetExample {
         // 원소 추가
         // 원소를 추가할 때 이진 탐색 트리에 저장하여 객체 크기 순서가 유지될 수 있도록 만듦 (정렬됨)
         // 이진 탐색 트리 중 레드-블랙 트리로 구현되어있음 (개략적으로 balanced tree) (https://code-lab1.tistory.com/62)
-        penSet.add(new Pen("0001", "파카", "red")); // ClassCastException
-        penSet.add(new Pen("0002", "빅", "black")); // ClassCastException
-        penSet.add(new Pen("0003", "파카", "blue")); // ClassCastException
-        penSet.add(new Pen("0004", "제브라", "red")); // ClassCastException
-        // TODO: ClassCastException 발생 이유와 해결 방안을 제시하시오.
+        penSet.add(new Pen("0001", "파카", "red"));
+        penSet.add(new Pen("0002", "빅", "black"));
+        penSet.add(new Pen("0003", "파카", "blue"));
+        penSet.add(new Pen("0004", "제브라", "red"));
 
         System.out.println("penSet = " + penSet);
         System.out.println("penSet.size() = " + penSet.size());
