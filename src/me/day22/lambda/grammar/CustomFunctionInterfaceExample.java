@@ -2,12 +2,20 @@ package me.day22.lambda.grammar;
 
 public class CustomFunctionInterfaceExample {
     public static void main(String[] args) {
+
         CustomFunctionInterface1.staticMethod();
 
-        CustomFunctionInterface1 f1 = () -> System.out.println("hello world!");
+        CustomFunctionInterface1 f1 = () -> System.out.println("hello world");
         f1.lambda();
         f1.defaultMethod();
-        System.out.println();
+
+        CustomFunctionInterface1 f12 = () -> System.out.println("java lambda");
+        f12.lambda();
+        f12.defaultMethod();
+
+//        f1.lambda();
+//        f1.defaultMethod();
+//        System.out.println();
         ///////////////////////////////////////////////////////////////////
 
 
@@ -26,11 +34,13 @@ public class CustomFunctionInterfaceExample {
         CustomFunctionInterface3.staticMethod();
 
         CustomFunctionInterface3 f3 = arguments -> {
-            for (Object arg: arguments) {
-                System.out.print(arg + ",");
+            for (int i = 0; i < arguments.length; i++) {
+                System.out.print(arguments[i] + ",");
             }
             System.out.println();
         };
+
+
         f3.lambda();
         f3.lambda(10);
         f3.lambda(10, 20);
@@ -43,7 +53,10 @@ public class CustomFunctionInterfaceExample {
 
         CustomFunctionInterface4.staticMethod();
 
-//        CustomFunctionInterface4 f4 = (a, b) -> { return a + b; };
+//        CustomFunctionInterface4 f4 = (a, b) -> {
+//             code ...
+//            return a + b;
+//        }; // add
         CustomFunctionInterface4 f4 = (a, b) -> a + b;
         System.out.println(f4.lambda(1, 2));
         System.out.println(f4.lambda(3, 4));

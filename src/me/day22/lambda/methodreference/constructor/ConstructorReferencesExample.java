@@ -6,10 +6,12 @@ import java.util.function.Function;
 
 public class ConstructorReferencesExample {
     public static void main(String[] args) {
+        // String (id) -> Member (member)
         Function<String, Member> function1 = Member :: new;
         Member member1 = function1.apply("a1234");
         System.out.println("member1 = " + member1);
 
+        // String (name), String (id) -> Member (member)
         BiFunction<String, String, Member> function2 = Member :: new;
         Member member2 = function2.apply("a", "a1234");
         System.out.println("member2 = " + member2);

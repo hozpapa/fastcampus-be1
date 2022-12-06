@@ -65,7 +65,8 @@ public class Customers { // 싱글톤
         }
 
     }
-    public void add(int i, Customer customer) { // i 번째 원소 추가
+
+    public void add(int i, Customer customer) { // i 번째 원소 추가 (가장 마지막에도 추가 가능)
         if (!(i >= 0 && i <= size)) return;
         if (customer == null) return;
 

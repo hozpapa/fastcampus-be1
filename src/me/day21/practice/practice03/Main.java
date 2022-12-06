@@ -19,10 +19,10 @@ public class Main {
         studentList.add(new Student("20045555", "이초잉", 70)); // 입학연도: 2004 + 들어간 순서: 5
 
 
-        List<Student> upperList = upper(70);
+        List<Student> upperList = upper(70); // 70점 초과인 학생 집합
         System.out.println("upperList = " + upperList);
 
-        List<Student> lowerList = lower(80);
+        List<Student> lowerList = lower(80); // 80점 미만인 학생 집합
         System.out.println("lowerList = " + lowerList);
 
         double average = average();

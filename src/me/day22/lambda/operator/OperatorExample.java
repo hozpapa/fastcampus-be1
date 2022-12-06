@@ -17,10 +17,11 @@ public class OperatorExample {
 
     public static void main(String[] args) {
         // max
-        int max = maxOrMin((a, b) -> Math.max(a, b));
+        int max = maxOrMin(Math :: max);
         System.out.println("max = " + max);
 
-        int min = maxOrMin((a, b) -> Math.min(a, b));
+        // min
+        int min = maxOrMin(Math :: min);
         System.out.println("min = " + min);
 
     }

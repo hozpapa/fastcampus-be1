@@ -1,9 +1,11 @@
 package me.day22.lambda.methodreference.argument;
 
+import java.util.Objects;
 import java.util.function.ToIntBiFunction;
 
 public class ArgumentMethodReferenceExample {
     public static void main(String[] args) {
+        // String, String -> Int
         ToIntBiFunction<String, String> function;
 
         function = (a, b) -> a.compareToIgnoreCase(b);

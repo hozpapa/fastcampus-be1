@@ -3,8 +3,18 @@ package me.day22.lambda.finals;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ExternalVariableRefExample {
+    private int a;
+
+    public ExternalVariableRefExample() {
+        a = 20;
+    }
+
+    public void setA(int a) {
+        this.a = a;
+    }
+
     public static void main(String[] args) {
-        int num = 10;
+        int num = 10; // compiler: 값이 초기화된 후에 값을 수정하지 않으면 final
         System.out.println("num = " + num);
         // 외부 지역 변수를 람다식에서 사용하는 경우 final 이어야 함
         // 변수가 초기화되고 값의 변화가 한 번도 없다면 컴파일러에서는 해당 변수를 final로 취급 => effectively final
@@ -18,7 +28,7 @@ public class ExternalVariableRefExample {
         Runnable runnable2 = () -> System.out.println("runnable2 = " + num);
         runnable1.run();
         runnable2.run();
-//        num++ // uncomment 하게 되면 람다식의 num이 오류남
+//        num++; // uncomment 하게 되면 람다식의 num이 오류남
         System.out.println("num = " + num);
         System.out.println();
 
@@ -29,14 +39,17 @@ public class ExternalVariableRefExample {
         AtomicInteger atomicInteger = new AtomicInteger(10);
         System.out.println("atomicInteger = " + atomicInteger);
 
-        Runnable runnable3 = () -> System.out.println("runnable3 = " + num);
-        Runnable runnable4 = () -> System.out.println("runnable4 = " + num);
-        runnable3.run();
-        runnable4.run();
+        Runnable runnable3 = () -> System.out.println("runnable3 = " + atomicInteger.get()); // Thread
+        Runnable runnable4 = () -> System.out.println("runnable4 = " + atomicInteger.get()); // Thread
+        runnable3.run(); // 10
 
-        atomicInteger.addAndGet(10);
+        atomicInteger.addAndGet(10); // 20
+        System.out.println("atomicInteger = " + atomicInteger); // main memory : atomicInteger
 
-        System.out.println("atomicInteger = " + atomicInteger);
+        runnable4.run(); // 10 => 20
+
+
+
 
     }
 }
