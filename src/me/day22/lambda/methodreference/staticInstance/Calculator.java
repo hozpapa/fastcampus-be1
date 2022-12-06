@@ -1,4 +1,4 @@
-package me.day22.lambda.methodreference.staticInstanceMethod;
+package me.day22.lambda.methodreference.staticInstance;
 
 public class Calculator {
     public static int staticMethod(int x, int y) { return x + y; }

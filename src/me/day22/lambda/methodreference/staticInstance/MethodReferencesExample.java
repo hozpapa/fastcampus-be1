@@ -1,4 +1,4 @@
-package me.day22.lambda.methodreference.staticInstanceMethod;
+package me.day22.lambda.methodreference.staticInstance;
 
 import java.util.function.IntBinaryOperator;
 
