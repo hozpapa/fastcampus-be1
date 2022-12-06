@@ -39,8 +39,8 @@ public class ExternalVariableRefExample {
         AtomicInteger atomicInteger = new AtomicInteger(10);
         System.out.println("atomicInteger = " + atomicInteger);
 
-        Runnable runnable3 = () -> System.out.println("runnable3 = " + atomicInteger.get()); // Thread
-        Runnable runnable4 = () -> System.out.println("runnable4 = " + atomicInteger.get()); // Thread
+        Runnable runnable3 = () -> System.out.println("runnable3 = " + atomicInteger); // Thread
+        Runnable runnable4 = () -> System.out.println("runnable4 = " + atomicInteger); // Thread
         runnable3.run(); // 10
 
         atomicInteger.addAndGet(10); // 20
