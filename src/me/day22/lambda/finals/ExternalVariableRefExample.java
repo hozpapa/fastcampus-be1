@@ -42,11 +42,11 @@ public class ExternalVariableRefExample {
         Runnable runnable3 = () -> System.out.println("runnable3 = " + atomicInteger); // Thread
         Runnable runnable4 = () -> System.out.println("runnable4 = " + atomicInteger); // Thread
         runnable3.run(); // 10
-
+        runnable4.run(); // 10 => 20
         atomicInteger.addAndGet(10); // 20
         System.out.println("atomicInteger = " + atomicInteger); // main memory : atomicInteger
 
-        runnable4.run(); // 10 => 20
+
 
 
 
