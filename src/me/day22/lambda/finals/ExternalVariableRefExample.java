@@ -46,10 +46,5 @@ public class ExternalVariableRefExample {
         atomicInteger.addAndGet(10); // 20
         System.out.println("atomicInteger = " + atomicInteger); // main memory : atomicInteger
 
-
-
-
-
-
     }
 }
