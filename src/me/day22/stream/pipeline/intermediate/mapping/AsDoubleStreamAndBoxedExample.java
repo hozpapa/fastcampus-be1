@@ -13,7 +13,7 @@ public class AsDoubleStreamAndBoxedExample {
         IntStream intStream = Arrays.stream(intArray);
         intStream
                 .asDoubleStream()
-                .forEach(d -> System.out.println(d));
+                .forEach(System.out::println);
 
         System.out.println();
 

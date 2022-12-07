@@ -10,8 +10,8 @@ public class ImageCopyExample {
         final String copy = "dog_copy.jpg";
 
         try (
-                InputStream is = new FileInputStream(path + original);
-                OutputStream os = new FileOutputStream(path + copy);
+                InputStream is = new FileInputStream(path + original); // auto close
+                OutputStream os = new FileOutputStream(path + copy); // auto close
         ) {
 
             byte[] readBytes = new byte[256];

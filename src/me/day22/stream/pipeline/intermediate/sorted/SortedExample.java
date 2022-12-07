@@ -59,12 +59,12 @@ public class SortedExample {
         );
 
         fruitList.stream()
-                .sorted() // 기본 비교 방법으로 정렬
+                .sorted() // 기본 비교 방법으로 정렬 (Comparable)
                 .forEach(s -> System.out.print(s.getPrice() + ", "));
         System.out.println();
 
         fruitList.stream()
-                .sorted(Comparator.naturalOrder()) // 기본 비교 방법으로 정렬
+                .sorted(Comparator.naturalOrder()) // 기본 비교 방법으로 정렬 (Comparable)
                 .forEach(s -> System.out.print(s.getPrice() + ", "));
         System.out.println();
 
@@ -76,10 +76,10 @@ public class SortedExample {
 
         // 새로운 비교 방법 제시
         Comparator<Fruit> fruitComparator
-                = Comparator.comparing(Fruit::getName)
-                .thenComparing(Fruit::getPrice);
+                = Comparator.comparing(Fruit::getName).thenComparing(Fruit::getPrice);
+
         fruitList.stream()
-                .sorted(fruitComparator) // 새로운 비교 방법 정렬
+                .sorted(fruitComparator.reversed()) // 새로운 비교 방법 정렬
                 .forEach(s -> System.out.print(s + ", "));
         System.out.println();
         System.out.println();

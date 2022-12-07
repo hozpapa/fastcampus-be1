@@ -38,12 +38,12 @@ class Student {
 public class StreamExample {
     public static void main(String[] args) {
 
-        evenNum();
+        even();
         concat();
         average();
 
     }
-    public static void evenNum() {
+    public static void even() {
         //////////////////////////////////////////////////////////
         // List<Integer>
         List<Integer> integerList = new ArrayList<>(List.of(1, 2, 3, 4));
@@ -69,7 +69,6 @@ public class StreamExample {
 
         // 스트림을 이용해서 짝수만 출력
         integerList.stream()
-                .mapToInt(i -> Integer.valueOf(i))
                 .filter(i -> i % 2 == 0)
                 .forEach(i -> System.out.print(i + ", "));
         System.out.println('\n');
@@ -98,7 +97,10 @@ public class StreamExample {
 
         // 스트림을 이용해서 문자열 합치기
         String concat3 = stringList.stream().collect(Collectors.joining());
+        String concat4 = stringList.stream().reduce((x, y) -> x + y).get();
+
         System.out.println("concat3 = " + concat3);
+        System.out.println("concat4 = " + concat4);
 
         System.out.println();
     }
@@ -133,10 +135,13 @@ public class StreamExample {
         System.out.println("average2 = " + average2);
 
         // 스트림을 이용해서 학생 성적 평균
-        double average3 = studentList.stream()
-                .mapToInt(s -> s.getScore())
-                .average()
-                .getAsDouble();
+
+        double average3 = studentList // List<Student>
+                .stream() // Stream<Student>
+                .mapToInt(s -> s.getScore())// IntStream
+                .average() // OptionalDouble
+                .orElse(0.0); // default 0.0
+//                .getAsDouble(); // double
         System.out.println("average3 = " + average3);
     }
 

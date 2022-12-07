@@ -14,10 +14,10 @@ import java.util.stream.Stream;
 public class StreamExample {
     public static void main(String[] args) throws IOException {
         // streamFromCollection();
-        // streamFromStrArray();
-        // streamFromIntArray();
-        // streamFromIntRange();
-//         streamFromFile();
+//         streamFromStrArray();
+//         streamFromIntArray();
+//         streamFromIntRange();
+         streamFromFile();
         streamFromDirectory();
     }
 
@@ -33,23 +33,36 @@ public class StreamExample {
 
     public static void streamFromStrArray() {
         String[] strings = { "string1", "string2", "string3" };
-        List<String> stringList = Arrays.stream(strings) // 배열에서 스트림 얻기
+        List<String> stringList = Arrays.stream(strings) // 배열에서 스트림 얻기 (Stream.of(strings))
                 .map(s -> Character.toString(s.charAt(s.length() - 1)))
                 .collect(Collectors.toList());
+
+
         System.out.println("stringList = " + stringList);
     }
 
     public static void streamFromIntArray() {
-        int[] ints = {90, 97, 20, 30, 35, 80, 90, 95, 95, 97, 98};
-        boolean isEven = Arrays.stream(ints) // 배열에서 스트림 얻기
+        int[] ints = { 90, 97, 20, 30, 35, 80, 90, 95, 95, 97, 98 };
+
+        boolean isEven = Arrays.stream(ints) // 배열에서 스트림 얻기 (IntStream.of(ints))
                 .allMatch(i -> i % 2 == 0);
         System.out.println("isEven = " + isEven);
     }
 
     public static void streamFromIntRange() {
-        IntStream stream = IntStream.rangeClosed(1, 100); // 정수 범위를 통해 스트림 얻기
-        int total = stream.sum();
-        System.out.println("total = " + total);
+//        IntStream stream = IntStream.range(1, 100); // 정수 범위를 통해 스트림 얻기
+//        stream.forEach(System.out::println); // already operated.
+//
+//        int total = stream.sum();
+//        System.out.println("total = " + total);
+
+        int total2 = IntStream.rangeClosed(1, 100)
+                .filter(i -> i % 2 == 0)
+//                .forEach(s -> System.out.println()) // 최종처리 스트림
+                .peek(s -> System.out.println(s)) // 중간처리 스트림
+                .sum();
+        System.out.println(total2);
+
     }
 
 
@@ -59,7 +72,7 @@ public class StreamExample {
 
         List<Path> pathList = Files.walk(userPath) // 디렉토리 스트림 얻음
                 .collect(Collectors.toList());
-        //System.out.println(pathList);
+//        System.out.println(pathList);
 
         Path path = pathList.stream()
                 .filter(p -> p.toFile().isFile())

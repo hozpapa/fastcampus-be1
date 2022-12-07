@@ -1,18 +1,18 @@
 package me.day22.io.inputstream;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 
 public class InputStreamReadExample2 {
     public static void main(String[] args) {
         try {
             final String path = InputStreamReadExample2.class.getResource("").getPath();
+            File file = new File(path + "long.txt");
+            System.out.println(file.length()); // file length (#byte)
+
             InputStream inputSteam = new FileInputStream(path + "long.txt");
             int total = 0;
             int readByteNo = 0;
-            byte[] readBytes = new byte[100];
+            byte[] readBytes = new byte[100]; // read buffer array
 
             // 입력 스트림으로부터 100개 바이트가 들어온다면 read()는 100번 루핑 필요
             // 그러나 read(byte[] b) 메소드는 한 번 읽을 때 매개값으로 주어진 바이트 배열 길이만큼 읽기 때문에 루핑 횟수가 현저히 줄어듦

@@ -21,12 +21,12 @@ public class FileExample {
 
 
         // 현재 디렉토리에 파일 리스트 확인
-        File currDir = new File(path);
-        File[] files = currDir.listFiles();
-        for(File f : files) {
-            System.out.println(f);
-        }
-        System.out.println();
+//        File currDir = new File(path);
+//        File[] files = currDir.listFiles();
+//        for(File f : files) {
+//            System.out.println(f);
+//        }
+//        System.out.println();
 
         // 재귀적으로 디렉토리 탐색
         searchFile(new File("./"));

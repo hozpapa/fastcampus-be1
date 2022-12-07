@@ -11,7 +11,7 @@ public class OutputStreamWriteExample2 {
             final String path = OutputStreamWriteExample2.class.getResource("").getPath();
             OutputStream outputStream = new FileOutputStream(path + "output.txt");
             final byte[] data = "a b c d e f g h i j k".getBytes(); // "a b c d e f g h i j k"을 한꺼번에 출력
-            outputStream.write(data);
+            outputStream.write(data); // 대용량 파일에서는 좋음
             outputStream.flush();
             outputStream.close();
         } catch (FileNotFoundException e) {

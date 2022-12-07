@@ -8,7 +8,9 @@ public class StreamFilterExample {
     public static void main(String[] args) {
         // 1 ~ 10이 중복 저장된 컬렉션에서 중복을 제거하고 홀수만 필터링해서 컬렉션에 저장하는 예제
         System.out.print("1 ~ 10 중복 저장 => ");
-        List<Integer> numbers = IntStream.rangeClosed(1, 10).boxed().collect(Collectors.toList()); // 1 ~ 10 저장
+        List<Integer> numbers = IntStream.rangeClosed(1, 10)
+                .boxed() // int -> Integer
+                .collect(Collectors.toList()); // 1 ~ 10 저장
         numbers.addAll(numbers); // 1 ~ 10 중복 저장
         System.out.println(numbers);
 
