@@ -94,7 +94,7 @@ public class SummarizedMenu extends Menu {
             try {
                 Comparator<Customer> comparator = Comparator
                         .comparing(Customer::getName)
-                        .thenComparing(Customer::getUserID);
+                        .thenComparing(Customer::getUserId);
 
                 OrderType orderType = OrderType.valueOf(strOrder).replaceFullName();
 

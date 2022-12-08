@@ -98,23 +98,18 @@ public class Groups { // singleton
         return null;
     }
 
-    public Group findGroupFor(Customer cust) {
-        if (groups == null || cust == null) return null;
-        System.out.println(cust);
+    public Group findGroupFor(Customer customer) {
+        if (groups == null || customer == null) return null;
 
-        for(int i = size - 1; i >= 0; i--) {
+        for (int i = size - 1; i >= 0; i--) {
             Parameter param = groups[i].getParam();
-            System.out.println(param);
             if (param == null) continue;
 
-            if (cust.getSpentTime() >= param.getMinimumSpentTime()
-                    && cust.getTotalPay() >= param.getMinimumTotalPay()) {
+            if (customer.getSpentTime() >= param.getMinimumSpentTime()
+                    && customer.getTotalPay() >= param.getMinimumTotalPay()) {
                 return groups[i];
             }
-
-            return null;
         }
-
         return null;
     }
 
@@ -123,7 +118,7 @@ public class Groups { // singleton
         String str = "";
 
         for(int i = 0; i < size; ++i) {
-            str = str + " " + groups[i].toString() + "\n";
+            str = str + " " + groups[i] + "\n";
         }
 
         return str;

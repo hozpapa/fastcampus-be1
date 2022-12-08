@@ -32,19 +32,17 @@ public class Customers { // singleton
         capacity = DEFAULT_SIZE;
     }
 
+    public Customers(int initialCapacity) {
+        customers = new Customer[initialCapacity];
+        capacity = initialCapacity;
+    }
 
     public void setCustomers(Customer[] customers) {
         this.customers = customers;
     }
 
     public Customer[] getCustomers() {
-        int realCount = 0;
-
-        for(int i = 0; i < customers.length; i++) {
-            realCount++;
-        }
-
-        return Arrays.copyOf(customers, realCount);
+        return customers;
     }
 
     public int getCapacity() {
@@ -76,35 +74,61 @@ public class Customers { // singleton
         return size == 0;
     }
 
+    public void set(int index, Customer customer) { // i 번째 원소를 customer 로 수정
+        if (!(index >= 0 && index < size)) return;
+        if (customer == null) return;
+
+        customers[index] = customer;
+    }
+
+    public Customer get(int index) { // i 번째 원소 반환
+        if (!(index >= 0 && index < size)) return null;
+
+        return customers[index];
+    }
+
+    public int indexOf(Customer customer) { // customer 원소 인덱스 반환
+        if (customer == null) return -1; // 객체를 찾지 못함
+
+        for (int i = 0; i < size; i++) {
+            if (customers[i] == null) continue;
+            if (customers[i].getSerialNO().equals(customer.getSerialNO())) return i;
+        }
+        return -1; // 객체를 찾지 못함
+    }
+
     public void add(Customer customer) {
+        if (customer == null) return;
+
         if (size < capacity) {
             customers[size] = customer;
             size++;
         } else {
-            extend(customer);
+            grow();
+            add(customer);
         }
 
     }
 
     public void add(int index, Customer customer) {
-        if (index < size) {
-            if (size < capacity) {
-                Customer customer1 = customers[index];
+        if (!(index >= 0 && index <= size)) return;
+        if (customer == null) return;
 
-                for (int i = customers.length - 1; i >= index; i--) {
-                    customers[i + 1] = customers[i];
-                }
+        if (size < capacity) {
 
-                customers[index] = customer;
-                size++;
-            } else {
-                extend(index, customer);
+            for (int i = customers.length - 1; i >= index; i--) {
+                customers[i + 1] = customers[i];
             }
 
+            customers[index] = customer;
+            size++;
+        } else {
+            grow();
+            add(index, customer);
         }
     }
 
-    public void extend(int index, Customer customer) {
+    public void grow() {
         Customer[] copy = Arrays.copyOf(customers, customers.length);
         capacity *= 2;
         customers = new Customer[capacity];
@@ -112,53 +136,42 @@ public class Customers { // singleton
         System.arraycopy(copy, 0, customers, 0, copy.length);
 
         size = copy.length;
-        add(index, customer);
     }
 
-    public void extend(Customer customer) {
-        Customer[] copy = Arrays.copyOf(customers, customers.length);
-        capacity *= 2;
-        customers = new Customer[capacity];
+    public void pop(int index) {
+        if (size == 0) return;
+        if (!(index >= 0 && index < size)) return;
 
-        System.arraycopy(copy, 0, customers, 0, copy.length);
+        customers[index] = null; // 명시적으로 원소 삭제되었다고 표시하기 위함 (어차피 i + 1에 의해 덮어씌워짐)
 
-        size = copy.length;
-        add(customer);
-    }
-
-    public int pop(int index) {
-        if (size == 0) {
-            return -1;
-        } else if (index >= 0 && index < size) {
-            customers[index] = null;
-
-            for(int i = index + 1; i < size; ++i) {
-                customers[i - 1] = customers[i];
-            }
-
-            --size;
-            return 1;
-        } else {
-            return -1;
+        for (int j = index + 1; j < size; j++) {
+            customers[j - 1] = customers[j];
         }
+
+        customers[size - 1] = null;
+        size--;
     }
 
-    public int pop() {
-        if (size == 0) {
-            return -1;
-        } else {
-            customers[size - 1] = null;
-            size--;
-            return 1;
-        }
+    public void pop() {
+        if (size == 0) return;
+
+        customers[size - 1] = null;
+        size--;
     }
 
-    public Customer get(int i) {
-        return i < size ? customers[i] : null;
+    public void pop(Customer customer) {
+        if (size == 0) return;
+        if (customer == null) return;
+
+        pop(indexOf(customer));
     }
 
-    public void set(int i, Customer customer) {
-        customers[i] = customer;
+    public void trimToSize() { // 실제 객체 수만큼 객체 배열의 크기를 변경
+        Customer[] newCustomers = new Customer[size];
+        System.arraycopy(customers, 0, newCustomers, 0, size);
+
+        customers = newCustomers;
+        capacity = size;
     }
 
     public Customers findCustomers(GroupType type) {
@@ -190,11 +203,11 @@ public class Customers { // singleton
             if (grp.getType() != null) {
                 return findCustomers(grp.getType());
             } else {
-                System.out.println("Customers.findCustomers Error : No group type.");
+                System.out.println("Customers.findCustomers() Error : No group type.");
                 return null;
             }
         } else {
-            System.out.println("Customers.findCustomers Error : No group.");
+            System.out.println("Customers.findCustomers() Error : No group.");
             return null;
         }
     }
@@ -202,7 +215,6 @@ public class Customers { // singleton
     public void refresh(Groups groups) {
         if (groups == null) return;
 
-        System.out.println(size);
         for (int i = 0; i < size; i++) {
             Customer cust = customers[i];
             cust.setGroup(groups.findGroupFor(cust));
@@ -224,12 +236,13 @@ public class Customers { // singleton
         for (int i = 0; i < allGroups.length(); ++i) {
             Group grp = allGroups.get(i);
             Customer[] customers = grp.getCustomers(allCustomers).getCustomers();
+            Customer[] copy = Arrays.copyOf(customers, size);
             //System.out.println(Arrays.toString(customers));
 
             ClassifiedCustomers classifiedCustomers = new ClassifiedCustomers();
             classifiedCustomers.setGroup(grp);
-            classifiedCustomers.setSize(customers.length);
-            classifiedCustomers.setCustomers(customers);
+            classifiedCustomers.setSize(copy.length);
+            classifiedCustomers.setCustomers(copy);
 
             classifiedCustomersGroup.set(i, classifiedCustomers);
         }

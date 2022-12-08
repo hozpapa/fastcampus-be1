@@ -30,7 +30,6 @@ public class BufferedStreamExample {
                 OutputStream fos = new FileOutputStream(path + copy);
                 BufferedOutputStream bos = new BufferedOutputStream(fos);
         ) {
-
             // 이미지 복사
             int data;
             while ( (data = bis.read()) != -1 ) {

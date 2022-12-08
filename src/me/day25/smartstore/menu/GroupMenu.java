@@ -9,7 +9,6 @@ import me.day25.smartstore.groups.Groups;
 import me.day25.smartstore.groups.Parameter;
 import me.day25.smartstore.util.Message;
 
-import java.util.InputMismatchException;
 public class GroupMenu extends Menu {
 
     ////////////// singleton ////////////////
@@ -36,7 +35,7 @@ public class GroupMenu extends Menu {
                 System.out.print("Which group (GENERAL (G), VIP (V), VVIP (VV))? ");
                 String choice = scanner.next().toUpperCase();
 
-                if (choice == null || choice.equals("")) throw new InputEmptyException();
+                if (choice.equals("")) throw new InputEmptyException();
                 return choice;
 
             } catch (InputEmptyException e) {

@@ -1,7 +1,5 @@
 package me.day25.smartstore.menu;
 
-import me.day25.smartstore.groups.GroupType;
-
 public enum OrderType {
     ASCENDING("오름차순"), DESCENDING("내림차순"),
     A("오름차순"), D("내림차순");

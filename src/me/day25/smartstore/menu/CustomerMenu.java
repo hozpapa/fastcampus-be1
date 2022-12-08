@@ -102,21 +102,17 @@ public class CustomerMenu extends Menu {
     }
 
     public void deleteCustomerData() {
-        int allCustCount = allCustomers.getSize();
+        int size = allCustomers.size();
         viewCustomerData();
         int custNo = findCustomer();
-        if (custNo >= 1 && custNo <= allCustCount) {
-            Customer cust = allCustomers.get(custNo - 1);
-            int ret = allCustomers.pop(custNo - 1);
-            if (ret == -1) {
-                System.out.println("\nCustomer Data Can't Be Deleted ...");
-            } else {
-                System.out.println("\nCustomer Data Deleted Successfully !");
-            }
+        if (custNo >= 1 && custNo <= size) {
+            Customer customer = allCustomers.get(custNo - 1);
+            System.out.println(customer);
 
+            allCustomers.pop(custNo - 1);
             viewCustomerData();
         } else {
-            System.out.printf("\nSelected Customer Number Incorrect ! ( Range: %d ~ %d )\n", 1, allCustCount);
+            System.out.printf("\nSelected Customer Number Incorrect ! ( Range: %d ~ %d )\n", 1, size);
         }
 
     }
@@ -216,7 +212,7 @@ public class CustomerMenu extends Menu {
 //                String REGEX = "^[a-zA-Z]{1}[a-zA-Z0-9_]{4,11}$";
                 String userID = scanner.next();
                 if (userID == null || userID.equals("")) throw new InputEmptyException();
-                customer.setUserID(userID);
+                customer.setUserId(userID);
                 return;
             } catch (InputEmptyException e) {
                 System.out.println(Message.ERR_MSG_INVALID_INPUT_EMPTY);

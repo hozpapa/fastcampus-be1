@@ -57,13 +57,12 @@ public class Group {
 
     @Override
     public String toString() {
-        if (this.type == null) {
+        if (type == null) {
             return "No group.";
-        } else if (this.param == null) {
-            return "GroupType: " + this.type + "\nParameter: null";
+        } else if (param == null) {
+            return "GroupType: " + type + "\nParameter: null";
         } else {
-            GroupType var10000 = this.type;
-            return "GroupType: " + var10000 + "\nParameter: " + this.param;
+            return "GroupType: " + type + "\nParameter: " + param;
         }
     }
 }

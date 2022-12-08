@@ -14,12 +14,12 @@ public class Customer implements Comparable<Customer> {
     private static int AUTO_GENERATOR = 0;
 
     public Customer() {
-        ++AUTO_GENERATOR;
+        AUTO_GENERATOR++;
         this.serialNO = String.format("%04d", AUTO_GENERATOR);
     }
 
     public Customer(String name, String userId, int spentTime, int totalPay) {
-        ++AUTO_GENERATOR;
+        AUTO_GENERATOR++;
         this.serialNO = String.format("%04d", AUTO_GENERATOR);
         this.name = name;
         this.userId = userId;
@@ -43,11 +43,11 @@ public class Customer implements Comparable<Customer> {
         this.name = name;
     }
 
-    public String getUserID() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserID(String userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

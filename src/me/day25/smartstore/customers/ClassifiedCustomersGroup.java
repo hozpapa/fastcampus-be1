@@ -23,6 +23,7 @@ public class ClassifiedCustomersGroup {
 
     public ClassifiedCustomersGroup() {
         classifiedCustomers = new ClassifiedCustomers[GroupType.size()];
+
         for (int i = 0; i < classifiedCustomers.length; i++) {
             classifiedCustomers[i] = new ClassifiedCustomers();
         }
