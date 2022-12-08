@@ -106,8 +106,8 @@ public class GroupMenu extends Menu {
 
                 while ( true ) {
                     int choice = dispMenu(new String[] {"Minimum Spent Time", "Minimum Total Pay", "Back"});
-                    if (choice == 1) setParameterMinimumSpentTime(param);
-                    else if (choice == 2) setParameterMinimumTotalPay(param);
+                    if (choice == 1) { setParameterMinimumSpentTime(param); }
+                    else if (choice == 2) { setParameterMinimumTotalPay(param); }
                     else if (choice == 3) break;
                     else System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE);
                 }

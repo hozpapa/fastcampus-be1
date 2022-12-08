@@ -2,10 +2,8 @@ package me.day25.smartstore.groups;
 
 
 import me.day25.smartstore.customers.Customer;
-import me.day25.smartstore.customers.Customers;
 import me.day25.smartstore.util.UtilMethod;
 
-import java.util.Arrays;
 
 public class Groups { // singleton
 

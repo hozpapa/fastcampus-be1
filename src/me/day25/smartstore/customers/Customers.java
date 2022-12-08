@@ -52,6 +52,15 @@ public class Customers { // singleton
         return customers;
     }
 
+    public Customer[] getRealCustomers() {
+        int real = 0;
+        for (int i = 0; i < size; i++) {
+            if (customers[i] != null) real++;
+        }
+        size = real;
+        return Arrays.copyOf(customers, real);
+    }
+
     public int getCapacity() {
         return capacity;
     }
@@ -237,23 +246,23 @@ public class Customers { // singleton
         }
     }
 
-    public ClassifiedCustomersGroup classify() {
-        ClassifiedCustomersGroup classifiedCustomersGroup = ClassifiedCustomersGroup.getInstance();
+    public ClassifiedCustomersGroup classified() {
+        ClassifiedCustomersGroup classifiedCusGroup = ClassifiedCustomersGroup.getInstance();
 
         for (int i = 0; i < allGroups.size(); i++) {
             Group grp = allGroups.get(i);
             Customer[] customers = grp.getCustomers(allCustomers).getCustomers();
-            Customer[] copy = Arrays.copyOf(customers, size);
-            //System.out.println(Arrays.toString(customers));
+            Customer[] copy = Arrays.copyOf(customers, customers.length);
 
             ClassifiedCustomers classifiedCustomers = new ClassifiedCustomers();
             classifiedCustomers.setGroup(grp);
             classifiedCustomers.setSize(copy.length);
             classifiedCustomers.setCustomers(copy);
+            classifiedCustomers.setCustomers(classifiedCustomers.getRealCustomers());
 
-            classifiedCustomersGroup.set(i, classifiedCustomers);
+            classifiedCusGroup.set(i, classifiedCustomers);
         }
-        return classifiedCustomersGroup;
+        return classifiedCusGroup;
     }
 
     @Override

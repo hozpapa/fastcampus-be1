@@ -74,7 +74,7 @@ public class ClassifiedCustomersGroup {
     public void sort(Comparator<Customer> comparator) {
 
         for (int i = 0; i < classifiedCustomersGroup.size(); i++) {
-            Customer[] customers = classifiedCustomersGroup.get(i).getRealCustomers();
+            Customer[] customers = classifiedCustomersGroup.get(i).getCustomers();
 
             if (UtilMethod.isAnyNUll(customers)) continue;
 

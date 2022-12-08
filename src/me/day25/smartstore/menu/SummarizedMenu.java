@@ -27,7 +27,7 @@ public class SummarizedMenu extends Menu {
 
     private Customers allCustomers = Customers.getInstance();
 
-    private ClassifiedCustomersGroup classifiedCustomersGroup = ClassifiedCustomersGroup.getInstance();
+    private ClassifiedCustomersGroup classifiedCusGroup = ClassifiedCustomersGroup.getInstance();
 
 
 //    static int dispSummaryMenu() {
@@ -56,8 +56,8 @@ public class SummarizedMenu extends Menu {
 //    }
 
     public void manageSummaryMenu() {
-        classifiedCustomersGroup = allCustomers.classify();
-        //System.out.println("Arrays.toString(classifiedCustomersGroup.getClassifiedCustomers()) = " + Arrays.toString(classifiedCustomersGroup.getClassifiedCustomers()));
+        classifiedCusGroup = allCustomers.classified();
+        //System.out.println("Arrays.toString(classifiedCusGroup.getClassifiedCustomers()) = " + Arrays.toString(classifiedCusGroup.getClassifiedCustomers()));
 
         while (true) {
             int choice = dispMenu(new String[]{"Summary",
@@ -67,39 +67,41 @@ public class SummarizedMenu extends Menu {
                     "Back"});
 
             if (choice == 1) dispSummary();
-            else if (choice == 2) manageSortedByName();
-            else if (choice == 3) manageSortedBySpentTime();
-            else if (choice == 4) manageSortedByTotalPay();
-            else if (choice == 5) return;
+            else if (choice == 2) {
+                manageSort(Comparator
+                        .comparing(Customer::getName)
+                        .thenComparing(Customer::getUserId));
+            } else if (choice == 3) {
+                manageSort(Comparator
+                        .comparing(Customer::getSpentTime)
+                        .thenComparing(Customer::getName));
+            } else if (choice == 4) {
+                manageSort(Comparator
+                        .comparing(Customer::getTotalPay)
+                        .thenComparing(Customer::getName));
+            } else if (choice == 5) return;
             else System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE);
         }
     }
 
 
     public void dispSummary() {
-        if (classifiedCustomersGroup == null) {
+        if (classifiedCusGroup == null) {
             System.out.println(Message.ERR_MSG_INVALID_INPUT_NULL);
             return;
         }
-        classifiedCustomersGroup.print();
+        classifiedCusGroup.print();
     }
 
-
-    public void manageSortedByName() {
+    public void manageSort(Comparator<Customer> comparator) {
         while (true) {
             String strOrder = chooseSortOrder().toUpperCase();
             if (strOrder.equals(Message.END_MSG)) return;
 
             try {
-                Comparator<Customer> comparatorByName = Comparator
-                        .comparing(Customer::getName)
-                        .thenComparing(Customer::getUserId);
-
-                Comparator<Customer> comparator = Comparator.nullsLast(comparatorByName);
-
                 OrderType orderType = OrderType.valueOf(strOrder).replaceFullName();
-                if (orderType == OrderType.ASCENDING) classifiedCustomersGroup.sort(comparator);
-                else if (orderType == OrderType.DESCENDING) classifiedCustomersGroup.sort(comparator.reversed());
+                if (orderType == OrderType.ASCENDING) classifiedCusGroup.sort(comparator);
+                else if (orderType == OrderType.DESCENDING) classifiedCusGroup.sort(comparator.reversed());
                 else throw new InputRangeException();
 
             } catch (IllegalArgumentException | InputRangeException e) {
@@ -108,58 +110,6 @@ public class SummarizedMenu extends Menu {
 
             dispSummary();
         }
-    }
-
-    public void manageSortedBySpentTime() {
-        while (true) {
-            String strOrder = chooseSortOrder().toUpperCase();
-            if (strOrder.equals(Message.END_MSG)) return;
-
-            try {
-                Comparator<Customer> comparatorBySpentTime = Comparator
-                        .comparing(Customer::getSpentTime)
-                        .thenComparing(Customer::getName);
-
-                Comparator<Customer> comparator = Comparator.nullsLast(comparatorBySpentTime);
-
-                OrderType orderType = OrderType.valueOf(strOrder).replaceFullName();
-                if (orderType == OrderType.ASCENDING) classifiedCustomersGroup.sort(comparator);
-                else if (orderType == OrderType.DESCENDING) classifiedCustomersGroup.sort(comparator.reversed());
-                else throw new InputRangeException();
-
-            } catch (IllegalArgumentException | InputRangeException e) {
-                System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE);
-            }
-            dispSummary();
-        }
-    }
-
-    public void manageSortedByTotalPay() {
-        while (true) {
-            String strOrder = chooseSortOrder().toUpperCase();
-            if (strOrder.equals(Message.END_MSG)) {
-                return;
-            }
-
-            try {
-                Comparator<Customer> comparatorByTotalPay = Comparator
-                        .comparing(Customer::getTotalPay)
-                        .thenComparing(Customer::getName);
-
-                Comparator<Customer> comparator = Comparator.nullsLast(comparatorByTotalPay);
-
-
-                OrderType orderType = OrderType.valueOf(strOrder).replaceFullName();
-                if (orderType == OrderType.ASCENDING) classifiedCustomersGroup.sort(comparator);
-                else if (orderType == OrderType.DESCENDING) classifiedCustomersGroup.sort(comparator.reversed());
-                else throw new InputRangeException();
-
-            } catch (IllegalArgumentException | InputRangeException e) {
-                System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE);
-            }
-            dispSummary();
-        }
-
     }
 
     public String chooseSortOrder() {
