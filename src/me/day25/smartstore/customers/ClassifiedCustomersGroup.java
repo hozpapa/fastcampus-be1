@@ -1,16 +1,24 @@
 package me.day25.smartstore.customers;
 
 
-import me.day25.smartstore.exception.InputEmptyException;
-import me.day25.smartstore.exception.InputNullException;
 import me.day25.smartstore.groups.GroupType;
-import me.day25.smartstore.menu.OrderType;
+import me.day25.smartstore.menu.CustomerMenu;
 
 import java.util.Arrays;
 import java.util.Comparator;
 
 public class ClassifiedCustomersGroup {
+
+    ////////////// singleton ////////////////
     private static ClassifiedCustomersGroup classifiedCustomersGroup;
+
+    public static ClassifiedCustomersGroup getInstance() {
+        if (classifiedCustomersGroup == null) {
+            classifiedCustomersGroup = new ClassifiedCustomersGroup();
+        }
+        return classifiedCustomersGroup;
+    }
+    /////////////////////////////////////////
 
     private ClassifiedCustomers[] classifiedCustomers;
 
@@ -19,13 +27,6 @@ public class ClassifiedCustomersGroup {
         for (int i = 0; i < classifiedCustomers.length; i++) {
             classifiedCustomers[i] = new ClassifiedCustomers();
         }
-    }
-
-    public static ClassifiedCustomersGroup getInstance() {
-        if (classifiedCustomersGroup == null) {
-            classifiedCustomersGroup = new ClassifiedCustomersGroup();
-        }
-        return classifiedCustomersGroup;
     }
 
 
@@ -57,62 +58,68 @@ public class ClassifiedCustomersGroup {
 
     }
 
-    public void sortByName(OrderType orderType) throws InputNullException {
-        if (orderType == null) throw new InputNullException();
+    public void sort(Comparator<Customer> comparator) {
 
         for (int i = 0; i < classifiedCustomersGroup.length(); i++) {
             Customer[] customers = classifiedCustomersGroup.get(i).getCustomers();
-            if (orderType == OrderType.ASCENDING) {
-                Arrays.sort(customers);
-            } else {
-                Arrays.sort(customers, (o1, o2) -> o1.compareTo(o2) * -1);
-            }
+            if (comparator == null) Arrays.sort(customers);
+            else Arrays.sort(customers, comparator);
             classifiedCustomersGroup.get(i).setCustomers(customers);
         }
     }
 
-    public void sortedBySpentTime(OrderType orderType) throws InputNullException {
-        if (orderType == null) throw new InputNullException();
-
-        Comparator<Customer> comparator = Comparator
-                .comparing( Customer :: getSpentTime )
-                .thenComparing( Customer :: getName );
-
-        for (int i = 0; i < classifiedCustomersGroup.length(); i++) {
-            Customer[] customers = classifiedCustomersGroup.get(i).getCustomers();
-            if (orderType == OrderType.ASCENDING) {
-                Arrays.sort(customers, comparator);
-            } else {
-                Arrays.sort(customers, comparator.reversed());
-            }
-
-            classifiedCustomersGroup.get(i).setCustomers(customers);
-        }
-
-    }
-
-    public void sortedByTotalPay(OrderType orderType) {
-        Comparator<Customer> comparatorByTotalPay = Comparator
-                .comparing( Customer :: getTotalPay )
-                .thenComparing( Customer :: getName );
-
-        if (orderType != null && !orderType.equals("")) {
-            for (int i = 0; i < classifiedCustomersGroup.length(); i++) {
-                Customer[] customers = classifiedCustomersGroup.get(i).getCustomers();
-                if (orderType == OrderType.ASCENDING) {
-                    Arrays.sort(customers, comparatorByTotalPay);
-                } else {
-                    Arrays.sort(customers, comparatorByTotalPay.reversed());
-                }
-                classifiedCustomersGroup.get(i).setCustomers(customers);
-            }
-        }
-    }
-
-    private void sort() {
-
-    }
-
+//    public void sortByName(OrderType orderType) throws InputNullException {
+//        if (orderType == null) throw new InputNullException();
+//
+//        for (int i = 0; i < classifiedCustomersGroup.length(); i++) {
+//            Customer[] customers = classifiedCustomersGroup.get(i).getCustomers();
+//            if (orderType == OrderType.ASCENDING) {
+//                Arrays.sort(customers);
+//            } else {
+//                Arrays.sort(customers, (o1, o2) -> o1.compareTo(o2) * -1);
+//            }
+//            classifiedCustomersGroup.get(i).setCustomers(customers);
+//        }
+//    }
+//
+//    public void sortedBySpentTime(OrderType orderType) throws InputNullException {
+//        if (orderType == null) throw new InputNullException();
+//
+//        Comparator<Customer> comparator = Comparator
+//                .comparing( Customer :: getSpentTime )
+//                .thenComparing( Customer :: getName );
+//
+//        for (int i = 0; i < classifiedCustomersGroup.length(); i++) {
+//            Customer[] customers = classifiedCustomersGroup.get(i).getCustomers();
+//            if (orderType == OrderType.ASCENDING) {
+//                Arrays.sort(customers, comparator);
+//            } else {
+//                Arrays.sort(customers, comparator.reversed());
+//            }
+//
+//            classifiedCustomersGroup.get(i).setCustomers(customers);
+//        }
+//
+//    }
+//
+//    public void sortedByTotalPay(OrderType orderType) {
+//        Comparator<Customer> comparatorByTotalPay = Comparator
+//                .comparing( Customer :: getTotalPay )
+//                .thenComparing( Customer :: getName );
+//
+//        if (orderType != null && !orderType.equals("")) {
+//            for (int i = 0; i < classifiedCustomersGroup.length(); i++) {
+//                Customer[] customers = classifiedCustomersGroup.get(i).getCustomers();
+//                if (orderType == OrderType.ASCENDING) {
+//                    Arrays.sort(customers, comparatorByTotalPay);
+//                } else {
+//                    Arrays.sort(customers, comparatorByTotalPay.reversed());
+//                }
+//                classifiedCustomersGroup.get(i).setCustomers(customers);
+//            }
+//        }
+//    }
+//
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -7,7 +7,7 @@ import java.util.Objects;
 public class Customer implements Comparable<Customer> {
     private String serialNO;
     private String name;
-    private String userID;
+    private String userId;
     private Integer spentTime;
     private Integer totalPay;
     private Group group;
@@ -18,11 +18,11 @@ public class Customer implements Comparable<Customer> {
         this.serialNO = String.format("%04d", AUTO_GENERATOR);
     }
 
-    public Customer(String name, String userID, int spentTime, int totalPay) {
+    public Customer(String name, String userId, int spentTime, int totalPay) {
         ++AUTO_GENERATOR;
         this.serialNO = String.format("%04d", AUTO_GENERATOR);
         this.name = name;
-        this.userID = userID;
+        this.userId = userId;
         this.spentTime = spentTime;
         this.totalPay = totalPay;
     }
@@ -44,11 +44,11 @@ public class Customer implements Comparable<Customer> {
     }
 
     public String getUserID() {
-        return userID;
+        return userId;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
+    public void setUserID(String userId) {
+        this.userId = userId;
     }
 
     public Integer getSpentTime() {
@@ -79,7 +79,7 @@ public class Customer implements Comparable<Customer> {
     @Override
     public int compareTo(Customer o) {
         if (name.compareTo(o.name) < 0) return -1;
-        else if (name.compareTo(o.name) == 0) return userID.compareTo(o.userID);
+        else if (name.compareTo(o.name) == 0) return userId.compareTo(o.userId);
         else return 1;
 
     }
@@ -89,12 +89,12 @@ public class Customer implements Comparable<Customer> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
-        return Objects.equals(serialNO, customer.serialNO) && Objects.equals(name, customer.name) && Objects.equals(userID, customer.userID) && Objects.equals(spentTime, customer.spentTime) && Objects.equals(totalPay, customer.totalPay) && Objects.equals(group, customer.group);
+        return Objects.equals(serialNO, customer.serialNO) && Objects.equals(name, customer.name) && Objects.equals(userId, customer.userId) && Objects.equals(spentTime, customer.spentTime) && Objects.equals(totalPay, customer.totalPay) && Objects.equals(group, customer.group);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(serialNO, name, userID, spentTime, totalPay, group);
+        return Objects.hash(serialNO, name, userId, spentTime, totalPay, group);
     }
 
     @Override
@@ -102,7 +102,7 @@ public class Customer implements Comparable<Customer> {
         return "Customer{" +
                 "serialNO='" + serialNO + '\'' +
                 ", name='" + name + '\'' +
-                ", userID='" + userID + '\'' +
+                ", userId='" + userId + '\'' +
                 ", spentTime=" + spentTime +
                 ", totalPay=" + totalPay +
                 ", group=" + group +

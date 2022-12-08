@@ -7,13 +7,10 @@ import me.day25.smartstore.groups.Groups;
 import java.util.Arrays;
 
 public class Customers { // singleton
-    private static Customers allCustomers;
-    protected final Groups allGroups = Groups.getInstance();
 
-    protected static int DEFAULT_SIZE = 10;
-    protected int size;
-    protected int count;
-    protected Customer[] customers;
+
+    ////////////// singleton ////////////////
+    private static Customers allCustomers;
 
     public static Customers getInstance() {
         if (allCustomers == null) {
@@ -21,15 +18,20 @@ public class Customers { // singleton
         }
         return allCustomers;
     }
+    /////////////////////////////////////////
+
+    private final Groups allGroups = Groups.getInstance();
+
+    protected static int DEFAULT_SIZE = 10;
+    protected int capacity;
+    protected int size;
+    protected Customer[] customers;
 
     public Customers() {
         customers = new Customer[DEFAULT_SIZE];
-        size = DEFAULT_SIZE;
+        capacity = DEFAULT_SIZE;
     }
 
-    public int getCount() {
-        return count;
-    }
 
     public void setCustomers(Customer[] customers) {
         customers = customers;
@@ -45,12 +47,25 @@ public class Customers { // singleton
         return Arrays.copyOf(customers, realCount);
     }
 
-    public void setCount(int count) {
-        count = count;
+    public int getCapacity() {
+        return capacity;
     }
 
-    public int length() {
-        return customers.length;
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public int capacity() { return capacity; }
+    public int size() {
+        return size;
     }
 
     private boolean isNull() {
@@ -58,13 +73,13 @@ public class Customers { // singleton
     }
 
     public boolean isEmpty() {
-        return count == 0;
+        return size == 0;
     }
 
     public void add(Customer customer) {
-        if (count < size) {
-            customers[count] = customer;
-            ++count;
+        if (size < capacity) {
+            customers[size] = customer;
+            size++;
         } else {
             extend(customer);
         }
@@ -72,8 +87,8 @@ public class Customers { // singleton
     }
 
     public void add(int index, Customer customer) {
-        if (index < count) {
-            if (count < size) {
+        if (index < size) {
+            if (size < capacity) {
                 Customer customer1 = customers[index];
 
                 for (int i = customers.length - 1; i >= index; i--) {
@@ -81,7 +96,7 @@ public class Customers { // singleton
                 }
 
                 customers[index] = customer;
-                ++count;
+                size++;
             } else {
                 extend(index, customer);
             }
@@ -91,37 +106,37 @@ public class Customers { // singleton
 
     public void extend(int index, Customer customer) {
         Customer[] copy = Arrays.copyOf(customers, customers.length);
-        size *= 2;
-        customers = new Customer[size];
+        capacity *= 2;
+        customers = new Customer[capacity];
 
         System.arraycopy(copy, 0, customers, 0, copy.length);
 
-        count = copy.length;
+        size = copy.length;
         add(index, customer);
     }
 
     public void extend(Customer customer) {
         Customer[] copy = Arrays.copyOf(customers, customers.length);
-        size *= 2;
-        customers = new Customer[size];
+        capacity *= 2;
+        customers = new Customer[capacity];
 
         System.arraycopy(copy, 0, customers, 0, copy.length);
 
-        count = copy.length;
+        size = copy.length;
         add(customer);
     }
 
     public int pop(int index) {
-        if (count == 0) {
+        if (size == 0) {
             return -1;
-        } else if (index >= 0 && index < count) {
+        } else if (index >= 0 && index < size) {
             customers[index] = null;
 
-            for(int i = index + 1; i < count; ++i) {
+            for(int i = index + 1; i < size; ++i) {
                 customers[i - 1] = customers[i];
             }
 
-            --count;
+            --size;
             return 1;
         } else {
             return -1;
@@ -129,17 +144,17 @@ public class Customers { // singleton
     }
 
     public int pop() {
-        if (count == 0) {
+        if (size == 0) {
             return -1;
         } else {
-            customers[count - 1] = null;
-            count--;
+            customers[size - 1] = null;
+            size--;
             return 1;
         }
     }
 
     public Customer get(int i) {
-        return i < count ? customers[i] : null;
+        return i < size ? customers[i] : null;
     }
 
     public void set(int i, Customer customer) {
@@ -149,7 +164,7 @@ public class Customers { // singleton
     public Customers findCustomers(GroupType type) {
         Customers custs = new Customers();
         if (custs != null) {
-            for(int i = 0; i < count; ++i) {
+            for(int i = 0; i < size; ++i) {
                 Customer cust = get(i);
                 if (cust != null) {
                     Group grp = cust.getGroup();
@@ -183,7 +198,7 @@ public class Customers { // singleton
 
     public void refresh(Groups groups) {
         if (groups != null) {
-            for (int i = 0; i < count; ++i) {
+            for (int i = 0; i < size; ++i) {
                 Customer cust = customers[i];
                 cust.setGroup(groups.findGroupFor(cust));
             }
@@ -192,7 +207,7 @@ public class Customers { // singleton
     }
 
     public void print() {
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < size; i++) {
             if (customers[i] != null) {
                 System.out.printf("No.  %4d => %s\n", (i + 1), customers[i]);
             }
@@ -209,7 +224,7 @@ public class Customers { // singleton
 
             ClassifiedCustomers classifiedCustomers = new ClassifiedCustomers();
             classifiedCustomers.setGroup(grp);
-            classifiedCustomers.setCount(customers.length);
+            classifiedCustomers.setSize(customers.length);
             classifiedCustomers.setCustomers(customers);
 
             classifiedCustomersGroup.set(i, classifiedCustomers);
@@ -221,7 +236,7 @@ public class Customers { // singleton
     public String toString() {
         String str = "";
 
-        for (int i = 0; i < count; ++i) {
+        for (int i = 0; i < size; ++i) {
             str = str + customers[i].toString() + "\n";
         }
 

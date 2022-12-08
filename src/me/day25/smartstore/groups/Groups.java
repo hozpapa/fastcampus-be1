@@ -2,12 +2,12 @@ package me.day25.smartstore.groups;
 
 
 import me.day25.smartstore.customers.Customer;
+import me.day25.smartstore.customers.Customers;
 
 public class Groups { // singleton
-    private static Groups allGroups;
-    private int count;
-    private Group[] groups;
 
+    ////////////// singleton ////////////////
+    private static Groups allGroups;
 
     public static Groups getInstance() {
         if (allGroups == null) {
@@ -15,18 +15,21 @@ public class Groups { // singleton
         }
         return allGroups;
     }
+    /////////////////////////////////////////
+
+    private int size;
+    private int capacity;
+    private Group[] groups;
+
+
 
     public Groups() {
         this.groups = new Group[GroupType.values().length];
         initialize();
     }
 
-    public Groups(int maxSize) {
-        this.groups = new Group[maxSize];
-    }
-
-    public int getCount() {
-        return this.count;
+    public int size() {
+        return this.size;
     }
 
     public int length() {
@@ -38,7 +41,7 @@ public class Groups { // singleton
     }
 
     public boolean isEmpty() {
-        return count == 0;
+        return size == 0;
     }
 
     public void initialize() {
@@ -54,8 +57,8 @@ public class Groups { // singleton
         if (grp != null) {
             update(group);
         } else {
-            this.groups[this.count] = group;
-            ++this.count;
+            this.groups[this.size] = group;
+            this.size++;
         }
 
     }
@@ -73,7 +76,7 @@ public class Groups { // singleton
     }
 
     public void print() {
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < size; i++) {
             if (groups[i] != null) {
                 System.out.println(groups[i]);
             }
@@ -111,7 +114,7 @@ public class Groups { // singleton
     public String toString() {
         String str = "";
 
-        for(int i = 0; i < count; ++i) {
+        for(int i = 0; i < size; ++i) {
             str = str + " " + groups[i].toString() + "\n";
         }
 

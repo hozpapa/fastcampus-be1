@@ -10,12 +10,10 @@ import me.day25.smartstore.groups.Parameter;
 import me.day25.smartstore.util.Message;
 
 import java.util.InputMismatchException;
-
 public class GroupMenu extends Menu {
-    private static GroupMenu groupMenu;
-    private final Groups allGroups = Groups.getInstance();
-    private final Customers allCustomers = Customers.getInstance();
 
+    ////////////// singleton ////////////////
+    private static GroupMenu groupMenu;
 
     public static GroupMenu getInstance() {
         if (groupMenu == null) {
@@ -23,6 +21,12 @@ public class GroupMenu extends Menu {
         }
         return groupMenu;
     }
+    /////////////////////////////////////////
+
+
+    Groups allGroups = Groups.getInstance();
+    Customers allCustomers = Customers.getInstance();
+
 
     public String chooseGroup() {
         while (true) {
@@ -30,64 +34,54 @@ public class GroupMenu extends Menu {
                 System.out.println();
                 System.out.println("** Press 'end', if you want to exit! **");
                 System.out.print("Which group (GENERAL, VIP, VVIP)? ");
-                String choice = Menu.scanner.next().toUpperCase();
-                if (choice == null) {
-                    throw new NullPointerException();
-                }
+                String choice = scanner.next().toUpperCase();
 
-                if (choice.equals("")) {
-                    throw new InputEmptyException();
-                }
-
-                if (choice.equals(Message.END_MSG)) {
-                    return choice;
-                }
+                if (choice == null || choice.equals("")) throw new InputEmptyException();
+                if (choice.equals(Message.END_MSG)) return choice;
 
                 for (int i = 0; i < GroupType.values().length; ++i) {
                     if (choice != null && choice.equals(GroupType.values()[i].toString())) {
                         return choice;
                     }
                 }
-
                 throw new InputRangeException();
-            } catch (NullPointerException e) {
-                System.out.println(Message.ERR_MSG_INVALID_INPUT_NULL);
             } catch (InputEmptyException e) {
-                System.out.println(Message.ERR_MSG_INVALID_INPUT_EMPTY);
+                System.out.println(Message.ERR_MSG_INVALID_INPUT_NULL);
             } catch (InputRangeException e) {
                 System.out.println(Message.ERR_MSG_INVALID_INPUT_RANGE);
             }
         }
     }
 
-    public int dispManageParameterMenu() {
-        while (true) {
-            try {
-                System.out.println();
-                System.out.println("==============================");
-                System.out.println(" 1. Set Parameter");
-                System.out.println(" 2. View Parameter");
-                System.out.println(" 3. Update Parameter");
-                System.out.println(" 4. Back");
-                System.out.println("==============================");
-                System.out.print("Choose One: ");
-                int choice = Integer.parseInt(Menu.scanner.next());
-                if (choice >= 1 && choice <= 4) {
-                    return choice;
-                }
-
-                throw new InputRangeException();
-            } catch (NumberFormatException e) {
-                System.out.println(Message.ERR_MSG_INVALID_INPUT_FORMAT);
-            } catch (InputRangeException e) {
-                System.out.println(Message.ERR_MSG_INVALID_INPUT_RANGE);
-            }
-        }
-    }
+//public int dispManageParameterMenu() {
+//        while (true) {
+//            try {
+//                System.out.println();
+//                System.out.println("==============================");
+//                System.out.println(" 1. Set Parameter");
+//                System.out.println(" 2. View Parameter");
+//                System.out.println(" 3. Update Parameter");
+//                System.out.println(" 4. Back");
+//                System.out.println("==============================");
+//                System.out.print("Choose One: ");
+//                int choice = Integer.parseInt(Menu.scanner.next());
+//                if (choice >= 1 && choice <= 4) {
+//                    return choice;
+//                }
+//
+//                throw new InputRangeException();
+//            } catch (NumberFormatException e) {
+//                System.out.println(Message.ERR_MSG_INVALID_INPUT_FORMAT);
+//            } catch (InputRangeException e) {
+//                System.out.println(Message.ERR_MSG_INVALID_INPUT_RANGE);
+//            }
+//        }
+//    }
 
     public void manageParameter() {
         while (true) {
-            int choice = dispManageParameterMenu();
+            int choice = dispMenu(new String[] {"Set Parameter", "View Parameter", "Update Parameter", "Back"});
+
             if (choice == 1) {
                 setParameter();
             } else if (choice == 2) {
@@ -224,7 +218,7 @@ public class GroupMenu extends Menu {
                 System.out.println(" 3. Back");
                 System.out.println("==============================");
                 System.out.print("Choose One: ");
-                int choice = Integer.parseInt(Menu.scanner.next());
+                int choice = Integer.parseInt(scanner.next());
                 if (choice >= 1 && choice <= 3) {
                     return choice;
                 }
@@ -243,7 +237,7 @@ public class GroupMenu extends Menu {
             try {
                 System.out.println();
                 System.out.print("Input Minimum Spent Time: ");
-                int minimumSpentTime = Integer.parseInt(Menu.scanner.next());
+                int minimumSpentTime = Integer.parseInt(scanner.next());
                 if (minimumSpentTime < 0) {
                     throw new InputRangeException();
                 }
@@ -263,7 +257,7 @@ public class GroupMenu extends Menu {
             try {
                 System.out.println();
                 System.out.print("Input Minimum Total Pay: ");
-                int minimumTotalPay = Integer.parseInt(Menu.scanner.next());
+                int minimumTotalPay = Integer.parseInt(scanner.next());
                 if (minimumTotalPay < 0) throw new InputRangeException();
 
                 param.setMinimumTotalPay(minimumTotalPay);

@@ -13,19 +13,10 @@ import me.day25.smartstore.menu.SummarizedMenu;
 import me.day25.smartstore.util.Message;
 
 
-import java.util.InputMismatchException;
-
 public class SmartStoreApplication {
+
+    ////////////// singleton ////////////////
     private static SmartStoreApplication smartStoreApp;
-
-    private final Groups allGroups = Groups.getInstance();
-    private final Customers allCustomers = Customers.getInstance();
-
-    private final Menu menu = Menu.getInstance();
-    private final CustomerMenu customerMenu = CustomerMenu.getInstance();
-    private final GroupMenu groupMenu = GroupMenu.getInstance();
-    private final SummarizedMenu classifiedMenu = SummarizedMenu.getInstance();
-
 
     public static SmartStoreApplication getInstance() {
         if (smartStoreApp == null) {
@@ -33,6 +24,17 @@ public class SmartStoreApplication {
         }
         return smartStoreApp;
     }
+    /////////////////////////////////////////
+
+    private final Groups allGroups = Groups.getInstance();
+    private final Customers allCustomers = Customers.getInstance();
+
+    private final Menu menu = Menu.getInstance();
+
+    private final CustomerMenu customerMenu = CustomerMenu.getInstance();
+    private final GroupMenu groupMenu = GroupMenu.getInstance();
+    private final SummarizedMenu classifiedMenu = SummarizedMenu.getInstance();
+
 
     public SmartStoreApplication test() {
         allGroups.add(new Group( GroupType.GENERAL, new Parameter(10, 100000)) );
@@ -57,26 +59,21 @@ public class SmartStoreApplication {
         System.out.println();
 
         while (true) {
-            try {
-                int choice = menu.dispMainMenu();
-                if (choice == 1) {
-                    groupMenu.manageParameter();
-                } else if (choice == 2) {
-                    customerMenu.manageCustomerData();
-                } else if (choice == 3) {
-                    classifiedMenu.manageSummaryMenu();
-                } else if (choice == 4) {
-                    System.out.println("\nProgram Finished.");
-                    break;
-                } else {
-                    System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE);
-                }
-            } catch ( InputMismatchException e ) {
-                System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_TYPE);
-                Menu.scanner.next();
+            int choice = menu.dispMenu(new String[] {"Parameter", "Customer Data", "Classification Summary", "Quit"});
+
+            if (choice == 1) {
+                groupMenu.manageParameter();
+            } else if (choice == 2) {
+                customerMenu.manageCustomerData();
+            } else if (choice == 3) {
+                classifiedMenu.manageSummaryMenu();
+            } else if (choice == 4) {
+                System.out.println("\nProgram Finished.");
+                break;
+            } else {
+                System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE);
             }
         }
 
-        Menu.scanner.close();
     }
 }

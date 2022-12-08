@@ -2,74 +2,74 @@ package me.day25.smartstore.menu;
 
 
 import me.day25.smartstore.customers.ClassifiedCustomersGroup;
+import me.day25.smartstore.customers.Customer;
 import me.day25.smartstore.customers.Customers;
 import me.day25.smartstore.exception.InputEmptyException;
-import me.day25.smartstore.exception.InputNullException;
 import me.day25.smartstore.exception.InputRangeException;
-import me.day25.smartstore.groups.Groups;
 import me.day25.smartstore.util.Message;
 
-import java.util.NoSuchElementException;
+import java.util.Comparator;
+
 
 public class SummarizedMenu extends Menu {
-    private static SummarizedMenu classifiedMenu;
 
-    private final Groups allGroups = Groups.getInstance();
-    private final Customers allCustomers = Customers.getInstance();
+    ////////////// singleton ////////////////
+    private static SummarizedMenu summarizedMenu;
+
+    public static SummarizedMenu getInstance() {
+        if (summarizedMenu == null) {
+            summarizedMenu = new SummarizedMenu();
+        }
+        return summarizedMenu;
+    }
+    /////////////////////////////////////////
+
+    private Customers allCustomers = Customers.getInstance();
 
     private ClassifiedCustomersGroup classifiedCustomersGroup = ClassifiedCustomersGroup.getInstance();
 
-    public static SummarizedMenu getInstance() {
-        if (classifiedMenu == null) {
-            classifiedMenu = new SummarizedMenu();
-        }
-        return classifiedMenu;
-    }
 
-    public int dispSummaryMenu() {
-        while (true) {
-            try {
-                System.out.println();
-                System.out.println("==============================");
-                System.out.println(" 1. Summary");
-                System.out.println(" 2. Summary (Sorted By Name)");
-                System.out.println(" 3. Summary (Sorted By Spent Time)");
-                System.out.println(" 4. Summary (Sorted By Total Payment)");
-                System.out.println(" 5. Back");
-                System.out.println("==============================");
-                System.out.print("Choose One: ");
-                int choice = Integer.parseInt(Menu.scanner.next());
-                if (choice >= 1 && choice <= 5) {
-                    return choice;
-                }
-                throw new InputRangeException();
-            } catch (NumberFormatException e) {
-                System.out.println(Message.ERR_MSG_INVALID_INPUT_FORMAT);
-            } catch (InputRangeException e) {
-                System.out.println(Message.ERR_MSG_INVALID_INPUT_RANGE);
-            }
-        }
-    }
+//    static int dispSummaryMenu() {
+//        while (true) {
+//            try {
+//                System.out.println();
+//                System.out.println("==============================");
+//                System.out.println(" 1. Summary");
+//                System.out.println(" 2. Summary (Sorted By Name)");
+//                System.out.println(" 3. Summary (Sorted By Spent Time)");
+//                System.out.println(" 4. Summary (Sorted By Total Payment)");
+//                System.out.println(" 5. Back");
+//                System.out.println("==============================");
+//                System.out.print("Choose One: ");
+//                int choice = Integer.parseInt(Menu.scanner.next());
+//                if (choice >= 1 && choice <= 5) {
+//                    return choice;
+//                }
+//                throw new InputRangeException();
+//            } catch (NumberFormatException e) {
+//                System.out.println(Message.ERR_MSG_INVALID_INPUT_FORMAT);
+//            } catch (InputRangeException e) {
+//                System.out.println(Message.ERR_MSG_INVALID_INPUT_RANGE);
+//            }
+//        }
+//    }
 
     public void manageSummaryMenu() {
         classifiedCustomersGroup = allCustomers.classify();
         //System.out.println("Arrays.toString(classifiedCustomersGroup.getClassifiedCustomers()) = " + Arrays.toString(classifiedCustomersGroup.getClassifiedCustomers()));
 
         while (true) {
-            int choice = dispSummaryMenu();
-            if (choice == 1) {
-                dispSummary();
-            } else if (choice == 2) {
-                manageSortedByName();
-            } else if (choice == 3) {
-                manageSortedBySpentTime();
-            } else if (choice == 4) {
-                manageSortedByTotalPay();
-            } else if (choice == 5) {
-                return;
-            } else {
-                System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE);
-            }
+            int choice = dispMenu(new String[]{"Summary",
+                    "Summary (Sorted By Name)",
+                    "Summary (Sorted By Spent Time)",
+                    "Summary (Sorted By Total Payment)",
+                    "Back"});
+            if (choice == 1) dispSummary();
+            else if (choice == 2) manageSortedByName();
+            else if (choice == 3) manageSortedBySpentTime();
+            else if (choice == 4) manageSortedByTotalPay();
+            else if (choice == 5) return;
+            else System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE);
         }
     }
 
@@ -92,16 +92,20 @@ public class SummarizedMenu extends Menu {
             }
 
             try {
+                Comparator<Customer> comparator = Comparator
+                        .comparing(Customer::getName)
+                        .thenComparing(Customer::getUserID);
+
                 OrderType orderType = OrderType.valueOf(strOrder);
-                if (orderType == OrderType.ASCENDING) {
-                    classifiedCustomersGroup.sortByName(OrderType.ASCENDING);
-                } else {
-                    classifiedCustomersGroup.sortByName(OrderType.DESCENDING);
+                if (orderType == OrderType.ASCENDING || strOrder.startsWith("A")) {
+                    classifiedCustomersGroup.sort(comparator);
+                } else if (orderType == OrderType.DESCENDING || strOrder.startsWith("D")) {
+                    classifiedCustomersGroup.sort(comparator.reversed());
                 }
-            } catch (IllegalArgumentException e) {
+
+                throw new InputRangeException();
+            } catch (IllegalArgumentException | InputRangeException e) {
                 System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE);
-            } catch (InputNullException e) {
-                System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_NULL);
             }
 
             dispSummary();
@@ -111,21 +115,24 @@ public class SummarizedMenu extends Menu {
     public void manageSortedBySpentTime() {
         while (true) {
             String strOrder = chooseSortOrder().toUpperCase();
-            if (strOrder.equals(Message.END_MSG)) {
-                return;
-            }
+            if (strOrder.equals(Message.END_MSG)) return;
+
 
             try {
+                Comparator<Customer> comparator = Comparator
+                        .comparing(Customer::getSpentTime)
+                        .thenComparing(Customer::getName);
+
                 OrderType orderType = OrderType.valueOf(strOrder);
-                if (orderType == OrderType.ASCENDING) {
-                    classifiedCustomersGroup.sortedBySpentTime(OrderType.ASCENDING);
-                } else {
-                    classifiedCustomersGroup.sortedBySpentTime(OrderType.DESCENDING);
+                if (orderType == OrderType.ASCENDING || strOrder.startsWith("A")) {
+                    classifiedCustomersGroup.sort(comparator);
+                } else if (orderType == OrderType.DESCENDING || strOrder.startsWith("D")) {
+                    classifiedCustomersGroup.sort(comparator.reversed());
                 }
-            } catch (IllegalArgumentException e) {
+
+                throw new InputRangeException();
+            } catch (IllegalArgumentException | InputRangeException e) {
                 System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE);
-            } catch (InputNullException e) {
-                System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_NULL);
             }
 
             dispSummary();
@@ -140,13 +147,19 @@ public class SummarizedMenu extends Menu {
             }
 
             try {
+                Comparator<Customer> comparatorByTotalPay = Comparator
+                        .comparing(Customer::getTotalPay)
+                        .thenComparing(Customer::getName);
+
                 OrderType orderType = OrderType.valueOf(strOrder);
                 if (orderType == OrderType.ASCENDING) {
-                    classifiedCustomersGroup.sortedByTotalPay(OrderType.ASCENDING);
-                } else {
-                    classifiedCustomersGroup.sortedByTotalPay(OrderType.DESCENDING);
+                    classifiedCustomersGroup.sort(comparatorByTotalPay);
+                } else if (orderType == OrderType.DESCENDING || strOrder.startsWith("D")) {
+                    classifiedCustomersGroup.sort(comparatorByTotalPay.reversed());
                 }
-            } catch (IllegalArgumentException e) {
+
+                throw new InputRangeException();
+            } catch (IllegalArgumentException | InputRangeException e) {
                 System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE);
             }
             dispSummary();
@@ -160,29 +173,25 @@ public class SummarizedMenu extends Menu {
                 System.out.println();
                 System.out.println("** Press 'end', if you want to exit! **");
                 System.out.print("Which order (ASCENDING (A), DESCENDING (D))? ");
-                String choice = Menu.scanner.next().toUpperCase();
+                String choice = scanner.next().toUpperCase();
 
-                if (choice == null) throw new InputNullException();
+                if (choice == null) throw new InputEmptyException();
                 if (choice.equals("")) throw new InputEmptyException();
                 if (choice.equals(Message.END_MSG)) return choice;
 
                 try {
                     OrderType orderType = OrderType.valueOf(choice);
-
                     for (int i = 0; i < OrderType.values().length; ++i) {
                         if (orderType == OrderType.values()[i]) {
                             return choice;
                         }
                     }
-
                     throw new InputRangeException();
                 } catch (IllegalArgumentException e) {
                     System.out.println(Message.ERR_MSG_INVALID_INPUT_TYPE);
                 }
-            } catch (InputNullException e) {
-                System.out.println(Message.ERR_MSG_INVALID_INPUT_NULL);
             } catch (InputEmptyException e) {
-                System.out.println(Message.ERR_MSG_INVALID_INPUT_EMPTY);
+                System.out.println(Message.ERR_MSG_INVALID_INPUT_NULL);
             } catch (InputRangeException e) {
                 System.out.println(Message.ERR_MSG_INVALID_INPUT_RANGE);
             }

@@ -41,8 +41,7 @@ public class ClassifiedCustomers extends Customers {
     public String toString() {
         return "ClassifiedCustomers{" +
                 "group=" + group +
-                ", allGroups=" + allGroups +
-                ", count=" + count +
+                ", size=" + size +
                 ", customers=" + Arrays.toString(customers) +
                 '}';
     }
