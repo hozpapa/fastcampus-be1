@@ -2,12 +2,15 @@ package me.day25.smartstore.customers;
 
 
 import me.day25.smartstore.groups.GroupType;
+import me.day25.smartstore.groups.Parameter;
+import me.day25.smartstore.util.UtilMethod;
 
 import java.util.Arrays;
 import java.util.Comparator;
 
 public class ClassifiedCustomersGroup {
 
+    /////////////////////////////////////////
     ////////////// singleton ////////////////
     private static ClassifiedCustomersGroup classifiedCustomersGroup;
 
@@ -18,13 +21,14 @@ public class ClassifiedCustomersGroup {
         return classifiedCustomersGroup;
     }
     /////////////////////////////////////////
+    /////////////////////////////////////////
 
     private ClassifiedCustomers[] classifiedCustomers;
 
     public ClassifiedCustomersGroup() {
         classifiedCustomers = new ClassifiedCustomers[GroupType.size()];
 
-        for (int i = 0; i < classifiedCustomers.length; i++) {
+        for (int i = 0; i < GroupType.size(); i++) {
             classifiedCustomers[i] = new ClassifiedCustomers();
         }
     }
@@ -44,8 +48,17 @@ public class ClassifiedCustomersGroup {
     
     public void print() {
         for (int i = 0; i < classifiedCustomers.length; i++) {
-            System.out.println("==============================");
-            System.out.println("Group : " + classifiedCustomers[i].getGroup().getType());
+            System.out.println("\n==============================");
+
+            if (classifiedCustomers[i] == null) return;
+
+            GroupType groupType = classifiedCustomers[i].getGroup().getType();
+            Parameter parameter = classifiedCustomers[i].getGroup().getParam();
+
+            System.out.printf("Group : %s ( Time : %d, Pay : %d )\n",
+                    groupType,
+                    parameter != null ? parameter.getMinimumSpentTime() : null,
+                    parameter != null ? parameter.getMinimumTotalPay() : null);
             System.out.println("==============================");
 
             if (classifiedCustomers[i] == null || classifiedCustomers[i].isEmpty()) {
@@ -61,7 +74,30 @@ public class ClassifiedCustomersGroup {
     public void sort(Comparator<Customer> comparator) {
 
         for (int i = 0; i < classifiedCustomersGroup.size(); i++) {
-            Customer[] customers = classifiedCustomersGroup.get(i).getCustomers();
+            Customer[] customers = classifiedCustomersGroup.get(i).getRealCustomers();
+
+            if (UtilMethod.isAnyNUll(customers)) {
+                continue;
+            }
+
+            boolean checker = false;
+            for (Customer customer: customers) {
+                if (UtilMethod.isAnyNUll(
+                        customer.getSerialNO(),
+                        customer.getName(),
+                        customer.getUserId(),
+                        customer.getSpentTime(),
+                        customer.getTotalPay())) {
+                    checker = true;
+                    break;
+                }
+            }
+            if (checker) {
+                continue;
+            }
+
+            //System.out.println(Arrays.toString(customers));
+
             if (comparator == null) Arrays.sort(customers);
             else Arrays.sort(customers, comparator);
             classifiedCustomersGroup.get(i).setCustomers(customers);

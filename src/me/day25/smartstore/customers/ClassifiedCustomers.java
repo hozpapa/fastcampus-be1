@@ -24,6 +24,16 @@ public class ClassifiedCustomers extends Customers {
         this.group = group;
     }
 
+    public Customer[] getRealCustomers() {
+        int real = 0;
+        for (int i = 0; i < size; i++) {
+            if (customers[i] != null) real++;
+        }
+        size = real;
+        return Arrays.copyOf(customers, real);
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

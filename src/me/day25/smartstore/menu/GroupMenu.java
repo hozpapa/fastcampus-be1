@@ -11,6 +11,7 @@ import me.day25.smartstore.util.Message;
 
 public class GroupMenu extends Menu {
 
+    /////////////////////////////////////////
     ////////////// singleton ////////////////
     private static GroupMenu groupMenu;
 
@@ -21,6 +22,7 @@ public class GroupMenu extends Menu {
         return groupMenu;
     }
     /////////////////////////////////////////
+    /////////////////////////////////////////
 
 
     Groups allGroups = Groups.getInstance();
@@ -30,8 +32,7 @@ public class GroupMenu extends Menu {
     public String chooseGroup() {
         while (true) {
             try {
-                System.out.println();
-                System.out.println("** Press 'end', if you want to exit! **");
+                System.out.println("\n** Press 'end', if you want to exit! **");
                 System.out.print("Which group (GENERAL (G), VIP (V), VVIP (VV))? ");
                 String choice = scanner.next().toUpperCase();
 
@@ -84,7 +85,7 @@ public class GroupMenu extends Menu {
     }
 
     public void setParameter() {
-        while (true) {
+        while ( true ) {
             String strGroup = chooseGroup();
             if (strGroup.equals(Message.END_MSG)) return;
 
@@ -98,7 +99,7 @@ public class GroupMenu extends Menu {
 
             Group grp = allGroups.find(groupType);
             if (grp != null && grp.getParam() != null) {
-                System.out.println("\n" + strGroup + " group already exists.");
+                System.out.println("\n" + grp.getType() + " group already exists.");
                 System.out.println("\n" + grp);
             } else {
                 Parameter param = new Parameter();
@@ -113,6 +114,7 @@ public class GroupMenu extends Menu {
 
                 allGroups.add(new Group(groupType, param));
                 allCustomers.refresh(allGroups);
+                System.out.println("\n" + grp);
             }
         }
     }
@@ -139,7 +141,7 @@ public class GroupMenu extends Menu {
     }
 
     public void updateParameter() {
-        while (true) {
+        while ( true ) {
             String strGroup = chooseGroup();
             if (strGroup.equals(Message.END_MSG)) {
                 return;
@@ -160,7 +162,7 @@ public class GroupMenu extends Menu {
                 System.out.println("\n" + grp);
                 Parameter param = grp.getParam();
 
-                while (true) {
+                while ( true ) {
                     int choice = dispMenu(new String[] {"Minimum Spent Time", "Minimum Total Pay", "Back"});
                     if (choice == 1) { setParameterMinimumSpentTime(param); }
                     else if (choice == 2) { setParameterMinimumTotalPay(param); }
@@ -168,7 +170,7 @@ public class GroupMenu extends Menu {
                     else { System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE); }
                 }
 
-
+                allGroups.update(new Group(groupType, param));
                 allCustomers.refresh(allGroups);
                 System.out.println("\n" + grp);
             }
@@ -202,8 +204,7 @@ public class GroupMenu extends Menu {
     public void setParameterMinimumSpentTime(Parameter param) {
         while (true) {
             try {
-                System.out.println();
-                System.out.print("Input Minimum Spent Time: ");
+                System.out.print("\nInput Minimum Spent Time: ");
                 int minimumSpentTime = Integer.parseInt(scanner.next());
                 if (minimumSpentTime < 0) throw new InputRangeException();
 
@@ -220,8 +221,7 @@ public class GroupMenu extends Menu {
     public void setParameterMinimumTotalPay(Parameter param) {
         while (true) {
             try {
-                System.out.println();
-                System.out.print("Input Minimum Total Pay: ");
+                System.out.print("\nInput Minimum Total Pay: ");
                 int minimumTotalPay = Integer.parseInt(scanner.next());
                 if (minimumTotalPay < 0) throw new InputRangeException();
 

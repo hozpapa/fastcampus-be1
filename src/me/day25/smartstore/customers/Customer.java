@@ -1,6 +1,7 @@
 package me.day25.smartstore.customers;
 
 import me.day25.smartstore.groups.Group;
+import me.day25.smartstore.util.UtilMethod;
 
 import java.util.Objects;
 
@@ -105,7 +106,6 @@ public class Customer implements Comparable<Customer> {
                 ", userId='" + userId + '\'' +
                 ", spentTime=" + spentTime +
                 ", totalPay=" + totalPay +
-                ", group=" + group +
                 '}';
     }
 }

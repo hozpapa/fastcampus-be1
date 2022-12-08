@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 public class Customers { // singleton
 
-
+    /////////////////////////////////////////
     ////////////// singleton ////////////////
     private static Customers allCustomers;
 
@@ -18,6 +18,7 @@ public class Customers { // singleton
         }
         return allCustomers;
     }
+    /////////////////////////////////////////
     /////////////////////////////////////////
 
     private final Groups allGroups = Groups.getInstance();
@@ -35,6 +36,12 @@ public class Customers { // singleton
     public Customers(int initialCapacity) {
         customers = new Customer[initialCapacity];
         capacity = initialCapacity;
+    }
+
+    public Customers(Customer[] customers) {
+        this.customers = customers;
+        capacity = customers.length;
+        size = customers.length;
     }
 
     public void setCustomers(Customer[] customers) {
@@ -166,17 +173,18 @@ public class Customers { // singleton
         pop(indexOf(customer));
     }
 
-    public void trimToSize() { // 실제 객체 수만큼 객체 배열의 크기를 변경
+    public Customers trimToSize() { // 실제 객체 수만큼 객체 배열의 크기를 변경
         Customer[] newCustomers = new Customer[size];
         System.arraycopy(customers, 0, newCustomers, 0, size);
 
         customers = newCustomers;
         capacity = size;
+
+        return new Customers(newCustomers);
     }
 
     public Customers findCustomers(GroupType type) {
         Customers custs = new Customers();
-        if (custs == null) return null;
 
         for(int i = 0; i < size; ++i) {
             Customer cust = get(i);
@@ -198,7 +206,6 @@ public class Customers { // singleton
     }
 
     public Customers findCustomers(Group grp) {
-
         if (grp != null) {
             if (grp.getType() != null) {
                 return findCustomers(grp.getType());
@@ -233,7 +240,7 @@ public class Customers { // singleton
     public ClassifiedCustomersGroup classify() {
         ClassifiedCustomersGroup classifiedCustomersGroup = ClassifiedCustomersGroup.getInstance();
 
-        for (int i = 0; i < allGroups.length(); ++i) {
+        for (int i = 0; i < allGroups.size(); i++) {
             Group grp = allGroups.get(i);
             Customer[] customers = grp.getCustomers(allCustomers).getCustomers();
             Customer[] copy = Arrays.copyOf(customers, size);
@@ -253,7 +260,7 @@ public class Customers { // singleton
     public String toString() {
         String str = "";
 
-        for (int i = 0; i < size; ++i) {
+        for (int i = 0; i < size; i++) {
             str = str + customers[i].toString() + "\n";
         }
 

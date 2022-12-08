@@ -10,6 +10,7 @@ import me.day25.smartstore.util.Message;
 
 public class CustomerMenu extends Menu {
 
+    /////////////////////////////////////////
     ////////////// singleton ////////////////
     private static CustomerMenu customerMenu;
 
@@ -20,6 +21,7 @@ public class CustomerMenu extends Menu {
         return customerMenu;
     }
     /////////////////////////////////////////
+    /////////////////////////////////////////
 
     private Groups allGroups = Groups.getInstance();
     private Customers allCustomers = Customers.getInstance();
@@ -29,6 +31,7 @@ public class CustomerMenu extends Menu {
             int choice = dispMenu(
                     new String[]{"Set Customer Data", "View Customer Data",
                             "Update Customer Data", "Delete Customer Data", "Back"});
+
             if (choice == 1) { int size = getCustomerSizeToAdd(); setCustomerData(size); }
             else if (choice == 2) viewCustomerData();
             else if (choice == 3) updateCustomerData();
@@ -43,20 +46,25 @@ public class CustomerMenu extends Menu {
             Customer customer = new Customer();
             System.out.println("\n====== Customer " + (i + 1) + " Info. ======");
 
-            while (true) {
+            while ( true ) {
                 int choice = dispMenu(
                         new String[]{"Customer Name", "Customer ID",
                                 "Customer Spent Time", "Customer Total Pay", "Back"});
                 if (choice == 1) setCustomerName(customer);
-                else if (choice == 2) setCustomerUserID(customer);
+                else if (choice == 2) setCustomerUserId(customer);
                 else if (choice == 3) setCustomerSpentTime(customer);
                 else if (choice == 4) setCustomerTotalPay(customer);
                 else if (choice == 5) break;
                 else System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE);
+
             }
-            customer.setGroup(allGroups.findGroupFor(customer));
+
+            Group grp = allGroups.findGroupFor(customer);
+            if (grp == null) customer.setGroup(null);
+            else if (!grp.equals(customer.getGroup())) customer.setGroup(grp);
+
             allCustomers.add(customer);
-            System.out.println();
+
         }
     }
 
@@ -73,47 +81,49 @@ public class CustomerMenu extends Menu {
     }
 
     public void updateCustomerData() {
-        int allCustCount = allCustomers.size();
         viewCustomerData();
         int custNo = findCustomer();
-        if (custNo >= 1 && custNo <= allCustCount) {
-            Customer cust = allCustomers.get(custNo - 1);
-            if (cust != null) {
-                while (true) {
-                    int choice = dispMenu(
-                            new String[]{"Customer Name", "Customer ID",
-                                    "Customer Spent Time", "Customer Total Pay", "Back"});
+        if (custNo == -1) {
+            System.out.println(Message.ERR_MSG_INVALID_ARR_EMPTY);
+            return;
+        }
 
-                    if (choice == 1) setCustomerName(cust);
-                    else if (choice == 2) setCustomerUserID(cust);
-                    else if (choice == 3) setCustomerSpentTime(cust);
-                    else if (choice == 4) setCustomerTotalPay(cust);
-                    else if (choice == 5) break;
-                    else System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE);
+        Customer customer = allCustomers.get(custNo - 1);
+        if (customer == null) return;
 
-                    Group grp = allGroups.findGroupFor(cust);
-                    if (grp == null) cust.setGroup(null);
-                    else if (!grp.equals(cust.getGroup())) cust.setGroup(grp);
+        while ( true ) {
+            int choice = dispMenu(
+                    new String[]{"Customer Name", "Customer ID",
+                            "Customer Spent Time", "Customer Total Pay", "Back"});
 
-                }
-            }
+            if (choice == 1) setCustomerName(customer);
+            else if (choice == 2) setCustomerUserId(customer);
+            else if (choice == 3) setCustomerSpentTime(customer);
+            else if (choice == 4) setCustomerTotalPay(customer);
+            else if (choice == 5) break;
+            else System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE);
 
         }
+
+        Group grp = allGroups.findGroupFor(customer);
+        if (grp == null) customer.setGroup(null);
+        else if (!grp.equals(customer.getGroup())) customer.setGroup(grp);
+
     }
 
     public void deleteCustomerData() {
-        int size = allCustomers.size();
         viewCustomerData();
         int custNo = findCustomer();
-        if (custNo >= 1 && custNo <= size) {
-            Customer customer = allCustomers.get(custNo - 1);
-            System.out.println(customer);
-
-            allCustomers.pop(custNo - 1);
-            viewCustomerData();
-        } else {
-            System.out.printf("\nSelected Customer Number Incorrect ! ( Range: %d ~ %d )\n", 1, size);
+        if (custNo == -1) {
+            System.out.println(Message.ERR_MSG_INVALID_ARR_EMPTY);
+            return;
         }
+
+        Customer customer = allCustomers.get(custNo - 1);
+        System.out.println(customer);
+
+        allCustomers.pop(custNo - 1);
+        viewCustomerData();
 
     }
 
@@ -146,8 +156,7 @@ public class CustomerMenu extends Menu {
     private int getCustomerSizeToAdd() {
         while (true) {
             try {
-                System.out.println();
-                System.out.println("** Press -1, if you want to exit! **");
+                System.out.println("\n** Press -1, if you want to exit! **");
                 System.out.print("How many customers to input? ");
                 int size = Integer.parseInt(scanner.next());
                 if (size < 0) throw new InputRangeException();
@@ -190,8 +199,7 @@ public class CustomerMenu extends Menu {
     public void setCustomerName(Customer customer) {
         while (true) {
             try {
-                System.out.println();
-                System.out.print("Input Customer's Name: ");
+                System.out.print("\nInput Customer's Name: ");
 //                String REGEX = "^[a-zA-Z]{3,}$";
                 String name = scanner.next();
 
@@ -204,15 +212,14 @@ public class CustomerMenu extends Menu {
         }
     }
 
-    public void setCustomerUserID(Customer customer) {
+    public void setCustomerUserId(Customer customer) {
         while (true) {
             try {
-                System.out.println();
-                System.out.print("Input Customer's UserID: ");
+                System.out.print("\nInput Customer's ID: ");
 //                String REGEX = "^[a-zA-Z]{1}[a-zA-Z0-9_]{4,11}$";
-                String userID = scanner.next();
-                if (userID == null || userID.equals("")) throw new InputEmptyException();
-                customer.setUserId(userID);
+                String userId = scanner.next();
+                if (userId == null || userId.equals("")) throw new InputEmptyException();
+                customer.setUserId(userId);
                 return;
             } catch (InputEmptyException e) {
                 System.out.println(Message.ERR_MSG_INVALID_INPUT_EMPTY);
@@ -223,8 +230,7 @@ public class CustomerMenu extends Menu {
     public void setCustomerSpentTime(Customer customer) {
         while (true) {
             try {
-                System.out.println();
-                System.out.print("Input Customer's Spent Time at Your Store: ");
+                System.out.print("\nInput Customer's Spent Time: ");
                 int spentTime = Integer.parseInt(scanner.next());
                 if (spentTime < 0) throw new InputRangeException();
                 customer.setSpentTime(spentTime);
@@ -238,8 +244,7 @@ public class CustomerMenu extends Menu {
     public void setCustomerTotalPay(Customer customer) {
         while (true) {
             try {
-                System.out.println();
-                System.out.print("Input Customer's Total Payment at Your Store: ");
+                System.out.print("\nInput Customer's Total Payment: ");
                 int totalPay = Integer.parseInt(scanner.next());
                 if (totalPay < 0) throw new InputRangeException();
                 customer.setTotalPay(totalPay);
@@ -253,14 +258,14 @@ public class CustomerMenu extends Menu {
     }
 
     public int findCustomer() {
-        int allCustCount = allCustomers.size();
+        int size = allCustomers.size();
+        if (size == 0) return -1;
 
         while (true) {
             try {
-                System.out.println();
-                System.out.print("Which customer ( 1 ~ " + allCustCount + " )? ");
+                System.out.print("\nWhich customer ( 1 ~ " + size + " )? ");
                 int custNo = Integer.parseInt(scanner.next());
-                if (!(custNo >= 1 && custNo <= allCustCount)) throw new InputRangeException();
+                if (!(custNo >= 1 && custNo <= size)) throw new InputRangeException();
                 return custNo;
             } catch (NumberFormatException e) {
                 System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_FORMAT);

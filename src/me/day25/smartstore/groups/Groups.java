@@ -3,9 +3,13 @@ package me.day25.smartstore.groups;
 
 import me.day25.smartstore.customers.Customer;
 import me.day25.smartstore.customers.Customers;
+import me.day25.smartstore.util.UtilMethod;
+
+import java.util.Arrays;
 
 public class Groups { // singleton
 
+    /////////////////////////////////////////
     ////////////// singleton ////////////////
     private static Groups allGroups;
 
@@ -15,6 +19,7 @@ public class Groups { // singleton
         }
         return allGroups;
     }
+    /////////////////////////////////////////
     /////////////////////////////////////////
 
     private int size;
@@ -99,11 +104,14 @@ public class Groups { // singleton
     }
 
     public Group findGroupFor(Customer customer) {
-        if (groups == null || customer == null) return null;
+        if (groups == null) return null;
+        if (UtilMethod.isAnyNUll(customer, customer.getSpentTime(), customer.getTotalPay())) return null;
 
         for (int i = size - 1; i >= 0; i--) {
+            if (UtilMethod.isAnyNUll(groups[i], groups[i].getParam())) continue;
+
             Parameter param = groups[i].getParam();
-            if (param == null) continue;
+            if (UtilMethod.isAnyNUll(param, param.getMinimumSpentTime(), param.getMinimumTotalPay())) continue;
 
             if (customer.getSpentTime() >= param.getMinimumSpentTime()
                     && customer.getTotalPay() >= param.getMinimumTotalPay()) {
@@ -112,6 +120,7 @@ public class Groups { // singleton
         }
         return null;
     }
+
 
     @Override
     public String toString() {

@@ -3,30 +3,30 @@ package me.day25.smartstore.groups;
 import java.util.Objects;
 
 public class Parameter {
-    private int minimumSpentTime;
-    private int minimumTotalPay;
+    private Integer minimumSpentTime;
+    private Integer minimumTotalPay;
 
     public Parameter() {
     }
 
-    public Parameter(int minimumSpentTime, int minimumTotalPay) {
+    public Parameter(Integer minimumSpentTime, Integer minimumTotalPay) {
         this.minimumSpentTime = minimumSpentTime;
         this.minimumTotalPay = minimumTotalPay;
     }
 
-    public int getMinimumSpentTime() {
-        return this.minimumSpentTime;
+    public Integer getMinimumSpentTime() {
+        return minimumSpentTime;
     }
 
-    public void setMinimumSpentTime(int minimumSpentTime) {
+    public void setMinimumSpentTime(Integer minimumSpentTime) {
         this.minimumSpentTime = minimumSpentTime;
     }
 
-    public int getMinimumTotalPay() {
-        return this.minimumTotalPay;
+    public Integer getMinimumTotalPay() {
+        return minimumTotalPay;
     }
 
-    public void setMinimumTotalPay(int minimumTotalPay) {
+    public void setMinimumTotalPay(Integer minimumTotalPay) {
         this.minimumTotalPay = minimumTotalPay;
     }
 

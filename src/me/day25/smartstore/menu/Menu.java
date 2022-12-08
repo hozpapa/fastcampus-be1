@@ -3,10 +3,12 @@ package me.day25.smartstore.menu;
 import me.day25.smartstore.exception.InputRangeException;
 import me.day25.smartstore.util.Message;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Menu {
 
+    /////////////////////////////////////////
     ////////////// singleton ////////////////
     private static Menu menu;
 
@@ -17,6 +19,7 @@ public class Menu {
         return menu;
     }
     /////////////////////////////////////////
+    /////////////////////////////////////////
 
 
     protected Scanner scanner = new Scanner(System.in);
@@ -24,10 +27,9 @@ public class Menu {
     public int dispMenu(String[] menus) {
         while (true) {
             try {
-                System.out.println();
-                System.out.println("==============================");
+                System.out.println("\n==============================");
                 for (int i = 0; i < menus.length; i++) {
-                    System.out.printf(" %d. %s\n", i+1, menus[i]);
+                    System.out.printf(" %d. %s\n", i + 1, menus[i]);
                 }
                 System.out.println("==============================");
                 System.out.print("Choose One: ");
@@ -71,4 +73,5 @@ public class Menu {
 //
 //        }
 //    }
+
 }

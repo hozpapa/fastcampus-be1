@@ -1,6 +1,7 @@
 package me.day25.smartstore.menu;
 
 
+import me.day16.practice.practice01.InputNegativeException;
 import me.day25.smartstore.customers.ClassifiedCustomersGroup;
 import me.day25.smartstore.customers.Customer;
 import me.day25.smartstore.customers.Customers;
@@ -13,6 +14,7 @@ import java.util.Comparator;
 
 public class SummarizedMenu extends Menu {
 
+    /////////////////////////////////////////
     ////////////// singleton ////////////////
     private static SummarizedMenu summarizedMenu;
 
@@ -22,6 +24,7 @@ public class SummarizedMenu extends Menu {
         }
         return summarizedMenu;
     }
+    /////////////////////////////////////////
     /////////////////////////////////////////
 
     private Customers allCustomers = Customers.getInstance();
@@ -64,6 +67,7 @@ public class SummarizedMenu extends Menu {
                     "Summary (Sorted By Spent Time)",
                     "Summary (Sorted By Total Payment)",
                     "Back"});
+
             if (choice == 1) dispSummary();
             else if (choice == 2) manageSortedByName();
             else if (choice == 3) manageSortedBySpentTime();
@@ -75,7 +79,6 @@ public class SummarizedMenu extends Menu {
 
 
     public void dispSummary() {
-
         if (classifiedCustomersGroup == null) {
             System.out.println(Message.ERR_MSG_INVALID_INPUT_NULL);
             return;
@@ -87,24 +90,20 @@ public class SummarizedMenu extends Menu {
     public void manageSortedByName() {
         while (true) {
             String strOrder = chooseSortOrder().toUpperCase();
-            if (strOrder.equals(Message.END_MSG)) {
-                return;
-            }
+            if (strOrder.equals(Message.END_MSG)) return;
 
             try {
-                Comparator<Customer> comparator = Comparator
+                Comparator<Customer> comparatorByName = Comparator
                         .comparing(Customer::getName)
                         .thenComparing(Customer::getUserId);
 
+                Comparator<Customer> comparator = Comparator.nullsLast(comparatorByName);
+
                 OrderType orderType = OrderType.valueOf(strOrder).replaceFullName();
+                if (orderType == OrderType.ASCENDING) classifiedCustomersGroup.sort(comparator);
+                else if (orderType == OrderType.DESCENDING) classifiedCustomersGroup.sort(comparator.reversed());
+                else throw new InputRangeException();
 
-                if (orderType == OrderType.ASCENDING) {
-                    classifiedCustomersGroup.sort(comparator);
-                } else if (orderType == OrderType.DESCENDING) {
-                    classifiedCustomersGroup.sort(comparator.reversed());
-                }
-
-                throw new InputRangeException();
             } catch (IllegalArgumentException | InputRangeException e) {
                 System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE);
             }
@@ -118,24 +117,21 @@ public class SummarizedMenu extends Menu {
             String strOrder = chooseSortOrder().toUpperCase();
             if (strOrder.equals(Message.END_MSG)) return;
 
-
             try {
-                Comparator<Customer> comparator = Comparator
+                Comparator<Customer> comparatorBySpentTime = Comparator
                         .comparing(Customer::getSpentTime)
                         .thenComparing(Customer::getName);
 
-                OrderType orderType = OrderType.valueOf(strOrder).replaceFullName();
-                if (orderType == OrderType.ASCENDING || strOrder.startsWith("A")) {
-                    classifiedCustomersGroup.sort(comparator);
-                } else if (orderType == OrderType.DESCENDING || strOrder.startsWith("D")) {
-                    classifiedCustomersGroup.sort(comparator.reversed());
-                }
+                Comparator<Customer> comparator = Comparator.nullsLast(comparatorBySpentTime);
 
-                throw new InputRangeException();
+                OrderType orderType = OrderType.valueOf(strOrder).replaceFullName();
+                if (orderType == OrderType.ASCENDING) classifiedCustomersGroup.sort(comparator);
+                else if (orderType == OrderType.DESCENDING) classifiedCustomersGroup.sort(comparator.reversed());
+                else throw new InputRangeException();
+
             } catch (IllegalArgumentException | InputRangeException e) {
                 System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE);
             }
-
             dispSummary();
         }
     }
@@ -152,14 +148,14 @@ public class SummarizedMenu extends Menu {
                         .comparing(Customer::getTotalPay)
                         .thenComparing(Customer::getName);
 
-                OrderType orderType = OrderType.valueOf(strOrder).replaceFullName();
-                if (orderType == OrderType.ASCENDING) {
-                    classifiedCustomersGroup.sort(comparatorByTotalPay);
-                } else if (orderType == OrderType.DESCENDING || strOrder.startsWith("D")) {
-                    classifiedCustomersGroup.sort(comparatorByTotalPay.reversed());
-                }
+                Comparator<Customer> comparator = Comparator.nullsLast(comparatorByTotalPay);
 
-                throw new InputRangeException();
+
+                OrderType orderType = OrderType.valueOf(strOrder).replaceFullName();
+                if (orderType == OrderType.ASCENDING) classifiedCustomersGroup.sort(comparator);
+                else if (orderType == OrderType.DESCENDING) classifiedCustomersGroup.sort(comparator.reversed());
+                else throw new InputRangeException();
+
             } catch (IllegalArgumentException | InputRangeException e) {
                 System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE);
             }
@@ -171,18 +167,16 @@ public class SummarizedMenu extends Menu {
     public String chooseSortOrder() {
         while (true) {
             try {
-                System.out.println();
-                System.out.println("** Press 'end', if you want to exit! **");
+                System.out.println("\n** Press 'end', if you want to exit! **");
                 System.out.print("Which order (ASCENDING (A), DESCENDING (D))? ");
                 String choice = scanner.next().toUpperCase();
 
-                if (choice == null) throw new InputEmptyException();
                 if (choice.equals("")) throw new InputEmptyException();
                 if (choice.equals(Message.END_MSG)) return choice;
 
                 try {
                     OrderType orderType = OrderType.valueOf(choice).replaceFullName();
-                    for (int i = 0; i < OrderType.size(); ++i) {
+                    for (int i = 0; i < OrderType.size(); i++) {
                         if (orderType == OrderType.values()[i]) {
                             return choice;
                         }

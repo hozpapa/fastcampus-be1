@@ -12,9 +12,12 @@ import me.day25.smartstore.menu.Menu;
 import me.day25.smartstore.menu.SummarizedMenu;
 import me.day25.smartstore.util.Message;
 
+import java.math.MathContext;
+
 
 public class SmartStoreApplication {
 
+    /////////////////////////////////////////
     ////////////// singleton ////////////////
     private static SmartStoreApplication smartStoreApp;
 
@@ -24,6 +27,7 @@ public class SmartStoreApplication {
         }
         return smartStoreApp;
     }
+    /////////////////////////////////////////
     /////////////////////////////////////////
 
     private final Groups allGroups = Groups.getInstance();
@@ -43,7 +47,11 @@ public class SmartStoreApplication {
 
         for (int i = 0; i < 20; ++i) {
             allCustomers.add(new Customer(
-                    Character.toString((char) (97 + i)), (char) (97 + i) + "12345", i * 10, i * 100000));
+                    Character.toString(
+                               (char) ('a' + i)),
+                        (char) ('a' + i) + "12345",
+                     ((int) (Math.random() * 5) + 1) * 10,
+                       ((int) (Math.random() * 5) + 1) * 100000));
         }
 
         allCustomers.refresh(allGroups);
@@ -51,7 +59,7 @@ public class SmartStoreApplication {
     }
 
     private void details() {
-        System.out.println("===========================================");
+        System.out.println("\n\n===========================================");
         System.out.println(" Title : SmartStore Customer Segmentation");
         System.out.println(" Release Date : 22.12.08");
         System.out.println(" Copyright 2022 Eunbin All rights reserved.");
