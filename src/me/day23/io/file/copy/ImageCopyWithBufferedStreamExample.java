@@ -58,7 +58,6 @@ public class ImageCopyWithBufferedStreamExample {
                 BufferedOutputStream bos = new BufferedOutputStream(fos);
 
         ) {
-
             // 이미지 복사
             int data;
             while ( (data = bis.read()) != -1 ) {

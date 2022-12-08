@@ -16,7 +16,6 @@ public class ImageCopyExample {
                 InputStream is = new FileInputStream(path + original); // auto close
                 OutputStream os = new FileOutputStream(path + copy); // auto close
         ) {
-
             byte[] readBytes = new byte[256];
             int data;
             while ( (data = is.read(readBytes)) != -1 ) {
