@@ -11,7 +11,6 @@ public class ImageCopyExample {
 
     public static void main(String[] args) {
 
-
         try (
                 InputStream is = new FileInputStream(path + original); // auto close
                 OutputStream os = new FileOutputStream(path + copy); // auto close

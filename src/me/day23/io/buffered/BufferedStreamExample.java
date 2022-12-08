@@ -39,8 +39,10 @@ public class BufferedStreamExample {
             bos.flush();
             fos.flush();
         } catch ( FileNotFoundException e ) {
+            // 새로운 전략
             throw new RuntimeException(e);
         } catch ( IOException e ) {
+            // 새로운 전략
             throw new RuntimeException(e);
         }
 

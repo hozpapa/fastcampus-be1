@@ -12,6 +12,8 @@ import me.day25.smartstore.menu.Menu;
 import me.day25.smartstore.menu.SummarizedMenu;
 import me.day25.smartstore.util.Message;
 
+import java.util.Arrays;
+
 
 public class SmartStoreApplication {
 
@@ -40,6 +42,7 @@ public class SmartStoreApplication {
         allGroups.add(new Group( GroupType.GENERAL, new Parameter(10, 100000)) );
         allGroups.add(new Group( GroupType.VIP, new Parameter(20, 200000)) );
         allGroups.add(new Group( GroupType.VVIP, new Parameter(30, 300000)) );
+        System.out.println(allGroups.size());
 
         for (int i = 0; i < 20; ++i) {
             allCustomers.add(new Customer(
@@ -47,6 +50,7 @@ public class SmartStoreApplication {
         }
 
         allCustomers.refresh(allGroups);
+        System.out.println(allCustomers);
         return this;
     }
 
@@ -59,13 +63,14 @@ public class SmartStoreApplication {
     }
 
     public void run() {
+        System.out.println(Arrays.toString(allCustomers.getCustomers()));
         details();
 
         while (true) {
             int choice = menu.dispMenu(new String[] {"Parameter", "Customer Data", "Classification Summary", "Quit"});
 
-            if (choice == 1) { groupMenu.manageParameter(); }
-            else if (choice == 2) { customerMenu.manageCustomerData(); }
+            if (choice == 1)      { groupMenu.manageParameterMenu(); }
+            else if (choice == 2) { customerMenu.manageCustomerMenu(); }
             else if (choice == 3) { classifiedMenu.manageSummaryMenu(); }
             else if (choice == 4) { System.out.println("\nProgram Finished."); break; }
             else { System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE); }

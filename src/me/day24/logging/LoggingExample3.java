@@ -6,15 +6,16 @@ import java.util.logging.*;
 
 public class LoggingExample3 {
 
-    private static Logger logger = Logger.getLogger(LoggingExample3.class.getName());
+    private static Logger logger = Logger.getLogger(LoggingExample3.class.getName()); // root logger
 
     public static void main(String[] args) {
         // remove default log handler
         logger.setUseParentHandlers(false);
 
-        // add new log handler
+        // add new log handler (add logger handler to root logger)
         Handler handler = new ConsoleHandler();
         handler.setFormatter(new MyLogFormatter());
+        handler.setLevel(Level.CONFIG);
         logger.addHandler(handler);
 
         // logging

@@ -26,6 +26,7 @@ public class LoggingExample4 {
             }
         });
         logger.addHandler(handler);
+        logger.setLevel(Level.CONFIG);
 
         // logging
         logger.warning("Warning logging");

@@ -16,7 +16,7 @@ public class LoggingExample5 {
         // add new log handler
         Handler handler = null; // append mode
         try {
-            handler = new FileHandler(LocalDateTime.now() + ".log", true);
+            handler = new FileHandler(LocalDateTime.now() + ".log", true); // 1개의 파일에 로그 append
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -33,6 +33,7 @@ public class LoggingExample5 {
             }
         });
         logger.addHandler(handler);
+        logger.setLevel(Level.CONFIG);
 
         // logging
         logger.warning("Warning logging");

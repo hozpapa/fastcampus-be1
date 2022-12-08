@@ -31,13 +31,15 @@ public class FileInputStreamExample {
 				// 		: cr (13) (mac)
 			}*/
 
-            byte[] data = new byte[10];
-            int dataNo = is.read(data);
-
-            for (int i = 0; i < dataNo; i++) {
-                System.out.print((char)data[i] + ", ");
-                System.out.println(data[i]);
+            byte[] data = new byte[10]; // buffer
+            int dataNo;
+            while ((dataNo = is.read(data))!= -1) {
+                for (int i = 0; i < dataNo; i++) {
+                    System.out.print((char)data[i] + ", ");
+                    System.out.println(data[i]);
+                }
             }
+
         } catch ( FileNotFoundException e ) {
             throw new RuntimeException(e);
         } catch ( IOException e ) {

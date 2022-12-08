@@ -27,4 +27,8 @@ public enum GroupType {
         else if (this == VV) return VVIP;
         return this;
     }
+
+    public static int size() {
+        return GroupType.values().length / 2;
+    }
 }

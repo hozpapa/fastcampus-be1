@@ -8,7 +8,7 @@ import java.util.List;
 
 public class WriteObjectStreamExample {
     static final String path = FileUtil.getOutPath( WriteObjectStreamExample.class );
-    static final String filename = "students.dat";
+    static final String filename = "students.dat"; // 이진파일
     public static void main(String[] args) {
         /* 객체 입출력
          * - 객체는 문자가 아니기 때문에 바이트 기반 스트림으로 출력
@@ -23,13 +23,13 @@ public class WriteObjectStreamExample {
         // .dat: data file (binary 형식)
         try (
                 OutputStream fos = new FileOutputStream(path + filename);
-                ObjectOutputStream oos = new ObjectOutputStream(fos);
+                ObjectOutputStream oos = new ObjectOutputStream(fos); // 객체를 직렬화하가 위한 클래스 (보조 스트림)
         ) {
 
             List<Student> students = Arrays.asList(
-                    new Student("sally", Student.Gender.FEMALE, Student.Grade.SENIOR, "971010-2012234"),
-                    new Student("kain", Student.Gender.MALE, Student.Grade.JUNIOR, "980810-1212231"),
-                    new Student("kalin", Student.Gender.MALE, Student.Grade.SENIOR, "910420-1042314"));
+                    new Student("sally", Student.Gender.FEMALE, Student.Grade.SENIOR, 15, "971010-2012234"),
+                    new Student("kain", Student.Gender.MALE, Student.Grade.JUNIOR, 16, "980810-1212231"),
+                    new Student("kalin", Student.Gender.MALE, Student.Grade.SENIOR, 17,  "910420-1042314"));
             oos.writeObject(students);
             oos.flush();
             fos.flush();

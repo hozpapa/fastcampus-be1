@@ -34,7 +34,7 @@ public class Customers { // singleton
 
 
     public void setCustomers(Customer[] customers) {
-        customers = customers;
+        this.customers = customers;
     }
 
     public Customer[] getCustomers() {
@@ -200,13 +200,14 @@ public class Customers { // singleton
     }
 
     public void refresh(Groups groups) {
-        if (groups != null) {
-            for (int i = 0; i < size; ++i) {
-                Customer cust = customers[i];
-                cust.setGroup(groups.findGroupFor(cust));
-            }
+        if (groups == null) return;
 
+        System.out.println(size);
+        for (int i = 0; i < size; i++) {
+            Customer cust = customers[i];
+            cust.setGroup(groups.findGroupFor(cust));
         }
+
     }
 
     public void print() {

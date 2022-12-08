@@ -22,14 +22,21 @@ public class Groups { // singleton
     private Group[] groups;
 
 
-
     public Groups() {
-        this.groups = new Group[GroupType.values().length];
+        this.groups = new Group[GroupType.size()];
         initialize();
     }
 
+    public Group[] getGroups() {
+        return groups;
+    }
+
+    public void setGroups(Group[] groups) {
+        this.groups = groups;
+    }
+
     public int size() {
-        return this.size;
+        return size;
     }
 
     public int length() {
@@ -45,30 +52,30 @@ public class Groups { // singleton
     }
 
     public void initialize() {
-        int i = 0;
-        for(GroupType groupType : GroupType.values()) {
-            groups[i] = new Group(groupType, null);
-            i++;
+        for (int i = 0; i < GroupType.size(); i++) {
+            groups[i] = new Group(GroupType.values()[i], null);
+            size++;
         }
     }
 
     public void add(Group group) {
-        Group grp = this.find(group.getType());
+        Group grp = find(group.getType());
+
         if (grp != null) {
             update(group);
         } else {
-            this.groups[this.size] = group;
-            this.size++;
+            groups[size] = group;
+            size++;
         }
 
     }
 
     public Group get(int i) {
-        return this.groups[i];
+        return groups[i];
     }
 
     public void update(Group group) {
-        Group grp = this.find(group.getType());
+        Group grp = find(group.getType());
         if (grp != null) {
             grp.setParam(group.getParam());
         }
@@ -93,11 +100,12 @@ public class Groups { // singleton
 
     public Group findGroupFor(Customer cust) {
         if (groups == null || cust == null) return null;
+        System.out.println(cust);
 
-
-        for(int i = groups.length - 1; i >= 0; i--) {
+        for(int i = size - 1; i >= 0; i--) {
             Parameter param = groups[i].getParam();
-            if (param == null) continue;;
+            System.out.println(param);
+            if (param == null) continue;
 
             if (cust.getSpentTime() >= param.getMinimumSpentTime()
                     && cust.getTotalPay() >= param.getMinimumTotalPay()) {

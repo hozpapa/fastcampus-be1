@@ -12,10 +12,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 // 1000원을 주면 1개의 로또를 생성해주는 클래스
 public class LottoNumberGenerator { // 1 ~ 45번 6개
-    public List<Integer> generate(final int money) {
+    public List<Integer> generate(final int money) { // test code: 3개 (개발할 때 개발자가 고려한 사항)
+        // 새로운 기능 추가
+
         if (!isValidMoney(money)) {
             throw new RuntimeException("올바른 금액이 아닙니다.");
         }
+
+        // 새로운 기능 추가
         return generate();
     }
 

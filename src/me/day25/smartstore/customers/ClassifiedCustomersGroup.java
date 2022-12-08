@@ -2,7 +2,6 @@ package me.day25.smartstore.customers;
 
 
 import me.day25.smartstore.groups.GroupType;
-import me.day25.smartstore.menu.CustomerMenu;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -23,7 +22,7 @@ public class ClassifiedCustomersGroup {
     private ClassifiedCustomers[] classifiedCustomers;
 
     public ClassifiedCustomersGroup() {
-        classifiedCustomers = new ClassifiedCustomers[GroupType.values().length / 2];
+        classifiedCustomers = new ClassifiedCustomers[GroupType.size()];
         for (int i = 0; i < classifiedCustomers.length; i++) {
             classifiedCustomers[i] = new ClassifiedCustomers();
         }
@@ -39,7 +38,7 @@ public class ClassifiedCustomersGroup {
     }
 
     public int size() {
-        return GroupType.values().length / 2;
+        return GroupType.size();
     }
     
     public void print() {

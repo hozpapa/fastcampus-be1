@@ -24,7 +24,7 @@ public class CustomerMenu extends Menu {
     private Groups allGroups = Groups.getInstance();
     private Customers allCustomers = Customers.getInstance();
 
-    public void manageCustomerData() {
+    public void manageCustomerMenu() {
         while (true) {
             int choice = dispMenu(
                     new String[]{"Set Customer Data", "View Customer Data",

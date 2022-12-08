@@ -15,16 +15,17 @@ public class FileOutputStreamExample {
 
         final byte[] bytes = {'a', 'b', 'c', 'd', 'e', 'f', 'g'};
 
-        try ( OutputStream os = new FileOutputStream(path + filename) ) {
+        try ( OutputStream os = new FileOutputStream(path + filename) ) { // AutoClosable close()
             // 파일이 없을 경우 파일을 생성
             // 이미 파일이 있을 경우에는 파일을 덮어씀
 
             os.write(bytes);
-            os.flush();
+            os.flush(); // OutputStream close() 호출하기 전에 flush() 호출이 됨 (명시적 작성)
         } catch ( FileNotFoundException e ) {
             throw new RuntimeException(e);
         } catch ( IOException e ) {
             throw new RuntimeException(e);
         }
+        // OutputStream close()
     }
 }

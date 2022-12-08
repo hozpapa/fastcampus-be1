@@ -72,7 +72,7 @@ public class GroupMenu extends Menu {
 //        }
 //    }
 
-    public void manageParameter() {
+    public void manageParameterMenu() {
         while (true) {
             int choice = dispMenu(new String[] {"Set Parameter", "View Parameter", "Update Parameter", "Back"});
 

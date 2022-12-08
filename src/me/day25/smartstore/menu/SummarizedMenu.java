@@ -182,7 +182,7 @@ public class SummarizedMenu extends Menu {
 
                 try {
                     OrderType orderType = OrderType.valueOf(choice).replaceFullName();
-                    for (int i = 0; i < OrderType.values().length; ++i) {
+                    for (int i = 0; i < OrderType.size(); ++i) {
                         if (orderType == OrderType.values()[i]) {
                             return choice;
                         }

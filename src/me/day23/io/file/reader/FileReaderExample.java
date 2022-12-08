@@ -29,12 +29,14 @@ public class FileReaderExample {
 			}*/
 
             char[] data = new char[10];
-            int dataNo = reader.read(data);
-
-            for (int i = 0; i < dataNo; i++) {
-                System.out.print(data[i] + ", ");
-                System.out.println((int)data[i]);
+            int dataNo = 0;
+            while ((dataNo = reader.read(data)) != -1) {
+                for (int i = 0; i < dataNo; i++) {
+                    System.out.print(data[i] + ", ");
+                    System.out.println((int)data[i]);
+                }
             }
+
         } catch ( FileNotFoundException e ) {
             throw new RuntimeException(e);
         } catch ( IOException e ) {

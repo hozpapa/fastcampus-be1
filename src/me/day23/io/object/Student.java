@@ -3,7 +3,7 @@ package me.day23.io.object;
 import java.io.Serializable;
 
 public class Student implements Serializable {
-    private static final long serialVersionUID = 8428076779352261816L;
+    private static final long serialVersionUID = -3576702769350958892L;
 
 
     // 직렬화할 때 static / transient 변수는 제외
@@ -37,10 +37,11 @@ public class Student implements Serializable {
     public Student() {
     }
 
-    public Student(String name, Gender gender, Grade grade, String regNum) {
+    public Student(String name, Gender gender, Grade grade, Integer age, String regNum) {
         this.name = name;
         this.gender = gender;
         this.grade = grade;
+        this.age = age;
         this.regNum = regNum;
     }
 

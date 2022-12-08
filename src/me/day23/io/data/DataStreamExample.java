@@ -12,10 +12,10 @@ public class DataStreamExample {
 
         try (
                 OutputStream fos = new FileOutputStream(path + filename); // 이진 파일
-                DataOutputStream dos = new DataOutputStream(fos);
+                DataOutputStream dos = new DataOutputStream(fos); // 보조 스트림 (데이터 형을 다양하게 쓸 수 있는)
 
                 InputStream fis = new FileInputStream(path + filename); // 이진 파일
-                DataInputStream dis = new DataInputStream(fis)
+                DataInputStream dis = new DataInputStream(fis) // 보조 스트림 (데이터 형을 다양하게 읽을 수 있는)
         ) {
 
             /////////////////// write ////////////////////////
