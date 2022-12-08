@@ -76,9 +76,7 @@ public class ClassifiedCustomersGroup {
         for (int i = 0; i < classifiedCustomersGroup.size(); i++) {
             Customer[] customers = classifiedCustomersGroup.get(i).getRealCustomers();
 
-            if (UtilMethod.isAnyNUll(customers)) {
-                continue;
-            }
+            if (UtilMethod.isAnyNUll(customers)) continue;
 
             boolean checker = false;
             for (Customer customer: customers) {

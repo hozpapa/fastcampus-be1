@@ -1,7 +1,5 @@
 package me.day25.smartstore.menu;
 
-
-import me.day16.practice.practice01.InputNegativeException;
 import me.day25.smartstore.customers.ClassifiedCustomersGroup;
 import me.day25.smartstore.customers.Customer;
 import me.day25.smartstore.customers.Customers;

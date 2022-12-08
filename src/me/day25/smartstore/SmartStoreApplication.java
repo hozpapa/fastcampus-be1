@@ -49,7 +49,7 @@ public class SmartStoreApplication {
             allCustomers.add(new Customer(
                     Character.toString(
                                (char) ('a' + i)),
-                        (char) ('a' + i) + "12345",
+                        (char) ('a' + i) + "123",
                      ((int) (Math.random() * 5) + 1) * 10,
                        ((int) (Math.random() * 5) + 1) * 100000));
         }
