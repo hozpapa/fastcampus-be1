@@ -50,29 +50,25 @@ public class SmartStoreApplication {
         return this;
     }
 
-    public void run() {
+    private void details() {
         System.out.println("===========================================");
         System.out.println(" Title : SmartStore Customer Segmentation");
         System.out.println(" Release Date : 22.12.08");
         System.out.println(" Copyright 2022 Eunbin All rights reserved.");
-        System.out.println("===========================================");
-        System.out.println();
+        System.out.println("===========================================\n");
+    }
+
+    public void run() {
+        details();
 
         while (true) {
             int choice = menu.dispMenu(new String[] {"Parameter", "Customer Data", "Classification Summary", "Quit"});
 
-            if (choice == 1) {
-                groupMenu.manageParameter();
-            } else if (choice == 2) {
-                customerMenu.manageCustomerData();
-            } else if (choice == 3) {
-                classifiedMenu.manageSummaryMenu();
-            } else if (choice == 4) {
-                System.out.println("\nProgram Finished.");
-                break;
-            } else {
-                System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE);
-            }
+            if (choice == 1) { groupMenu.manageParameter(); }
+            else if (choice == 2) { customerMenu.manageCustomerData(); }
+            else if (choice == 3) { classifiedMenu.manageSummaryMenu(); }
+            else if (choice == 4) { System.out.println("\nProgram Finished."); break; }
+            else { System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE); }
         }
 
     }

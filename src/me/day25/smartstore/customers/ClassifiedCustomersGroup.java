@@ -23,7 +23,7 @@ public class ClassifiedCustomersGroup {
     private ClassifiedCustomers[] classifiedCustomers;
 
     public ClassifiedCustomersGroup() {
-        classifiedCustomers = new ClassifiedCustomers[GroupType.values().length];
+        classifiedCustomers = new ClassifiedCustomers[GroupType.values().length / 2];
         for (int i = 0; i < classifiedCustomers.length; i++) {
             classifiedCustomers[i] = new ClassifiedCustomers();
         }
@@ -38,8 +38,8 @@ public class ClassifiedCustomersGroup {
         classifiedCustomers[i] = customers;
     }
 
-    public int length() {
-        return GroupType.values().length;
+    public int size() {
+        return GroupType.values().length / 2;
     }
     
     public void print() {
@@ -60,7 +60,7 @@ public class ClassifiedCustomersGroup {
 
     public void sort(Comparator<Customer> comparator) {
 
-        for (int i = 0; i < classifiedCustomersGroup.length(); i++) {
+        for (int i = 0; i < classifiedCustomersGroup.size(); i++) {
             Customer[] customers = classifiedCustomersGroup.get(i).getCustomers();
             if (comparator == null) Arrays.sort(customers);
             else Arrays.sort(customers, comparator);

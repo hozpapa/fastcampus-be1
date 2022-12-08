@@ -96,10 +96,11 @@ public class SummarizedMenu extends Menu {
                         .comparing(Customer::getName)
                         .thenComparing(Customer::getUserID);
 
-                OrderType orderType = OrderType.valueOf(strOrder);
-                if (orderType == OrderType.ASCENDING || strOrder.startsWith("A")) {
+                OrderType orderType = OrderType.valueOf(strOrder).replaceFullName();
+
+                if (orderType == OrderType.ASCENDING) {
                     classifiedCustomersGroup.sort(comparator);
-                } else if (orderType == OrderType.DESCENDING || strOrder.startsWith("D")) {
+                } else if (orderType == OrderType.DESCENDING) {
                     classifiedCustomersGroup.sort(comparator.reversed());
                 }
 
@@ -123,7 +124,7 @@ public class SummarizedMenu extends Menu {
                         .comparing(Customer::getSpentTime)
                         .thenComparing(Customer::getName);
 
-                OrderType orderType = OrderType.valueOf(strOrder);
+                OrderType orderType = OrderType.valueOf(strOrder).replaceFullName();
                 if (orderType == OrderType.ASCENDING || strOrder.startsWith("A")) {
                     classifiedCustomersGroup.sort(comparator);
                 } else if (orderType == OrderType.DESCENDING || strOrder.startsWith("D")) {
@@ -151,7 +152,7 @@ public class SummarizedMenu extends Menu {
                         .comparing(Customer::getTotalPay)
                         .thenComparing(Customer::getName);
 
-                OrderType orderType = OrderType.valueOf(strOrder);
+                OrderType orderType = OrderType.valueOf(strOrder).replaceFullName();
                 if (orderType == OrderType.ASCENDING) {
                     classifiedCustomersGroup.sort(comparatorByTotalPay);
                 } else if (orderType == OrderType.DESCENDING || strOrder.startsWith("D")) {
@@ -180,7 +181,7 @@ public class SummarizedMenu extends Menu {
                 if (choice.equals(Message.END_MSG)) return choice;
 
                 try {
-                    OrderType orderType = OrderType.valueOf(choice);
+                    OrderType orderType = OrderType.valueOf(choice).replaceFullName();
                     for (int i = 0; i < OrderType.values().length; ++i) {
                         if (orderType == OrderType.values()[i]) {
                             return choice;

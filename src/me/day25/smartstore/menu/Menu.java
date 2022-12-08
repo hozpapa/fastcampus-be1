@@ -27,7 +27,7 @@ public class Menu {
                 System.out.println();
                 System.out.println("==============================");
                 for (int i = 0; i < menus.length; i++) {
-                    System.out.printf(" %d. %s", i+1, menus[i]);
+                    System.out.printf(" %d. %s\n", i+1, menus[i]);
                 }
                 System.out.println("==============================");
                 System.out.print("Choose One: ");

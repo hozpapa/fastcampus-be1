@@ -29,20 +29,12 @@ public class CustomerMenu extends Menu {
             int choice = dispMenu(
                     new String[]{"Set Customer Data", "View Customer Data",
                             "Update Customer Data", "Delete Customer Data", "Back"});
-            if (choice == 1) {
-                int size = getCustomerSizeToAdd();
-                setCustomerData(size);
-            } else if (choice == 2) {
-                viewCustomerData();
-            } else if (choice == 3) {
-                updateCustomerData();
-            } else if (choice == 4) {
-                deleteCustomerData();
-            } else if (choice == 5) {
-                return;
-            } else {
-                System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE);
-            }
+            if (choice == 1) { int size = getCustomerSizeToAdd(); setCustomerData(size); }
+            else if (choice == 2) viewCustomerData();
+            else if (choice == 3) updateCustomerData();
+            else if (choice == 4) deleteCustomerData();
+            else if (choice == 5) return;
+            else System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE);
         }
     }
 

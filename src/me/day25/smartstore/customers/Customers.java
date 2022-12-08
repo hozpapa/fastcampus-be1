@@ -163,26 +163,29 @@ public class Customers { // singleton
 
     public Customers findCustomers(GroupType type) {
         Customers custs = new Customers();
-        if (custs != null) {
-            for(int i = 0; i < size; ++i) {
-                Customer cust = get(i);
-                if (cust != null) {
-                    Group grp = cust.getGroup();
-                    if (type.equals(GroupType.NONE)) {
-                        if (grp == null || grp.getType() == null || grp.getType().equals(GroupType.NONE)) {
-                            custs.add(cust);
-                        }
-                    } else if (grp != null && grp.getType().equals(type)) {
-                        custs.add(cust);
-                    }
+        if (custs == null) return null;
+
+        for(int i = 0; i < size; ++i) {
+            Customer cust = get(i);
+            if (cust == null) return null;
+
+            Group grp = cust.getGroup();
+            if (type.equals(GroupType.NONE)) {
+                if (grp == null || grp.getType() == null || grp.getType().equals(GroupType.NONE)) {
+                    custs.add(cust);
                 }
+            } else if (grp != null && grp.getType().equals(type)) {
+                custs.add(cust);
             }
+
         }
+
 
         return custs;
     }
 
     public Customers findCustomers(Group grp) {
+
         if (grp != null) {
             if (grp.getType() != null) {
                 return findCustomers(grp.getType());
