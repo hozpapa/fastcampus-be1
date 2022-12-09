@@ -31,7 +31,7 @@ public class Menu {
     }
 
     public int dispMenu(String[] menus) {
-        while (true) {
+        while ( true ) {
             try {
                 System.out.println("\n==============================");
                 for (int i = 0; i < menus.length; i++) {
