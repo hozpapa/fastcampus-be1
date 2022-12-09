@@ -251,14 +251,13 @@ public class Customers { // singleton
 
         for (int i = 0; i < allGroups.size(); i++) {
             Group grp = allGroups.get(i);
-            Customer[] customers = grp.getCustomers(allCustomers).getCustomers();
+            Customer[] customers = grp.getCustomers(allCustomers).trimToSize().getCustomers();
             Customer[] copy = Arrays.copyOf(customers, customers.length);
 
             ClassifiedCustomers classifiedCustomers = new ClassifiedCustomers();
             classifiedCustomers.setGroup(grp);
             classifiedCustomers.setSize(copy.length);
             classifiedCustomers.setCustomers(copy);
-            classifiedCustomers.setCustomers(classifiedCustomers.getRealCustomers());
 
             classifiedCusGroup.set(i, classifiedCustomers);
         }
