@@ -2,11 +2,15 @@ package me.day25.smartstore.menu;
 
 import me.day25.smartstore.customers.Customer;
 import me.day25.smartstore.customers.Customers;
+import me.day25.smartstore.exception.ArrayEmptyException;
 import me.day25.smartstore.exception.InputEmptyException;
 import me.day25.smartstore.exception.InputRangeException;
 import me.day25.smartstore.groups.Group;
 import me.day25.smartstore.groups.Groups;
 import me.day25.smartstore.util.Message;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 public class CustomerMenu extends Menu {
 
@@ -32,8 +36,10 @@ public class CustomerMenu extends Menu {
                     new String[]{"Set Customer Data", "View Customer Data",
                             "Update Customer Data", "Delete Customer Data", "Back"});
 
-            if (choice == 1) { int size = getCustomerSizeToAdd(); setCustomerData(size); }
-            else if (choice == 2) viewCustomerData();
+            if (choice == 1) {
+                int size = getCustomerSizeToAdd();
+                setCustomerData(size);
+            } else if (choice == 2) viewCustomerData();
             else if (choice == 3) updateCustomerData();
             else if (choice == 4) deleteCustomerData();
             else if (choice == 5) return;
@@ -46,7 +52,7 @@ public class CustomerMenu extends Menu {
             Customer customer = new Customer();
             System.out.println("\n====== Customer " + (i + 1) + " Info. ======");
 
-            while ( true ) {
+            while (true) {
                 int choice = dispMenu(
                         new String[]{"Customer Name", "Customer ID",
                                 "Customer Spent Time", "Customer Total Pay", "Back"});
@@ -64,12 +70,16 @@ public class CustomerMenu extends Menu {
             else if (!grp.equals(customer.getGroup())) customer.setGroup(grp);
 
             allCustomers.add(customer);
-
         }
     }
 
 
     public void viewCustomerData() {
+        if (allCustomers.size() == 0) {
+            System.out.println(Message.ERR_MSG_INVALID_ARR_EMPTY);
+            return;
+        }
+
         System.out.println("\n======= Customer Info. =======");
 
         for (int i = 0; i < allCustomers.size(); ++i) {
@@ -82,16 +92,20 @@ public class CustomerMenu extends Menu {
 
     public void updateCustomerData() {
         viewCustomerData();
-        int custNo = findCustomer();
-        if (custNo == -1) {
-            System.out.println(Message.ERR_MSG_INVALID_ARR_EMPTY);
+        int custNo = 0;
+
+        // TODO: refactoring
+        try {
+            custNo = findCustomer();
+        } catch (ArrayEmptyException e) {
             return;
         }
+
 
         Customer customer = allCustomers.get(custNo - 1);
         if (customer == null) return;
 
-        while ( true ) {
+        while (true) {
             int choice = dispMenu(
                     new String[]{"Customer Name", "Customer ID",
                             "Customer Spent Time", "Customer Total Pay", "Back"});
@@ -108,16 +122,19 @@ public class CustomerMenu extends Menu {
         Group grp = allGroups.findGroupFor(customer);
         if (grp == null) customer.setGroup(null);
         else if (!grp.equals(customer.getGroup())) customer.setGroup(grp);
-
     }
 
     public void deleteCustomerData() {
         viewCustomerData();
-        int custNo = findCustomer();
-        if (custNo == -1) {
-            System.out.println(Message.ERR_MSG_INVALID_ARR_EMPTY);
+        int custNo = 0;
+
+        // TODO: refactoring
+        try {
+            custNo = findCustomer();
+        } catch (ArrayEmptyException e) {
             return;
         }
+
 
         Customer customer = allCustomers.get(custNo - 1);
         System.out.println(customer);
@@ -153,6 +170,9 @@ public class CustomerMenu extends Menu {
 //        }
 //    }
 
+
+    // TODO: when size == -1 -> exit()
+    // TODO: scanner.next() -> scanner.nextLine() (including space bar)
     private int getCustomerSizeToAdd() {
         while (true) {
             try {
@@ -257,9 +277,30 @@ public class CustomerMenu extends Menu {
         }
     }
 
-    public int findCustomer() {
+    // <<Reflection>> setCustomerName, setCustomerUserId, setCustomerSpentTime, setCustomerTotalPay
+    public void setCustomerField(String message, Customer customer, Method method) {
+        while (true) {
+            try {
+                System.out.print("\n" + message);
+                int input = Integer.parseInt(scanner.next());
+                if (input < 0) throw new InputRangeException();
+                method.invoke(customer, input);
+                return;
+            } catch (NumberFormatException e) {
+                System.out.println(Message.ERR_MSG_INVALID_INPUT_FORMAT);
+            } catch (InputRangeException e) {
+                System.out.println(Message.ERR_MSG_INVALID_INPUT_RANGE);
+            } catch (InvocationTargetException e) {
+                throw new RuntimeException(e);
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    public int findCustomer() throws ArrayEmptyException {
         int size = allCustomers.size();
-        if (size == 0) return -1;
+        if (size == 0) throw new ArrayEmptyException();
 
         while (true) {
             try {

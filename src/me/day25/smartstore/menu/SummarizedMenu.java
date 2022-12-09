@@ -55,7 +55,7 @@ public class SummarizedMenu extends Menu {
 //        }
 //    }
 
-    public void manageSummaryMenu() {
+    public void manageSummaryMenu() { // customer set group => classified by group
         classifiedCusGroup = allCustomers.classified();
         //System.out.println("Arrays.toString(classifiedCusGroup.getClassifiedCustomers()) = " + Arrays.toString(classifiedCusGroup.getClassifiedCustomers()));
 

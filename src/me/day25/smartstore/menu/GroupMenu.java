@@ -1,5 +1,6 @@
 package me.day25.smartstore.menu;
 
+import me.day25.smartstore.customers.Customer;
 import me.day25.smartstore.customers.Customers;
 import me.day25.smartstore.exception.InputEmptyException;
 import me.day25.smartstore.exception.InputRangeException;
@@ -8,6 +9,9 @@ import me.day25.smartstore.groups.GroupType;
 import me.day25.smartstore.groups.Groups;
 import me.day25.smartstore.groups.Parameter;
 import me.day25.smartstore.util.Message;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 public class GroupMenu extends Menu {
 
@@ -32,6 +36,7 @@ public class GroupMenu extends Menu {
     public String chooseGroup() {
         while (true) {
             try {
+                // TODO: end => exit()
                 System.out.println("\n** Press 'end', if you want to exit! **");
                 System.out.print("Which group (GENERAL (G), VIP (V), VVIP (VV))? ");
                 String choice = scanner.next().toUpperCase();
@@ -231,9 +236,18 @@ public class GroupMenu extends Menu {
                 System.out.println(Message.ERR_MSG_INVALID_INPUT_RANGE);
             }
         }
+
+
+// <<Reflection>>
+//        try {
+//            setParameterField("Input Minimum Spent Time: ", param, param.getClass().getDeclaredMethod("setMinimumSpentTime", Integer.class));
+//        } catch (NoSuchMethodException e) {
+//            throw new RuntimeException(e);
+//        }
     }
 
     public void setParameterMinimumTotalPay(Parameter param) {
+
         while (true) {
             try {
                 System.out.print("\nInput Minimum Total Pay: ");
@@ -246,6 +260,34 @@ public class GroupMenu extends Menu {
                 System.out.println(Message.ERR_MSG_INVALID_INPUT_TYPE);
             } catch (InputRangeException e) {
                 System.out.println(Message.ERR_MSG_INVALID_INPUT_RANGE);
+            }
+        }
+
+// <<Reflection>>
+//        try {
+//            setParameterField("Input Minimum Total Pay: ", param, param.getClass().getDeclaredMethod("setMinimumTotalPay", Integer.class));
+//        } catch (NoSuchMethodException e) {
+//            throw new RuntimeException(e);
+//        }
+    }
+
+    // <<Reflection>> setParameterMinimumTotalPay, setParameterMinimumSpentTime
+    public void setParameterField(String message, Parameter parameter, Method method) {
+        while (true) {
+            try {
+                System.out.print("\n" + message);
+                int input = Integer.parseInt(scanner.next());
+                if (input < 0) throw new InputRangeException();
+                method.invoke(parameter, input);
+                return;
+            } catch (NumberFormatException e) {
+                System.out.println(Message.ERR_MSG_INVALID_INPUT_FORMAT);
+            } catch (InputRangeException e) {
+                System.out.println(Message.ERR_MSG_INVALID_INPUT_RANGE);
+            } catch (InvocationTargetException e) {
+                throw new RuntimeException(e);
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
             }
         }
     }

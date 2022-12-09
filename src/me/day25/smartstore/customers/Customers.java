@@ -200,16 +200,15 @@ public class Customers { // singleton
             if (cust == null) return null;
 
             Group grp = cust.getGroup();
-            if (type.equals(GroupType.NONE)) {
-                if (grp == null || grp.getType() == null || grp.getType().equals(GroupType.NONE)) {
+            if (type == GroupType.NONE) { // Customer Group == null =>
+                if (grp == null || grp.getType() == null || grp.getType() == GroupType.NONE) {
                     custs.add(cust);
                 }
-            } else if (grp != null && grp.getType().equals(type)) {
+            } else if (grp != null && grp.getType() == type) {
                 custs.add(cust);
             }
 
         }
-
 
         return custs;
     }
@@ -251,6 +250,9 @@ public class Customers { // singleton
 
         for (int i = 0; i < allGroups.size(); i++) {
             Group grp = allGroups.get(i);
+
+            // None: 5, null, null, null, null, null
+            // new Customers(): 10
             Customer[] customers = grp.getCustomers(allCustomers).trimToSize().getCustomers();
             Customer[] copy = Arrays.copyOf(customers, customers.length);
 

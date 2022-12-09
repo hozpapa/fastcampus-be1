@@ -3,6 +3,7 @@ package me.day25.smartstore.customers;
 
 import me.day25.smartstore.groups.GroupType;
 import me.day25.smartstore.groups.Parameter;
+import me.day25.smartstore.util.Message;
 import me.day25.smartstore.util.UtilMethod;
 
 import java.util.Arrays;
@@ -76,29 +77,15 @@ public class ClassifiedCustomersGroup {
         for (int i = 0; i < classifiedCustomersGroup.size(); i++) {
             Customer[] customers = classifiedCustomersGroup.get(i).getCustomers();
 
-            if (UtilMethod.isAnyNUll(customers)) continue;
+            try {
+                if (comparator == null) Arrays.sort(customers);
+                else Arrays.sort(customers, comparator);
 
-            boolean checker = false;
-            for (Customer customer: customers) {
-                if (UtilMethod.isAnyNUll(
-                        customer.getSerialNO(),
-                        customer.getName(),
-                        customer.getUserId(),
-                        customer.getSpentTime(),
-                        customer.getTotalPay())) {
-                    checker = true;
-                    break;
-                }
-            }
-            if (checker) {
-                continue;
+                classifiedCustomersGroup.get(i).setCustomers(customers);
+            } catch (NullPointerException e) {
+                System.out.println(e.getMessage());
             }
 
-            //System.out.println(Arrays.toString(customers));
-
-            if (comparator == null) Arrays.sort(customers);
-            else Arrays.sort(customers, comparator);
-            classifiedCustomersGroup.get(i).setCustomers(customers);
         }
     }
 
