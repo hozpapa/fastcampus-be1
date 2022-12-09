@@ -80,7 +80,7 @@ public class SummarizedMenu extends Menu {
                         .comparing(Customer::getTotalPay)
                         .thenComparing(Customer::getName));
             } else if (choice == 5) return;
-            else System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE);
+//            else System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE);
         }
     }
 

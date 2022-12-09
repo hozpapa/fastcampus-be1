@@ -2,6 +2,7 @@ package me.day24.junit.lifecycle;
 
 import org.junit.jupiter.api.*;
 
+@TestInstance(TestInstance.Lifecycle.PER_METHOD)
 class PerMethodLifecycleTest {
     // 기본적으로 JUnit은 각 테스트 메서드를 실행하기 전에 테스트 클래스의 새 인스턴스를 만듦
     // 이를 통해 개별 테스트 방법을 개별적으로 실행하고 예기치 않은 부작용을 피할 수 있음

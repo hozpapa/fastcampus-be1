@@ -54,7 +54,7 @@ public class SmartStoreApplication {
                        ((int) (Math.random() * 5) + 1) * 100000));
         }
 
-        allCustomers.refresh(allGroups);
+        allCustomers.refresh(allGroups); // Customer 들의 Group 지정 (자동 배정)
         return this;
     }
 
@@ -76,7 +76,7 @@ public class SmartStoreApplication {
             else if (choice == 2) { customerMenu.manageCustomerMenu(); }
             else if (choice == 3) { classifiedMenu.manageSummaryMenu(); }
             else if (choice == 4) { System.out.println("\nProgram Finished."); break; }
-            else { System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE); }
+//            else { System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE); }
         }
 
     }

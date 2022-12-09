@@ -43,7 +43,6 @@ public class Menu {
             } catch (InputRangeException e) {
                 System.out.println(Message.ERR_MSG_INVALID_INPUT_RANGE);
             }
-
         }
     }
 

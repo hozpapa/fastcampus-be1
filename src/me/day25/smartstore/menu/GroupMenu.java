@@ -74,19 +74,26 @@ public class GroupMenu extends Menu {
 
     public void manageParameterMenu() {
         while (true) {
-            int choice = dispMenu(new String[] {"Set Parameter", "View Parameter", "Update Parameter", "Back"});
+            int choice = dispMenu(new String[]{"Set Parameter", "View Parameter", "Update Parameter", "Back"});
 
-            if (choice == 1) { setParameter(); }
-            else if (choice == 2) { viewParameter(); }
-            else if (choice == 3) { updateParameter(); }
-            else if (choice == 4) { break; }
-            else { System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE); }
+            if (choice == 1) {
+                setParameter();
+            } else if (choice == 2) {
+                viewParameter();
+            } else if (choice == 3) {
+                updateParameter();
+            } else if (choice == 4) {
+                break;
+            }
+//            else {
+//                System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE);
+//            }
         }
     }
 
     public void setParameter() {
-        while ( true ) {
-            String strGroup = chooseGroup();
+        while (true) {
+            String strGroup = chooseGroup(); // "V", "VIP" (string) => GroupType.VIP
             if (strGroup.equals(Message.END_MSG)) return;
 
             GroupType groupType;
@@ -104,12 +111,14 @@ public class GroupMenu extends Menu {
             } else {
                 Parameter param = new Parameter();
 
-                while ( true ) {
-                    int choice = dispMenu(new String[] {"Minimum Spent Time", "Minimum Total Pay", "Back"});
-                    if (choice == 1) { setParameterMinimumSpentTime(param); }
-                    else if (choice == 2) { setParameterMinimumTotalPay(param); }
-                    else if (choice == 3) break;
-                    else System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE);
+                while (true) {
+                    int choice = dispMenu(new String[]{"Minimum Spent Time", "Minimum Total Pay", "Back"});
+                    if (choice == 1) {
+                        setParameterMinimumSpentTime(param);
+                    } else if (choice == 2) {
+                        setParameterMinimumTotalPay(param);
+                    } else if (choice == 3) break;
+//                    else System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE);
                 }
 
                 allGroups.add(new Group(groupType, param));
@@ -120,7 +129,7 @@ public class GroupMenu extends Menu {
     }
 
     public void viewParameter() {
-        while ( true ) {
+        while (true) {
             String strGroup = chooseGroup();
             if (strGroup.equals(Message.END_MSG)) {
                 return;
@@ -141,7 +150,7 @@ public class GroupMenu extends Menu {
     }
 
     public void updateParameter() {
-        while ( true ) {
+        while (true) {
             String strGroup = chooseGroup();
             if (strGroup.equals(Message.END_MSG)) {
                 return;
@@ -158,22 +167,28 @@ public class GroupMenu extends Menu {
             Group grp = allGroups.find(groupType);
             if (grp.getParam() == null) {
                 System.out.println("\nNo parameter. Set the parameter first.");
-            } else {
-                System.out.println("\n" + grp);
-                Parameter param = grp.getParam();
-
-                while ( true ) {
-                    int choice = dispMenu(new String[] {"Minimum Spent Time", "Minimum Total Pay", "Back"});
-                    if (choice == 1) { setParameterMinimumSpentTime(param); }
-                    else if (choice == 2) { setParameterMinimumTotalPay(param); }
-                    else if (choice == 3) { break; }
-                    else { System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE); }
-                }
-
-                allGroups.update(new Group(groupType, param));
-                allCustomers.refresh(allGroups);
-                System.out.println("\n" + grp);
+                return;
             }
+
+            System.out.println("\n" + grp);
+            Parameter param = grp.getParam();
+
+            while ( true ) {
+                int choice = dispMenu(new String[]{"Minimum Spent Time", "Minimum Total Pay", "Back"});
+                if (choice == 1) {
+                    setParameterMinimumSpentTime(param);
+                } else if (choice == 2) {
+                    setParameterMinimumTotalPay(param);
+                } else if (choice == 3) {
+                    break;
+                }
+//                    else { System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE); }
+            }
+
+            allGroups.update(new Group(groupType, param));
+            allCustomers.refresh(allGroups);
+            System.out.println("\n" + grp);
+
         }
     }
 
@@ -227,9 +242,9 @@ public class GroupMenu extends Menu {
 
                 param.setMinimumTotalPay(minimumTotalPay);
                 return;
-            } catch ( NumberFormatException e ) {
+            } catch (NumberFormatException e) {
                 System.out.println(Message.ERR_MSG_INVALID_INPUT_TYPE);
-            } catch ( InputRangeException e ) {
+            } catch (InputRangeException e) {
                 System.out.println(Message.ERR_MSG_INVALID_INPUT_RANGE);
             }
         }

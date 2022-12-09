@@ -37,7 +37,7 @@ public class CustomerMenu extends Menu {
             else if (choice == 3) updateCustomerData();
             else if (choice == 4) deleteCustomerData();
             else if (choice == 5) return;
-            else System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE);
+//            else System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE);
         }
     }
 
@@ -55,7 +55,7 @@ public class CustomerMenu extends Menu {
                 else if (choice == 3) setCustomerSpentTime(customer);
                 else if (choice == 4) setCustomerTotalPay(customer);
                 else if (choice == 5) break;
-                else System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE);
+//                else System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE);
 
             }
 
@@ -101,7 +101,7 @@ public class CustomerMenu extends Menu {
             else if (choice == 3) setCustomerSpentTime(customer);
             else if (choice == 4) setCustomerTotalPay(customer);
             else if (choice == 5) break;
-            else System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE);
+//            else System.out.println("\n" + Message.ERR_MSG_INVALID_INPUT_RANGE);
 
         }
 

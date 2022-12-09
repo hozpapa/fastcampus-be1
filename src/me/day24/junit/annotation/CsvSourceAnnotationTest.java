@@ -65,8 +65,9 @@ public class CsvSourceAnnotationTest {
                 name,
                 LocalDateTime.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")),
                 active);
+
         assertNotNull(myClass, () -> "myClass NULL 입니다.!!!");
-        System.out.println("테스트 통과 " + myClass.toString());
+        System.out.println("테스트 통과 " + myClass);
     }
     // ParameterizedTest
     // 1 반복 테스트 message={value=10, name='자바 스터디', time=2020-04-02T14:20:21, active=true}

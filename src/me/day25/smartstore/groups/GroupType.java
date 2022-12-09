@@ -4,7 +4,7 @@ import me.day25.smartstore.menu.OrderType;
 
 public enum GroupType {
     NONE("해당없음"), GENERAL("일반고객"), VIP("우수고객"), VVIP("최우수고객"),
-    N("해당없음"), G("일반고객"), V("우수고객"), VV("최우수고객");
+    N("해당없음"), G("일반고객"), V("우수고객"), VV("최우수고객"); // shortcut (this is replaced with None, General, VIP, VVIP)
 
     String groupType = "";
 
