@@ -42,7 +42,7 @@ public class SummarizedMenu extends Menu {
 //                System.out.println(" 5. Back");
 //                System.out.println("==============================");
 //                System.out.print("Choose One: ");
-//                int choice = Integer.parseInt(Menu.scanner.next());
+//                int choice = Integer.parseInt(Menu.nextLine());
 //                if (choice >= 1 && choice <= 5) {
 //                    return choice;
 //                }
@@ -117,7 +117,7 @@ public class SummarizedMenu extends Menu {
             try {
                 System.out.println("\n** Press 'end', if you want to exit! **");
                 System.out.print("Which order (ASCENDING (A), DESCENDING (D))? ");
-                String choice = scanner.next().toUpperCase();
+                String choice = nextLine().toUpperCase();
 
                 if (choice.equals("")) throw new InputEmptyException();
                 if (choice.equals(Message.END_MSG)) return choice;

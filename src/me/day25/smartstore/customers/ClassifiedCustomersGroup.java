@@ -83,7 +83,7 @@ public class ClassifiedCustomersGroup {
 
                 classifiedCustomersGroup.get(i).setCustomers(customers);
             } catch (NullPointerException e) {
-                System.out.println(e.getMessage());
+                System.out.println(Message.ERR_MSG_NULL_ARR_ELEMENT);
             }
 
         }

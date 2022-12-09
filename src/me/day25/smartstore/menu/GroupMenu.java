@@ -39,7 +39,7 @@ public class GroupMenu extends Menu {
                 // TODO: end => exit()
                 System.out.println("\n** Press 'end', if you want to exit! **");
                 System.out.print("Which group (GENERAL (G), VIP (V), VVIP (VV))? ");
-                String choice = scanner.next().toUpperCase();
+                String choice = nextLine().toUpperCase();
 
                 if (choice.equals("")) throw new InputEmptyException();
                 return choice;
@@ -63,7 +63,7 @@ public class GroupMenu extends Menu {
 //                System.out.println(" 4. Back");
 //                System.out.println("==============================");
 //                System.out.print("Choose One: ");
-//                int choice = Integer.parseInt(Menu.scanner.next());
+//                int choice = Integer.parseInt(Menu.nextLine());
 //                if (choice >= 1 && choice <= 4) {
 //                    return choice;
 //                }
@@ -207,7 +207,7 @@ public class GroupMenu extends Menu {
 //                System.out.println(" 3. Back");
 //                System.out.println("==============================");
 //                System.out.print("Choose One: ");
-//                int choice = Integer.parseInt(scanner.next());
+//                int choice = Integer.parseInt(nextLine());
 //                if (choice >= 1 && choice <= 3) {
 //                    return choice;
 //                }
@@ -225,7 +225,7 @@ public class GroupMenu extends Menu {
         while (true) {
             try {
                 System.out.print("\nInput Minimum Spent Time: ");
-                int minimumSpentTime = Integer.parseInt(scanner.next());
+                int minimumSpentTime = Integer.parseInt(nextLine());
                 if (minimumSpentTime < 0) throw new InputRangeException();
 
                 param.setMinimumSpentTime(minimumSpentTime);
@@ -251,7 +251,7 @@ public class GroupMenu extends Menu {
         while (true) {
             try {
                 System.out.print("\nInput Minimum Total Pay: ");
-                int minimumTotalPay = Integer.parseInt(scanner.next());
+                int minimumTotalPay = Integer.parseInt(nextLine());
                 if (minimumTotalPay < 0) throw new InputRangeException();
 
                 param.setMinimumTotalPay(minimumTotalPay);
@@ -276,7 +276,7 @@ public class GroupMenu extends Menu {
         while (true) {
             try {
                 System.out.print("\n" + message);
-                int input = Integer.parseInt(scanner.next());
+                int input = Integer.parseInt(nextLine());
                 if (input < 0) throw new InputRangeException();
                 method.invoke(parameter, input);
                 return;

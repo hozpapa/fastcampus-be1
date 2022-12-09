@@ -94,7 +94,6 @@ public class CustomerMenu extends Menu {
         viewCustomerData();
         int custNo = 0;
 
-        // TODO: refactoring
         try {
             custNo = findCustomer();
         } catch (ArrayEmptyException e) {
@@ -128,7 +127,6 @@ public class CustomerMenu extends Menu {
         viewCustomerData();
         int custNo = 0;
 
-        // TODO: refactoring
         try {
             custNo = findCustomer();
         } catch (ArrayEmptyException e) {
@@ -156,7 +154,7 @@ public class CustomerMenu extends Menu {
 //                System.out.println(" 5. Back");
 //                System.out.println("==============================");
 //                System.out.print("Choose One: ");
-//                int choice = Integer.parseInt(Menu.scanner.next());
+//                int choice = Integer.parseInt(Menu.nextLine());
 //                if (choice >= 1 && choice <= 5) {
 //                    return choice;
 //                }
@@ -172,13 +170,12 @@ public class CustomerMenu extends Menu {
 
 
     // TODO: when size == -1 -> exit()
-    // TODO: scanner.next() -> scanner.nextLine() (including space bar)
     private int getCustomerSizeToAdd() {
         while (true) {
             try {
                 System.out.println("\n** Press -1, if you want to exit! **");
                 System.out.print("How many customers to input? ");
-                int size = Integer.parseInt(scanner.next());
+                int size = Integer.parseInt(nextLine());
                 if (size < 0) throw new InputRangeException();
 
                 return size;
@@ -202,7 +199,7 @@ public class CustomerMenu extends Menu {
 //                System.out.println(" 5. Back");
 //                System.out.println("==============================");
 //                System.out.print("Choose One: ");
-//                int choice = Integer.parseInt(Menu.scanner.next());
+//                int choice = Integer.parseInt(Menu.nextLine());
 //                if (choice >= 1 && choice <= 5) {
 //                    return choice;
 //                }
@@ -221,7 +218,7 @@ public class CustomerMenu extends Menu {
             try {
                 System.out.print("\nInput Customer's Name: ");
 //                String REGEX = "^[a-zA-Z]{3,}$";
-                String name = scanner.next();
+                String name = nextLine();
 
                 if (name == null || name.equals("")) throw new InputEmptyException();
                 customer.setName(name);
@@ -237,7 +234,7 @@ public class CustomerMenu extends Menu {
             try {
                 System.out.print("\nInput Customer's ID: ");
 //                String REGEX = "^[a-zA-Z]{1}[a-zA-Z0-9_]{4,11}$";
-                String userId = scanner.next();
+                String userId = nextLine();
                 if (userId == null || userId.equals("")) throw new InputEmptyException();
                 customer.setUserId(userId);
                 return;
@@ -251,7 +248,7 @@ public class CustomerMenu extends Menu {
         while (true) {
             try {
                 System.out.print("\nInput Customer's Spent Time: ");
-                int spentTime = Integer.parseInt(scanner.next());
+                int spentTime = Integer.parseInt(nextLine());
                 if (spentTime < 0) throw new InputRangeException();
                 customer.setSpentTime(spentTime);
                 return;
@@ -265,7 +262,7 @@ public class CustomerMenu extends Menu {
         while (true) {
             try {
                 System.out.print("\nInput Customer's Total Payment: ");
-                int totalPay = Integer.parseInt(scanner.next());
+                int totalPay = Integer.parseInt(nextLine());
                 if (totalPay < 0) throw new InputRangeException();
                 customer.setTotalPay(totalPay);
                 return;
@@ -282,7 +279,7 @@ public class CustomerMenu extends Menu {
         while (true) {
             try {
                 System.out.print("\n" + message);
-                int input = Integer.parseInt(scanner.next());
+                int input = Integer.parseInt(nextLine());
                 if (input < 0) throw new InputRangeException();
                 method.invoke(customer, input);
                 return;
@@ -305,7 +302,7 @@ public class CustomerMenu extends Menu {
         while (true) {
             try {
                 System.out.print("\nWhich customer ( 1 ~ " + size + " )? ");
-                int custNo = Integer.parseInt(scanner.next());
+                int custNo = Integer.parseInt(nextLine());
                 if (!(custNo >= 1 && custNo <= size)) throw new InputRangeException();
                 return custNo;
             } catch (NumberFormatException e) {

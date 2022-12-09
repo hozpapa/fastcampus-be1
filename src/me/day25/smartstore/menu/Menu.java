@@ -3,7 +3,7 @@ package me.day25.smartstore.menu;
 import me.day25.smartstore.exception.InputRangeException;
 import me.day25.smartstore.util.Message;
 
-import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Menu {
@@ -24,6 +24,12 @@ public class Menu {
 
     protected Scanner scanner = new Scanner(System.in);
 
+    public String nextLine() {
+        String str = scanner.nextLine(); // 1 1 => wrong input
+        String[] strings = str.split("\\s");
+        return (strings.length > 1) ? "" : str;
+    }
+
     public int dispMenu(String[] menus) {
         while (true) {
             try {
@@ -33,7 +39,7 @@ public class Menu {
                 }
                 System.out.println("==============================");
                 System.out.print("Choose One: ");
-                int choice = Integer.parseInt(scanner.next());
+                int choice = Integer.parseInt(nextLine());
                 if (choice >= 1 && choice <= menus.length) {
                     return choice;
                 }
@@ -58,7 +64,7 @@ public class Menu {
 //                System.out.println(" 4. Quit");
 //                System.out.println("==============================");
 //                System.out.print("Choose One: ");
-//                int choice = Integer.parseInt(scanner.next());
+//                int choice = Integer.parseInt(nextLine());
 //                if (choice >= 1 && choice <= 4) {
 //                    return choice;
 //                }
